@@ -1361,7 +1361,7 @@ iframe {
   left: 0;
   z-index: 5;
   display: none;
-  background-color: rgba(59, 67, 76, 0.7);
+  background-color: rgba(60, 60, 60, 0.8);
   position: fixed;
 }
 
