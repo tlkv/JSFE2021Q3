@@ -5,10 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Forum&family=Roboto:wght@100;200;300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Forum&family=Roboto:wght@100;200;300;400;500;700&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" href="./lib/lightslider.css" class="stylesheet">
     <link rel="stylesheet" href="./style.css" class="stylesheet">
-    <link rel="icon" href="./assets/favicon.ico">
     <script src="https://kit.fontawesome.com/2f1b1f79d4.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="./lib/lightslider.js"></script>
+    <link rel="icon" href="./assets/favicon.ico">
     <title>Museum</title>
 </head>
 
@@ -90,7 +93,7 @@
             </div>
         </div>
     </header>
-    <main class="main">
+    <main class="main">       
         <section class="welcome-section section dark-section" id="welcome">
             <div class="container">
                 <div class="welcome-content">
@@ -99,32 +102,50 @@
                     <a href="tours/tour1.html" target="_blank" class="discover-button">Discover the Louvre</a>
                 </div>
                 <div class="slider">
-                    <ul class="slider-list">
-                        <li class="slider-item"><img src="assets/img/slide1.jpg" alt="Mona Liza" class="slider-img"></li>
-                    </ul>
-                    <div class="slider-control">
-                        <span class="slider-cur-num">01</span>
-                        <span class="slider_delim">|</span>
-                        <span class="slider-amount-num">05</span>
-                        <ul class="slider-dots">
-                            <li class="slider-dot dot_active"></li>
-                            <li class="slider-dot"></li>
-                            <li class="slider-dot"></li>
-                            <li class="slider-dot"></li>
-                            <li class="slider-dot"></li>
-                        </ul>
-                        <button class="slider-btn-prev">
-                            <svg width="30" height="8" viewBox="0 0 30 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.72254 8C3.90173 6.31339 1.99422 5.08262 0 4.30769V3.69231C1.99422 2.89459 3.90173 1.66382 5.72254 0H7.23988C6.37283 1.4359 5.53468 2.52991 4.72543 3.28205H30V4.71795H4.72543C5.53468 5.47009 6.37283 6.5641 7.23988 8H5.72254Z" fill="white" />
-                            </svg>
-                        </button>
-                        <button class="slider-btn-next">
-                            <svg width="30" height="8" viewBox="0 0 30 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M24.2775 1.97284e-06C26.0983 1.68661 28.0058 2.91738 30 3.69231L30 4.30769C28.0058 5.10541 26.0983 6.33618 24.2775 8L22.7601 8C23.6272 6.5641 24.4653 5.47009 25.2746 4.71795L3.48964e-07 4.71795L5.01636e-07 3.28205L25.2746 3.28205C24.4653 2.52992 23.6272 1.4359 22.7601 1.86378e-06L24.2775 1.97284e-06Z" fill="white" />
-                            </svg>
-                        </button>
-                    </div>
+                   
+                            <!-- <div class="clearfix" > --><!-- style="max-width:474px;" -->
+                                <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
+                                    <li class="slider-item"><img src="assets/img/slide1.jpg" alt="Mona Liza"></li>
+                                    <li class="slider-item"><img src="assets/img/slide2.jpg" alt="slide2"></li>
+                                    <li class="slider-item"><img src="assets/img/slide3.jpg" alt="slide3"></li>
+                                    <li class="slider-item"><img src="assets/img/slide4.jpg" alt="slide4"></li>
+                                    <li class="slider-item"><img src="assets/img/slide5.jpg" alt="slide5"></li>
+                                </ul>
+                            <!-- </div>   -->                          
+                       
+                            <div class="slider-control-top">
+                                <span class="slider-cur-num">01</span>
+                                <span class="slider_delim">|</span>
+                                <span class="slider-amount-num">05</span>
+                            </div>
                 </div>
+            </div>
+        </section>
+        <section>
+            <ul class="slider-list">
+                <li class="slider-item"><img src="assets/img/slide1.jpg" alt="Mona Liza" class="slider-img"></li>
+            </ul>
+            <div class="slider-control">
+                <span class="slider-cur-num">01</span>
+                <span class="slider_delim">|</span>
+                <span class="slider-amount-num">05</span>
+                <ul class="slider-dots">
+                    <li class="slider-dot dot_active"></li>
+                    <li class="slider-dot"></li>
+                    <li class="slider-dot"></li>
+                    <li class="slider-dot"></li>
+                    <li class="slider-dot"></li>
+                </ul>
+                <button class="slider-btn-prev">
+                    <svg width="30" height="8" viewBox="0 0 30 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.72254 8C3.90173 6.31339 1.99422 5.08262 0 4.30769V3.69231C1.99422 2.89459 3.90173 1.66382 5.72254 0H7.23988C6.37283 1.4359 5.53468 2.52991 4.72543 3.28205H30V4.71795H4.72543C5.53468 5.47009 6.37283 6.5641 7.23988 8H5.72254Z" fill="white" />
+                    </svg>
+                </button>
+                <button class="slider-btn-next">
+                    <svg width="30" height="8" viewBox="0 0 30 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M24.2775 1.97284e-06C26.0983 1.68661 28.0058 2.91738 30 3.69231L30 4.30769C28.0058 5.10541 26.0983 6.33618 24.2775 8L22.7601 8C23.6272 6.5641 24.4653 5.47009 25.2746 4.71795L3.48964e-07 4.71795L5.01636e-07 3.28205L25.2746 3.28205C24.4653 2.52992 23.6272 1.4359 22.7601 1.86378e-06L24.2775 1.97284e-06Z" fill="white" />
+                    </svg>
+                </button>
             </div>
         </section>
         <section class="visiting-section section white-section" id="visiting">

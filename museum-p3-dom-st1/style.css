@@ -685,16 +685,16 @@ footer {
   position: absolute;
   top: -150px;
   right: 20px;
+  max-width: 1000px;
+ /*overflow: hidden;  */
 }
 
-.slider-list {
+
+
+/* .slider-item .active {
   display: block;
 }
-
-.slider-item .active {
-  display: block;
-}
-
+ */
 .welcome-section .container {
   position: relative;
 }
@@ -708,23 +708,24 @@ footer {
   position: relative;
   transition: all .3s;
   left: 0;
+  max-width: 600px;
 }
 
 .slider::after {
   content: ' ';
   display: block;
-  width: 33%;
+  width: 15%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  background: transparent;
-  background-image: linear-gradient(to right, #020202, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  /* background: transparent; */
+  background: linear-gradient(to right, #020202, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)) transparent;
 }
 
 .slider-control {
-  position: absolute;
-  bottom: -60px;
+  /* position: absolute;
+  bottom: -60px; */
   background-color: #000;
   right: 0;
   display: flex;
@@ -733,6 +734,7 @@ footer {
   width: 600px;
   height: 120px;
   z-index: 2;
+  color: #fff;
 }
 
 .slider-control span {
@@ -1629,6 +1631,74 @@ header .menu-link:hover::after {
 .theme-switcher .sun-icon {
   font-size: 24px !important;
   color: #263053;
+}
+
+.welcome-section .lSAction > a {
+  top: 98%;
+  background: none;
+}
+
+.welcome-section .lSSlideOuter .lSPager.lSpg {
+  position: absolute;
+  bottom: -60px; 
+ background-color: #000;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   width: 600px;
+  height: 120px;
+   /*z-index: 2;*/
+  color: #fff; 
+}
+
+.welcome-section .lSAction > .lSPrev {
+  right: 90px;
+  left: auto;
+  background: url("./assets/svg/slider_left.svg") center /100% no-repeat;
+  /* background-image: url(./img/controls.png); */
+}
+
+.welcome-section .lSAction > .lSNext {
+  background: url("./assets/svg/slider_right.svg") center /100% no-repeat;
+}
+
+.welcome-section .lSPager.lSpg > li a {
+  width: 16px;
+    height: 16px;
+    background-color: #fff;
+    border-radius: 0;
+}
+.welcome-section .lSPager.lSpg > li a:hover, .welcome-section .lSPager.lSpg > li:hover a {
+  background-color: #9D8665;
+}
+.welcome-section .lSPager.lSpg > li.active a {
+  background-color: #D2B183;
+}
+
+.slider-control-top {
+  position: absolute;
+  background-color: #000;
+    right: 400px;
+    display: flex;
+    /* justify-content: left; */
+    bottom: 2px;
+    align-items: center;
+    /* width: 600px; */
+    /* height: 120px; */
+    z-index: 2;
+    color: #fff;
+  /* position: absolute;
+  bottom: -60px; */
+  /* background-color: #000;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+  height: 120px;
+  z-index: 2;
+  color: #fff; */
 }
 
 @media (max-width: 1500px) {
