@@ -22,3 +22,24 @@ closeModal.addEventListener('click', () => {
     backgroundModal.style.display = 'none';
     formModal.style.transform = 'translateX(-500%)';
 });
+
+
+
+
+
+function lockTheDate() {
+    const formDate = document.getElementById('date');
+
+    const offset = new Date().getTimezoneOffset();
+    const today = new Date(new Date().getTime() - (offset * 60 * 1000))
+    const finalDate = today.toISOString().split('T')[0];
+    formDate.setAttribute('min', finalDate)
+
+    /*  if (formDate.value.length) {
+       document.querySelector('.hide-date-time').style.display = 'none';
+     } else {
+       document.querySelector('.hide-date-time').style.display = 'inline';
+     } */
+}
+
+lockTheDate();
