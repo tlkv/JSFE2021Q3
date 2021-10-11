@@ -4,7 +4,7 @@ function exploreCompare() {
 	for (i = 0; i < x.length; i++) {
 		compareImages(x[i]);
 	}
-	
+
 	function compareImages(img) {
 		var slider, img, clicked = 0, w, h;
 		w = img.offsetWidth;
@@ -13,7 +13,6 @@ function exploreCompare() {
 		slider = document.createElement("div");
 		slider.setAttribute("class", "explore-img-comp-slider");
 		img.parentElement.insertBefore(slider, img);
-		/* slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px"; */
 		slider.style.left = (w / 1.6) - (slider.offsetWidth / 2) + "px";
 		slider.addEventListener("mousedown", slideReady);
 		window.addEventListener("mouseup", slideFinish);
