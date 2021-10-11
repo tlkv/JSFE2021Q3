@@ -241,7 +241,6 @@ button {
 
 .explore-section-right {
   margin-top: 15px;
-  /* max-width: 50%; */
   max-height: 705px;
   position: relative;
   margin-bottom: 5px;
@@ -270,7 +269,6 @@ button {
 
 .video-section .player-screen {
   position: relative;
-  height: 650px;
 }
 
 .player-screen .video-player-old {
@@ -280,7 +278,7 @@ button {
   height: auto;
 }
 
-.video-section .player-screen .play-button {
+.video-section .play-button {
   position: absolute;
   width: 220px;
   height: 220px;
@@ -307,12 +305,14 @@ button {
   align-items: center;
   height: 85px;
   background-color: #000;
+  margin-top: -6px;
 }
 
 .player-controls .player-common {
   height: 30px;
   width: auto;
   margin-left: 30px;
+  transition: all .8s ease-in-out;
 }
 
 .player-controls .player-position {
@@ -568,8 +568,6 @@ button {
   color: #9d8665;
 }
 
-
-
 .footer-container {
   display: flex;
   align-items: flex-start;
@@ -683,13 +681,7 @@ footer {
   top: -150px;
   right: 20px;
   max-width: 1000px;
-  /*overflow: hidden;  */
 }
-
-/* .slider-item .active {
-  display: block;
-}
- */
 
 .welcome-section .container {
   position: relative;
@@ -715,13 +707,10 @@ footer {
   position: absolute;
   top: 0;
   left: 0;
-  /* background: transparent; */
   background: linear-gradient(to right, #020202, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)) transparent;
 }
 
 .slider-control {
-  /* position: absolute;
-  bottom: -60px; */
   background-color: #000;
   right: 0;
   display: flex;
@@ -1475,7 +1464,6 @@ iframe {
   width: 32px;
   height: 25px;
   background: url("./assets/svg/museum-hamburger.svg") center /contain no-repeat;
-  /* margin-left: auto; */
   display: none;
   transition: all .3s;
 }
@@ -1645,13 +1633,15 @@ header .menu-link:hover::after {
 }
 
 .welcome-section .lSAction>.lSPrev {
-  right: 90px;
+  right: 125px;
+  padding-top: 20px;
   left: auto;
   background: url("./assets/svg/slider_left.svg") center /100% no-repeat;
-  /* background-image: url(./img/controls.png); */
 }
 
 .welcome-section .lSAction>.lSNext {
+  padding-top: 20px;
+  right: 60px;
   background: url("./assets/svg/slider_right.svg") center /100% no-repeat;
 }
 
@@ -1675,24 +1665,10 @@ header .menu-link:hover::after {
   background-color: #000;
   right: 400px;
   display: flex;
-  /* justify-content: left; */
-  bottom: 2px;
+  bottom: -13px;
   align-items: center;
-  /* width: 600px; */
-  /* height: 120px; */
   z-index: 2;
   color: #fff;
-  /* position: absolute;
-  bottom: -60px; */
-  /* background-color: #000;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 600px;
-  height: 120px;
-  z-index: 2;
-  color: #fff; */
 }
 
 .explore-img-comp-container * {
@@ -1752,14 +1728,10 @@ header .menu-link:hover::after {
 }
 
 #map {
-  /* position: absolute;
-  top: 0;
-  bottom: 0; */
   width: 100%;
   margin: 0;
   padding: 0;
-  /* width: 960px;*/
-  height: 620px; 
+  height: 620px;
 }
 
 .mapboxgl-popup-content {
@@ -1770,6 +1742,72 @@ header .menu-link:hover::after {
   padding: 15px 30px 15px 15px;
   color: #353535;
   font-size: 16px;
+}
+
+.tickets-selector-right .tickets-cost-total .counted-price {
+  display: inline;
+}
+
+.video-item {
+  width: 100%;
+}
+
+.video-player-wrapper {
+  position: relative;
+}
+
+.button-opacity svg {
+  opacity: 0;
+}
+
+.play-button-opacity {
+  background: url('./assets/svg/pause.svg') center /100% no-repeat;
+}
+
+.play-button-opacity svg {
+  opacity: 0;
+}
+
+.mute-button-opacity {
+  background: url('./assets/svg/mute.svg') center /100% no-repeat;
+}
+
+.mute-button-opacity svg {
+  opacity: 0;
+}
+
+.show-full {
+  width: 100%;
+  z-index: 999;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+button {
+  outline: 0;
+}
+
+.lSSlideOuter .lSPager.lSpg>li {
+  padding: 2px 10px;
+}
+
+.video-section .lSSlideOuter .lSPager.lSpg {
+  justify-content: center;
+}
+
+.video-section .lSAction>a {
+  opacity: 1;
+}
+
+.video-section .lSSlideOuter .lSPager.lSpg>li a {
+  width: 12px;
+  height: 12px;
+  background: #999999;
+}
+
+.video-section .lSSlideOuter .lSPager.lSpg>li a:hover {
+  background-color: #710707;
 }
 
 @media (max-width: 1500px) {
@@ -2074,7 +2112,7 @@ header .menu-link:hover::after {
   .player-controls .player-volume {
     width: 14.5%;
   }
-  .video-section .player-screen .play-button {
+  .video-section .play-button {
     width: 152px;
     height: 152px;
     top: calc(50% - 76px);
@@ -2321,9 +2359,6 @@ header .menu-link:hover::after {
   .explore-section-left .underlined-title::after {
     margin-bottom: 40px;
   }
-  /* .explore-section-right img {
-    content: url("./assets/img/padintingSlide.jpg");
-  } */
   .video-block-container {
     margin-bottom: 20px;
   }
@@ -2368,15 +2403,12 @@ header .menu-link:hover::after {
     margin-left: 35px;
     margin-right: 35px;
   }
-  .video-section .player-screen .play-button {
+  .video-section .play-button {
     width: 80px;
     height: 80px;
     top: calc(50% - 40px);
     left: calc(50% - 40px);
   }
-  /* .picture-inner-container::before {
-    order: 1;
-  }  */
   .picture-inner-container img:nth-child(2n+1) {
     order: 1;
   }
@@ -2692,7 +2724,7 @@ header .menu-link:hover::after {
   .video-block-container {
     margin-bottom: 18px;
   }
-  .video-section .player-screen .play-button {
+  .video-section .play-button {
     width: 50px;
     height: 50px;
     top: calc(50% - 25px);

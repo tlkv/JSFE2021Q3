@@ -6,7 +6,7 @@ window.addEventListener("DOMContentLoaded", () => {
 		container: 'map',
 		style: 'mapbox://styles/mapbox/light-v10',
 		zoom: 15.7,
-		center: [2.3364, 48.86091],		
+		center: [2.3364, 48.86091],
 	});
 
 	map.addControl(new mapboxgl.NavigationControl());
