@@ -241,7 +241,7 @@ button {
 
 .explore-section-right {
   margin-top: 15px;
-  max-width: 50%;
+  /* max-width: 50%; */
   max-height: 705px;
   position: relative;
   margin-bottom: 5px;
@@ -273,7 +273,7 @@ button {
   height: 650px;
 }
 
-.player-screen .video-player {
+.player-screen .video-player-old {
   max-width: 100%;
   max-height: 100%;
   width: auto;
@@ -568,10 +568,7 @@ button {
   color: #9d8665;
 }
 
-.contacts-container .contacts-map {
-  max-width: 100%;
-  max-height: 620px;
-}
+
 
 .footer-container {
   display: flex;
@@ -685,15 +682,14 @@ footer {
   position: absolute;
   top: -150px;
   right: 20px;
+  max-width: 1000px;
+  /*overflow: hidden;  */
 }
 
-.slider-list {
+/* .slider-item .active {
   display: block;
 }
-
-.slider-item .active {
-  display: block;
-}
+ */
 
 .welcome-section .container {
   position: relative;
@@ -708,23 +704,24 @@ footer {
   position: relative;
   transition: all .3s;
   left: 0;
+  max-width: 600px;
 }
 
 .slider::after {
   content: ' ';
   display: block;
-  width: 33%;
+  width: 15%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  background: transparent;
-  background-image: linear-gradient(to right, #020202, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  /* background: transparent; */
+  background: linear-gradient(to right, #020202, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)) transparent;
 }
 
 .slider-control {
-  position: absolute;
-  bottom: -60px;
+  /* position: absolute;
+  bottom: -60px; */
   background-color: #000;
   right: 0;
   display: flex;
@@ -733,6 +730,7 @@ footer {
   width: 600px;
   height: 120px;
   z-index: 2;
+  color: #fff;
 }
 
 .slider-control span {
@@ -1446,10 +1444,6 @@ iframe {
   padding-top: 50px;
 }
 
-.picture-inner-container img {
-  max-width: 31.7%;
-}
-
 .picture-inner-container img:nth-child(3n+1) {
   order: 1;
 }
@@ -1631,14 +1625,165 @@ header .menu-link:hover::after {
   color: #263053;
 }
 
+.welcome-section .lSAction>a {
+  top: 98%;
+  background: none;
+}
+
+.welcome-section .lSSlideOuter .lSPager.lSpg {
+  position: absolute;
+  bottom: -60px;
+  background-color: #000;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+  height: 120px;
+  /*z-index: 2;*/
+  color: #fff;
+}
+
+.welcome-section .lSAction>.lSPrev {
+  right: 90px;
+  left: auto;
+  background: url("./assets/svg/slider_left.svg") center /100% no-repeat;
+  /* background-image: url(./img/controls.png); */
+}
+
+.welcome-section .lSAction>.lSNext {
+  background: url("./assets/svg/slider_right.svg") center /100% no-repeat;
+}
+
+.welcome-section .lSPager.lSpg>li a {
+  width: 16px;
+  height: 16px;
+  background-color: #fff;
+  border-radius: 0;
+}
+
+.welcome-section .lSPager.lSpg>li a:hover, .welcome-section .lSPager.lSpg>li:hover a {
+  background-color: #9D8665;
+}
+
+.welcome-section .lSPager.lSpg>li.active a {
+  background-color: #D2B183;
+}
+
+.slider-control-top {
+  position: absolute;
+  background-color: #000;
+  right: 400px;
+  display: flex;
+  /* justify-content: left; */
+  bottom: 2px;
+  align-items: center;
+  /* width: 600px; */
+  /* height: 120px; */
+  z-index: 2;
+  color: #fff;
+  /* position: absolute;
+  bottom: -60px; */
+  /* background-color: #000;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+  height: 120px;
+  z-index: 2;
+  color: #fff; */
+}
+
+.explore-img-comp-container * {
+  box-sizing: border-box;
+}
+
+.explore-img-comp-container {
+  position: relative;
+  height: 700px;
+  width: 720px;
+}
+
+.explore-img-comp-img {
+  position: absolute;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+}
+
+.explore-img-comp-img img {
+  display: block;
+  vertical-align: middle;
+  max-width: unset;
+}
+
+.explore-img-comp-slider {
+  position: absolute;
+  z-index: 9;
+  background: url(./assets/svg/exploreSlider.svg) center /100% no-repeat;
+  cursor: grabbing;
+  width: 40px;
+  height: 100%;
+}
+
+.picture-inner-container img {
+  max-width: 31.7%;
+  transition: all .5s;
+  transform: translateY(100px) scale(0.8);
+  opacity: 0;
+}
+
+.gallery-item-animated {
+  transform: translateY(0) scale(1) !important;
+  opacity: 1 !important;
+}
+
+.tickets-val-form {
+  display: flex;
+  width: 1024px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.contacts-container .contacts-map {
+  width: 960px;
+  max-height: 620px;
+}
+
+#map {
+  /* position: absolute;
+  top: 0;
+  bottom: 0; */
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  /* width: 960px;*/
+  height: 620px; 
+}
+
+.mapboxgl-popup-content {
+  background: #dbdbdb;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1px 5px black;
+  box-shadow: 0 1px 5px black;
+  padding: 15px 30px 15px 15px;
+  color: #353535;
+  font-size: 16px;
+}
+
 @media (max-width: 1500px) {
+  .explore-section-left {
+    max-width: 37%;
+    padding-right: 22px;
+  }
   .video-slider-wrapper iframe {
     width: 31.3%;
   }
   .contacts-map {
     padding-left: 10px;
   }
-  .player-screen .video-player {
+  .player-screen .video-player-old {
     height: 100%;
     object-fit: cover;
   }
@@ -1655,6 +1800,18 @@ header .menu-link:hover::after {
   .picture-container {
     height: 1265px;
   }
+  .welcome-hidden {
+    left: -110vw;
+  }
+  .tickets-modal {
+    padding: 75px 27px 30px 27px;
+    width: 1024px;
+    height: 768px;
+    left: calc(50% - 512px);
+  }
+}
+
+@media (max-width: 1200px) {
   .explore-section-container {
     max-height: none;
     flex-wrap: wrap;
@@ -1669,18 +1826,6 @@ header .menu-link:hover::after {
     margin: auto;
     max-width: 75%;
   }
-  .welcome-hidden {
-    left: -110vw;
-  }
-  .tickets-modal {
-    padding: 75px 27px 30px 27px;
-    width: 1024px;
-    height: 768px;
-    left: calc(50% - 512px);
-  }
-}
-
-@media (max-width: 1200px) {
   .header-menu-items {
     column-gap: 40px;
   }
@@ -1935,7 +2080,7 @@ header .menu-link:hover::after {
     top: calc(50% - 76px);
     left: calc(50% - 76px);
   }
-  .video-player {
+  .video-player-old {
     content: url("./assets/img/video1.jpg");
   }
   .video-slider-wrapper iframe {
