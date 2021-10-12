@@ -95,4 +95,4 @@ progressVolume.addEventListener('mousedown', () => mousedown = true);
 progressVolume.addEventListener('mouseup', () => mousedown = false);
 playMute.addEventListener("click", toggleMute);
 plFullscreen.addEventListener("click", playerFull);
-document.addEventListener('keydown', keyboard);
+videoWrapper.addEventListener('keydown', keyboard);

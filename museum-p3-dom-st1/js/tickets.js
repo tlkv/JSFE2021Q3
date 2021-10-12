@@ -100,7 +100,7 @@ backgroundModal.addEventListener('click', () => {
     formModal.style.transform = 'translateX(-500%)';
 });
 
-closeModal.addEventListener('click', () => {
+closeModal.addEventListener('click', () => {    
     backgroundModal.style.display = 'none';
     formModal.style.transform = 'translateX(-500%)';
 });
@@ -113,3 +113,60 @@ function lockTheDate() {
 }
 
 lockTheDate();
+
+const preventReload = document.querySelectorAll('.tickets-modal button, .form-credit-card-button');
+
+preventReload.forEach(item=>{
+item.addEventListener ("click", (e)=> {
+    e.preventDefault();
+})});
+let emailReg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+let nameReg = /^[a-zA-Zа-яА-Я \s]{3,15}$/ig;
+let phoneReg = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/gm;
+
+const email = document.getElementById('email');
+const nam = document.getElementById('name');
+const phone = document.getElementById('phone');
+const errorMessage = document.querySelector('.error-text');
+
+email.addEventListener("blur", () => {
+    console.log('compared', emailReg.test(email.value));
+    if (!emailReg.test(email.value)) {
+        email.classList.remove('validated');
+        email.classList.add('warning');
+        errorMessage.textContent = 'Ошибка при вводе данных!';
+    } 
+    if (emailReg.test(email.value)) {
+        email.classList.remove('warning');
+        email.classList.add('validated');
+        errorMessage.textContent = '';
+    } 
+});
+
+nam.addEventListener("blur", () => {  
+    console.log('compared', nameReg.test(nam.value));   
+    if (!nameReg.test(nam.value)) {
+        nam.classList.remove('validated');
+        nam.classList.add('warning');
+        errorMessage.textContent = 'Ошибка при вводе данных! ';
+    } 
+    if (nameReg.test(nam.value)) {
+        nam.classList.remove('warning');
+        nam.classList.add('validated');
+        errorMessage.textContent = '';
+    } 
+});
+
+phone.addEventListener("blur", () => {    
+    console.log('compared', phoneReg.test(phone.value)); 
+    if (!phoneReg.test(phone.value)) {
+        phone.classList.remove('validated');
+        phone.classList.add('warning');
+        errorMessage.textContent = 'Ошибка при вводе данных!';
+    } 
+    if (phoneReg.test(phone.value)) {
+        phone.classList.remove('warning');
+        phone.classList.add('validated');
+        errorMessage.textContent = '';
+    } 
+});

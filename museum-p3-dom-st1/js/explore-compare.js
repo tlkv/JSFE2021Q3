@@ -52,4 +52,5 @@ function exploreCompare() {
 
 window.addEventListener("DOMContentLoaded", () => {
 	exploreCompare();
+	/* console.log('Fire '); */
 });
