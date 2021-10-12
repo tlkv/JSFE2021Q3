@@ -43,9 +43,11 @@ function playerFull() {
     if (document.fullscreenElement) {
         document.exitFullscreen();
         playerControls.classList.remove('show-full');
+        plFullscreen.classList.remove('show-player-full');
     } else {
         videoWrapper.requestFullscreen();
         playerControls.classList.add('show-full');
+        plFullscreen.classList.add('show-player-full');
     }
 }
 
