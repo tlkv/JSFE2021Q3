@@ -466,9 +466,9 @@
                             </option>
                         </datalist>
                     </div>
-                    <input class="validate-item" id="name" name="name" type="text" placeholder="Name">
+                    <input class="validate-item" id="name" name="name" type="text" placeholder="Name" required>
                     <input class="validate-item" id="email" name="email" type="email" placeholder="E-mail">
-                    <input class="validate-item" id="tel" name="tel" type="tel" placeholder="Phone">
+                    <input class="validate-item" id="phone" name="tel" type="tel" placeholder="Phone" >                    
                     <select>
                         <option selected hidden>Ticket Type</option>
                         <option>Permanent exhibition</option>
@@ -562,7 +562,8 @@
                         <input id="cvc" type="tel" maxlength="4">
                         <div class="form-credit-card-back-description"> The last<br>3 or 4 digits on back<br>of the card </div>
                     </div>
-                    <button class="form-credit-card-button ripple">Book</button>
+                    <span class="error-text"></span>
+                    <input type="submit" value="Book" class="form-credit-card-button ripple"><!-- </button> -->
                 </div>
             </div>
         </form>
