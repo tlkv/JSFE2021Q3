@@ -322,7 +322,7 @@ button {
 }
 
 .player-controls .player-range {
-  background: linear-gradient(to right, #710707 0%, #710707 40%, #c4c4c4 40%, #c4c4c4 100%);
+  background: linear-gradient(to right, #710707 0%, #710707 50%, #c4c4c4 50%, #c4c4c4 100%);
   height: 8px;
   outline: none;
   transition: background 450ms ease-in;
@@ -330,7 +330,7 @@ button {
 }
 
 .player-controls .player-volume {
-  background: linear-gradient(to right, #710707 0%, #710707 40%, #c4c4c4 40%, #c4c4c4 100%);
+  background: linear-gradient(to right, #710707 0%, #710707 50%, #c4c4c4 50%, #c4c4c4 100%);
 }
 
 .player-controls .player-range::-webkit-slider-thumb {
@@ -1794,6 +1794,7 @@ button {
 
 .video-section .lSSlideOuter .lSPager.lSpg {
   justify-content: center;
+  margin-top: -32px !important
 }
 
 .video-section .lSAction>a {
@@ -1810,8 +1811,25 @@ button {
   background-color: #710707;
 }
 
+.video-section .lSAction>a {
+  opacity: 1;
+  top: 97%;
+  width: 20px;
+  height: 20px;
+}
+
 .video-section .lSPager.lSpg>li.active a {
   background-color: #710707;
+}
+
+.video-section .lSPrev {
+  left: calc(50% - 150px);
+  background: url("./assets/svg/prev.svg") center /80% no-repeat;
+}
+
+.video-section .lSNext {
+  right: calc(50% - 150px);
+  background: url("./assets/svg/next.svg") center /80% no-repeat;
 }
 
 /* .validate-item:invalid {
@@ -1827,16 +1845,26 @@ button {
 .warning {
   border: 3px solid red !important;
 }
+
 .validated {
   border: 3px solid green !important;
 }
 
 .error-text {
-  color:red;
-  font-size: 16px;
+  color: red;
+  font-size: 12px;
   font-weight: bold;
+  min-height: 20px;
+  line-height: 18px;
   display: block;
-  margin-top: 40px;
+}
+
+.validate-item {
+  margin-top: 1px !important;
+}
+
+.video-section .lSSlideWrapper {
+  height: 350px !important;
 }
 
 @media (max-width: 1500px) {

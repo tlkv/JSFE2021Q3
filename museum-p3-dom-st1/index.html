@@ -234,7 +234,7 @@
                                 <path d="M26.15 0H21.96V29.49H26.15V0Z" fill="#B3B3B3" />
                             </svg>
                         </button>
-                        <input type="range" value="40" min="0" max="100" step="1" class="player-position player-range">
+                        <input type="range" value="50" min="0" max="100" step="1" class="player-position player-range">
                         <button class="player-mute player-common"><svg width="38" height="30" viewBox="0 0 38 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M17.86 0L3.63 10.42V19.07L17.86 29.49C17.83 7.26 17.86 18.17 17.86 0Z" fill="#B3B3B3" />
                                 <path d="M0 21.9198H7.47V7.55981H0V21.9198Z" fill="#B3B3B3" />
@@ -242,7 +242,7 @@
                                 <path d="M23.69 22.0801C23.3094 22.0796 22.9406 21.9476 22.6462 21.7064C22.3518 21.4652 22.1499 21.1297 22.0746 20.7566C21.9992 20.3835 22.0551 19.9959 22.2329 19.6594C22.4106 19.3229 22.6993 19.0581 23.0499 18.9101C23.8655 18.5635 24.5605 17.9838 25.048 17.2438C25.5354 16.5037 25.7936 15.6362 25.79 14.7501C25.7935 14.149 25.6744 13.5535 25.44 13.0001C25.2031 12.4627 24.8634 11.9769 24.44 11.5701C24.0312 11.1489 23.5458 10.8095 23.01 10.5701C22.6564 10.3727 22.3883 10.0515 22.2574 9.66825C22.1264 9.28504 22.1418 8.86693 22.3008 8.49445C22.4597 8.12197 22.7508 7.82146 23.118 7.6508C23.4853 7.48013 23.9028 7.45138 24.29 7.57008C25.4625 8.07189 26.495 8.8522 27.2977 9.84332C28.1005 10.8344 28.6493 12.0064 28.8966 13.2577C29.1439 14.5089 29.0822 15.8016 28.7168 17.0235C28.3515 18.2455 27.6934 19.3599 26.7999 20.2701C26.0941 20.9834 25.2548 21.5508 24.3299 21.9401C24.1281 22.0293 23.9106 22.0769 23.69 22.0801Z" fill="#B3B3B3" />
                             </svg>
                         </button>
-                        <input type="range" value="40" min="0" max="100" step="1" class="player-volume player-range">
+                        <input type="range" value="50" min="0" max="100" step="1" class="player-volume player-range">
                         <button class="player-fullscreen"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M31.48 31.6299H23.05V35.8599H35.7001V23.1499H31.48V31.6299Z" fill="#B3B3B3" />
                                 <path d="M4.22 23.1499H0V35.8599H12.65V31.6299H4.22V23.1499Z" fill="#B3B3B3" />
@@ -466,10 +466,13 @@
                             </option>
                         </datalist>
                     </div>
+                    <span class="error-text error-text-name"></span>
                     <input class="validate-item" id="name" name="name" type="text" placeholder="Name" required>
+                    <span class="error-text error-text-email"></span>
                     <input class="validate-item" id="email" name="email" type="email" placeholder="E-mail">
-                    <input class="validate-item" id="phone" name="tel" type="tel" placeholder="Phone" >                    
-                    <select>
+                    <span class="error-text error-text-phone"></span>
+                    <input class="validate-item" id="phone" name="tel" type="tel" placeholder="Phone">
+                    <select class="select-modal">
                         <option selected hidden>Ticket Type</option>
                         <option>Permanent exhibition</option>
                         <option>Temporary exhibition</option>
@@ -480,7 +483,7 @@
                     <h3 class="modal-ticket-title">Entry ticket</h3>
                     <div class="modal-ticket-row">
                         <div class="modal-ticket-container">
-                            <h5 class="modal-ticket-subtitle">Basic 18+ (20 €)</h5>
+                            <h5 class="modal-ticket-subtitle">Basic 18+ (<span class="mod-price-basic">20</span> €)</h5>
                             <div class="modal-ticket-container-button">
                                 <button class="modal-ticket-button minus-basic-form minus" onclick="this.nextElementSibling.stepDown()">&#8211;</button>
                                 <input type="number" min="0" max="20" value="2" class="modal-ticket-number basic-form">
@@ -488,7 +491,7 @@
                             </div>
                         </div>
                         <div class="modal-ticket-container">
-                            <h5 class="modal-ticket-subtitle">Senior 65+ (10 €)</h5>
+                            <h5 class="modal-ticket-subtitle">Senior 65+ (<span class="mod-price-senior">10</span> €)</h5>
                             <div class="modal-ticket-container-button">
                                 <button class="modal-ticket-button minus-senior-form minus" onclick="this.nextElementSibling.stepDown()">&#8211;</button>
                                 <input type="number" min="0" max="20" value="2" class="modal-ticket-number senior-form">
@@ -510,12 +513,12 @@
                 </div>
                 <div class="form-tot">
                     <div class="form-tot-type">
-                        <h5 class="form-tot-type-basic"><span class="count-basic">2</span>Basic (20 €)</h5>
-                        <h5 class="form-tot-type-senior"><span class="count-senior">2</span>Senior (10 €)</h5>
+                        <h5 class="form-tot-type-basic"><span class="count-basic">0</span>Basic (<span class="mod-price-basic">20</span> €)</h5>
+                        <h5 class="form-tot-type-senior"><span class="count-senior">0</span>Senior (<span class="mod-price-senior">10</span> €)</h5>
                         <h5 class="form-tot-type-total">Total:</h5>
                     </div>
                     <div class="form-tot-amount">
-                        <h5 class="form-tot-amount-basic"><span class="tot-basic">40</span>€</h5>
+                        <h5 class="form-tot-amount-basic"><span class="tot-basic">0</span>€</h5>
                         <h5 class="form-tot-amount-senior"><span class="tot-senior">20</span>€</h5>
                         <h5 class="form-tot-amount-total"><span class="total-form">60</span>€</h5>
                     </div>
@@ -562,7 +565,6 @@
                         <input id="cvc" type="tel" maxlength="4">
                         <div class="form-credit-card-back-description"> The last<br>3 or 4 digits on back<br>of the card </div>
                     </div>
-                    <span class="error-text"></span>
                     <input type="submit" value="Book" class="form-credit-card-button ripple"><!-- </button> -->
                 </div>
             </div>
