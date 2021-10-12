@@ -1875,6 +1875,10 @@ button {
   height: 350px !important;
 }
 
+.show-video-full {
+  height: 100vh;
+}
+
 @media (max-width: 1500px) {
   .explore-section-left {
     max-width: 37%;

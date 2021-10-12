@@ -44,10 +44,12 @@ function playerFull() {
         document.exitFullscreen();
         playerControls.classList.remove('show-full');
         plFullscreen.classList.remove('show-player-full');
+        video.classList.remove('show-video-full');
     } else {
         videoWrapper.requestFullscreen();
         playerControls.classList.add('show-full');
         plFullscreen.classList.add('show-player-full');
+        video.classList.add('show-video-full');
     }
 }
 
