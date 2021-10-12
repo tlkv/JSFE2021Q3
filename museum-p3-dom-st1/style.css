@@ -1879,6 +1879,19 @@ button {
   height: 100vh;
 }
 
+.playback-speed {
+  position: absolute;
+  left: calc(50% - 50px);
+  width: 100px;
+  height: 40px;
+  bottom: 130px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 24px;
+  z-index: 11;
+  color: white;
+}
+
 @media (max-width: 1500px) {
   .explore-section-left {
     max-width: 37%;
