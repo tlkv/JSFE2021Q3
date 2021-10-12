@@ -9,6 +9,7 @@ const progress = videoWrapper.querySelector('.player-position');
 const plFullscreen = videoWrapper.querySelector('.player-fullscreen');
 const progressVolume = videoWrapper.querySelector('.player-volume');
 const progressColors = document.querySelectorAll('.player-range');
+const showSpeed = document.querySelector('.playback-speed');
 
 for (let item of progressColors) {
     item.addEventListener('input', function () {
@@ -76,11 +77,15 @@ function moveVolume(e) {
 function toggleFast() {
     if (video.playbackRate < 0.75) return false;
     video.playbackRate -= 0.25;
+    showSpeed.textContent = 'X' + video.playbackRate;
+    setTimeout(() => { showSpeed.textContent = '' }, 900);
 }
 
 function toggleSlow() {
     if (video.playbackRate > 1.75) return false;
     video.playbackRate += 0.25;
+    showSpeed.textContent = 'X' + video.playbackRate;
+    setTimeout(() => { showSpeed.textContent = '' }, 900);
 }
 
 function keyboard(e) {
