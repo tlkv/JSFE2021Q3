@@ -27,6 +27,8 @@ const modalTotSenior = document.querySelector('.tot-senior');
 const modalTotBasic = document.querySelector('.tot-basic');
 const modPriceSenior = document.querySelectorAll('.mod-price-senior');
 const modPriceBasic = document.querySelectorAll('.mod-price-basic');
+const countSenior = document.querySelector('.count-senior');
+const countBasic = document.querySelector('.count-basic');
 
 let typePrice = 20;
 
@@ -110,10 +112,18 @@ buyClick.addEventListener('click', () => {
     backgroundModal.style.display = 'block';
     totalForm.textContent = ticketsCountedPrice.textContent;
     basicModal.value = ticketsAmountBasic.value;
+    countBasic.textContent = ticketsAmountBasic.value;
     seniorModal.value = ticketsAmountSenior.value;
+    countSenior.textContent = ticketsAmountSenior.value;
     modalTotSenior.textContent = typePrice * ticketsAmountSenior.value / 2;
     modalTotBasic.textContent = typePrice * ticketsAmountBasic.value;
-
+    if (typePrice === 20) {
+        formSelectModal.value = "Permanent exhibition";
+    } else if (typePrice === 25) {
+        formSelectModal.value = "Temporary exhibition";
+    } else if (typePrice === 40) {
+        formSelectModal.value = "Combined Admission";
+    }
     modPriceSenior.forEach(item => {
         item.textContent = typePrice / 2;
     });
