@@ -69,11 +69,23 @@ function moveVolume(e) {
     }
 }
 
+function toggleFast() {
+    if (video.playbackRate < 0.75) return false;
+    video.playbackRate -= 0.25;
+}
+
+function toggleSlow() {
+    if (video.playbackRate > 1.75) return false;
+    video.playbackRate += 0.25;
+}
+
 function keyboard(e) {
     e.preventDefault();
     e.code === 'Space' ? togglePlay() : false;
     e.key === 'f' || e.key === 'а' ? playerFull() : false;
     e.key === 'm' || e.key === 'ь' ? toggleMute() : false;
+    e.shiftKey && (e.key === 'Б' || e.key === '<') ? toggleFast() : false;
+    e.shiftKey && (e.key === '>' || e.key === 'Ю') ? toggleSlow() : false;
 }
 
 
@@ -96,3 +108,8 @@ progressVolume.addEventListener('mouseup', () => mousedown = false);
 playMute.addEventListener("click", toggleMute);
 plFullscreen.addEventListener("click", playerFull);
 videoWrapper.addEventListener('keydown', keyboard);
+
+video.addEventListener('ended', () => {
+    playButtonBig.classList.remove('button-opacity');
+    playSmall.classList.remove('play-button-opacity');
+});
