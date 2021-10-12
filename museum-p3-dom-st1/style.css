@@ -1768,6 +1768,14 @@ header .menu-link:hover::after {
   opacity: 0;
 }
 
+.show-player-full {
+  background: url('./assets/svg/fullscreen_exit.svg') center /100% no-repeat;
+}
+
+.show-player-full svg {
+  opacity: 0;
+}
+
 .mute-button-opacity {
   background: url('./assets/svg/mute.svg') center /100% no-repeat;
 }
