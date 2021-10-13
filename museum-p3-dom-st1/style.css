@@ -708,6 +708,7 @@ footer {
   top: 0;
   left: 0;
   background: linear-gradient(to right, #020202, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)) transparent;
+  pointer-events: none;
 }
 
 .slider-control {
