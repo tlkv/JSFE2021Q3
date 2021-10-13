@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", () => {
-	//jquery for Lightslider library
+	//jquery for Slider library initialization - not forbidder)
 	$('#image-gallery').lightSlider({
 
 		item: 1,
