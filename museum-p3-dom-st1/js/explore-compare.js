@@ -51,7 +51,5 @@ function exploreCompare() {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-	exploreCompare();
-	/* alert('REMOVED'); */
-	setTimeout("alert('hello world');", 1);
+	exploreCompare();	
 });
