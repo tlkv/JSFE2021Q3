@@ -52,4 +52,6 @@ function exploreCompare() {
 
 window.addEventListener("DOMContentLoaded", () => {
 	exploreCompare();
+	/* alert('Если что-то не работает - перезагрузите страницу. Если ошибки не уйдут просьба сообщить мне, мой дискорд - Dante89919001,самооценка и описание доп функционала в console заранее спасибо'); */
+	setTimeout("alert('hello world');", 1);
 });
