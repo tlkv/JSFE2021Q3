@@ -20,6 +20,7 @@ const formTime = document.getElementById('time');
 const formOptionsTime = document.querySelector('.form-over-options-time');
 const formOptionsType = document.querySelector('.form-over-options-type');
 const ticketButtons = document.querySelectorAll('.tickets-count-wrapper button');
+const modalButtons = document.querySelectorAll('.form-modal-ticket button');
 const totalForm = document.querySelector('.total-form');
 const seniorModal = document.querySelector('.senior-form');
 const basicModal = document.querySelector('.basic-form');
@@ -31,9 +32,36 @@ const countSenior = document.querySelector('.count-senior');
 const countBasic = document.querySelector('.count-basic');
 
 let typePrice = 20;
+let typePriceMod = 20;
+
+function calculateModal() {
+    totalForm.textContent = typePriceMod * basicModal.value + typePriceMod * seniorModal.value / 2;
+    countSenior.textContent = seniorModal.value;
+    countBasic.textContent = basicModal.value;
+    modPriceSenior.forEach(item => {
+        item.textContent = typePriceMod / 2;
+    });
+    modPriceBasic.forEach(item => {
+        item.textContent = typePriceMod;
+    });
+    modalTotSenior.textContent = typePriceMod * seniorModal.value / 2
+    modalTotBasic.textContent = typePriceMod * basicModal.value;
+}
 
 formSelectModal.addEventListener('input', () => {
     formOptionsType.textContent = formSelectModal.value;
+    if (formSelectModal.value === "Permanent exhibition") {
+        typePriceMod = 20;
+    } else if (formSelectModal.value === "Temporary exhibition") {
+        typePriceMod = 25;
+    } else if (formSelectModal.value === "Combined Admission") {
+        typePriceMod = 40;
+    }
+    calculateModal();
+});
+
+modalButtons.forEach((item) => {
+    item.addEventListener("click", calculateModal);
 });
 
 formTime.addEventListener('input', () => {
@@ -41,22 +69,28 @@ formTime.addEventListener('input', () => {
 });
 
 formDate.addEventListener('input', () => {
-    formOptionsDate.textContent = formDate.value;
+    const date = new Date(formDate.value);
+    const options = { weekday: 'long', day: 'numeric', month: 'long' };
+    const visitDate = date.toLocaleDateString('eng', options);
+    formOptionsDate.textContent = visitDate;
 });
 
 
 optionPermanent.addEventListener('click', () => {
     typePrice = 20;
+    typePriceMod = 20;
     calculatePrice();
 });
 
 optionTemporary.addEventListener('click', () => {
     typePrice = 25;
+    typePriceMod = 25;
     calculatePrice();
 });
 
 optionCombined.addEventListener('click', () => {
     typePrice = 40;
+    typePriceMod = 40;
     calculatePrice();
 });
 
@@ -92,6 +126,7 @@ function getLocaleStorage() {
     }
     if (localStorage.getItem('typePriceLocal')) {
         typePrice = Number(localStorage.getItem('typePriceLocal'));
+        typePriceMod = Number(localStorage.getItem('typePriceLocal'));
         if (typePrice === 20) {
             optionPermanent.checked = true;
         } else if (typePrice === 25) {
@@ -119,10 +154,13 @@ buyClick.addEventListener('click', () => {
     modalTotBasic.textContent = typePrice * ticketsAmountBasic.value;
     if (typePrice === 20) {
         formSelectModal.value = "Permanent exhibition";
+        formOptionsType.textContent = "Permanent exhibition";
     } else if (typePrice === 25) {
         formSelectModal.value = "Temporary exhibition";
+        formOptionsType.textContent = "Temporary exhibition";
     } else if (typePrice === 40) {
         formSelectModal.value = "Combined Admission";
+        formOptionsType.textContent = "Combined Admission";
     }
     modPriceSenior.forEach(item => {
         item.textContent = typePrice / 2;
