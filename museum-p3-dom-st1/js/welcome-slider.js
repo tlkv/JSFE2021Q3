@@ -60,8 +60,8 @@ function toggleStop() {
 	playButtonBig1.classList.remove('button-opacity');
 	playSmall1.classList.remove('play-button-opacity');
 	setTimeout(() => { 
-		videoScr.currentTime = 0;
+		/* videoScr.currentTime = 0; */
 		progress1.value = 0;
 		progress1.style.background = `linear-gradient(to right, #710707 0%, #710707 $0%, #C4C4C4 0%, #C4C4C4 100%)`;		
-	}, 200);
+	}, 100);
 }
