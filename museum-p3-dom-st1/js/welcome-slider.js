@@ -54,9 +54,14 @@ window.addEventListener("DOMContentLoaded", () => {
 const playButtonBig1 = document.querySelector('.play-button');
 const playSmall1 = document.querySelector('.player-start');
 const videoScr = document.querySelector('.video-item');
+const progress1 = document.querySelector('.player-position');
 function toggleStop() {
-	videoScr.pause();
-	videoScr.currentTime = 0;
+	videoScr.pause();	
 	playButtonBig1.classList.remove('button-opacity');
 	playSmall1.classList.remove('play-button-opacity');
+	setTimeout(() => { 
+		videoScr.currentTime = 0;
+		progress1.value = 0;
+		progress1.style.background = `linear-gradient(to right, #710707 0%, #710707 $0%, #C4C4C4 0%, #C4C4C4 100%)`;		
+	}, 200);
 }
