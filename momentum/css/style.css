@@ -1,0 +1,166 @@
+@font-face {
+    font-family: 'Arial-MT';
+    src: url("../assets/fonts/Arial-MT.woff");
+}
+
+html {
+    font-family: "Josefin Sans", sans-serif;
+    background: #333333;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    font-size: 18px;
+    min-height: 100vh;
+}
+
+body {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    background: center center / cover, rgba(0, 0, 0, 0.5);
+    background-blend-mode: multiply;
+    transition: background-image 1s ease-in-out .5s;
+}
+
+.body:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.clock-old {
+    width: 320px;
+    height: 320px;
+    border: 10px solid white;
+    background: rgba(255, 255, 255, 0.95) url("../assets/img/clock.png");
+    background-size: cover;
+    position: relative;
+    padding: 30px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1), inset 0 0 0 2px #EFEFEF, inset 0 0 10px black, 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.clock-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform: translateY(-3px);
+}
+
+.clock-arrow {
+    transform-origin: 100%;
+    border-radius: 50% 20% 20% 50%;
+    width: 40%;
+    height: 7px;
+    background: #000;
+    position: absolute;
+    top: 50%;
+    left: 10%;
+}
+
+.second-arrow {
+    height: 3px;
+    background: #4CC7F4;
+}
+
+.min-arrow {
+    background-color: #666;
+    height: 5px;
+}
+
+.clock-digital {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 180px;
+    font-weight: 500;
+    flex-wrap: wrap;
+    max-width: 440px;
+    color: #fff;
+}
+
+.main-wrapper {
+    margin: 0 auto;
+    display: flex;
+    width: 1200px;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.digital-clock-numeric {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    letter-spacing: -4px;
+    font-size: 84px;
+    font-family: 'Arial-MT', sans-serif;
+}
+
+.date-additional {
+    font-size: 32px;
+}
+
+.slider-button {
+    font-size: 24px;
+    position: fixed;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    height: 50px;
+    width: 50px;
+    border: 2px solid #fff;
+    top: 50%;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-50%);
+    cursor: pointer;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.slider-left {
+    left: calc(8vw - 66px);
+}
+
+.slider-right {
+    right: calc(8vw - 65px);
+}
+
+.user-greeting {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 32px;
+    margin-top: 20px;
+    align-items: baseline;
+    color: #fff;
+}
+
+.user-greeting input {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    margin-left: 15px;
+    font-size: 32px;
+    color: #fff;
+    max-width: 320px;
+}
+
+.greeting {
+    width: 320px;
+    text-align: right;
+}
+
+.user-greeting input::placeholder {
+    color: #999;
+}
