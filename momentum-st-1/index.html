@@ -20,9 +20,9 @@
       <ul class="play-list"></ul>
     </div>
     <div class="weather">
-      <input type="text" class="city" />
+      <input type="text" class="city" value="Минск"/>
       <i class="weather-icon owf"></i>
-      <div class="weather-error"></div>
+      <div class="weather-error hide">Ошибка при выполнении запроса</div>
       <div class="description-container">
         <span class="temperature"></span>
         <span class="weather-description"></span>
@@ -44,12 +44,16 @@
     </div>
   </main>
   <footer class="footer">
+    <button class="open-settings"></button>
     <button class="change-quote"></button>
     <div>
       <div class="quote"></div>
       <div class="author"></div>
     </div>
   </footer>
+  <div class="settings">
+    TEST
+  </div>
   <script src="./script.js"></script>
 </body>
 </html>
