@@ -16,7 +16,7 @@
     font-size: 16px;
     color: #fff;
     text-align: center;
-    background: center/cover,  rgba(128, 42, 42, 0.5);
+    background: center/cover,  rgba(0, 0, 0, 0.5);
     background-blend-mode: multiply;
     transition: background-image 1s ease-in-out;
   }
@@ -35,22 +35,34 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 120px;
+    
     margin-bottom: 28px;
+    width: 100%;
+  }
+
+  .player-controls>button {
+    margin: 0 2px;
   }
   
   .play-list {
     text-align: left;
+    max-width: fit-content;
   }
   
   .play-item {
     position: relative;
     padding: 5px;
-    padding-left: 20px;
+    padding-left: 10px;
     list-style: none;
     opacity: .8;
     cursor: pointer;
     transition: .3s;
+    display: flex;
+    align-items: center;
+  }
+
+  .play-item span {
+    padding: 0 4px 0 8px;
   }
   
   .play-item:hover {
@@ -109,8 +121,15 @@
     background-size: 40px 40px;
     background-image: url("../assets/svg/play.svg");
   }
+
+  .play-alternative {
+    width: 25px;
+    height: 25px;
+    background-size: 25px 25px;
+    background-image: url("../assets/svg/play.svg");
+  }
   
-  .pause {
+  .pause, .play-pause {
     background-image: url("../assets/svg/pause.svg");
   }
   
@@ -304,6 +323,60 @@
   .settings-show {
     transform: translateX(0px);
   }
+
+  .player-extended {
+    max-width: 240px;
+    height: 80px;    
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 5px;
+  }
+
+  .track-name
+ {
+   width: 100%;
+ }
+
+ .player-extended-controls {
+   display: flex;
+   flex-wrap: wrap;
+   width: 100%;
+ }
+
+
+
+ .player-progress {
+  
+  flex-grow: 1;
+  cursor:grabbing;
+  width: 100%;
+  margin: 4px 0 8px 0;
+ }
+
+ .playback-info-wrapper {
+  width: 100px;
+}
+
+.player-volume {
+  max-width: 60px;
+  cursor:grabbing;
+}
+
+.mute {
+  width: 25px;
+  background: transparent url("../assets/svg/mute.svg")  center /100% no-repeat;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: 3px;
+}
+
+.mute-button-muted {
+  background: transparent url("../assets/svg/muteon.svg")  center /100% no-repeat;
+}
   
   @media (max-width: 768px) {
     .time {

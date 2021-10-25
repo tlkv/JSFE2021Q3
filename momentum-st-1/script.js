@@ -29,6 +29,15 @@ const play = document.querySelector('.play');
 const playPrev = document.querySelector('.play-prev');
 const playNext = document.querySelector('.play-next');
 const playListContainer = document.querySelector('.play-list');
+let playListCurrent;
+let playListCurrentButtons;
+
+const trackName = document.querySelector('.track-name');
+const playerVolume = document.querySelector('.player-volume');
+const muteButton = document.querySelector('.mute');
+const playbackInfo = document.querySelector('.playback-info');
+const playerProgress = document.querySelector('.player-progress');
+const playbackDuration = document.querySelector('.playback-duration');
 
 let isPlayed = false;
 
@@ -62,7 +71,50 @@ const playList = [
         src: './assets/sounds/Summer Wind.mp3',
         duration: '01:50'
     }
-]
+];
+
+
+playList.forEach(elem => {
+    const li = document.createElement('li');
+    li.classList.add('play-item');
+    const span = document.createElement('span');
+    span.textContent = elem.title;
+
+    const button = document.createElement('button');
+    button.classList.add("play-alternative","player-icon");
+    //li.textContent = elem.title;
+    li.append(button);
+    //li.innerHTML += span;
+    li.append(span);
+    playListContainer.append(li);
+    playListCurrent = playListContainer.querySelectorAll('.play-item');
+    playListCurrentButtons = playListContainer.querySelectorAll('button');
+  });
+
+for (let i=0; i<playListCurrent.length; i++) {
+    playListCurrent[i].addEventListener("click", ()=>{
+
+        playListCurrentButtons[playNum].classList.remove('play-pause');
+        if (playNum !== i) {   
+        playNum = i;
+        audio.src = playList[playNum].src;
+        //updateTrackData();
+        audio.currentTime = 0;//
+        isPlayed = false;
+    }
+
+        
+        playAudio();
+    });
+}
+  /* playListCurrent.forEach(item=>{
+      item.addEventListener("click", handleTrack);
+  }); */
+  /* function handleTrack() {
+   
+    console.log('this ',i);
+  } */
+  console.log('buttons ',playListCurrentButtons);
 
 
 
@@ -216,25 +268,27 @@ changeQuote.addEventListener('click', getQuotes);
 
 const audio = new Audio();
 audio.src = playList[playNum].src;
+audio.volume = 0.5;
+trackName.textContent = playList[playNum].title;
+playbackDuration.textContent = '/ '+playList[playNum].duration;
+playbackInfo.textContent = '00:00';
 
 function playAudio() {
     console.log('src ', playNum);
     console.log('container', playListContainer);
-    playListCurrent = playListContainer.querySelectorAll('.play-item');
-    playListCurrent.forEach(item=>{
-        item.classList.remove('item-active');
-    });
-    playListCurrent[playNum].classList.add('item-active');
+    updateTrackData();
 
     if (!isPlayed) {
         /* audio.currentTime = 0; */
         audio.play();
         isPlayed = true;
         play.classList.add("pause");
+        playListCurrentButtons[playNum].classList.add('play-pause');
     } else {
         audio.pause();
         isPlayed = false;
         play.classList.remove("pause");
+        playListCurrentButtons[playNum].classList.remove('play-pause');
     }
 
 
@@ -254,11 +308,26 @@ audio.addEventListener("ended", ()=>{
     playNextTrack();
 });
 
+
 play.addEventListener("click", playAudio);
 
-function playPrevTrack() {    
+function updateTrackData () {
+    //const playListCurrent = playListContainer.querySelectorAll('.play-item');
+    playListCurrent.forEach(item=>{
+        item.classList.remove('item-active');
+    });
+    playListCurrent[playNum].classList.add('item-active');
+    trackName.textContent = playList[playNum].title;
+    playbackDuration.textContent = '/ '+playList[playNum].duration;
+}
+
+
+
+function playPrevTrack() {
+    playListCurrentButtons[playNum].classList.remove('play-pause');   
     (playNum > 0) ? playNum-- : playNum = playList.length - 1;
     audio.src = playList[playNum].src;
+    //updateTrackData();
     audio.currentTime = 0;//
     isPlayed = false;
     playAudio();
@@ -266,26 +335,105 @@ function playPrevTrack() {
 
 playPrev.addEventListener("click", playPrevTrack);
 
-function playNextTrack() {      
+function playNextTrack() {
+    playListCurrentButtons[playNum].classList.remove('play-pause');
     (playList.length - 1 > playNum) ? playNum++ : playNum = 0;
     audio.src = playList[playNum].src;
+    //updateTrackData();
     audio.currentTime = 0;//
     isPlayed = false;
     playAudio();
 }
 
+/* ----------------- */
 
+function moveVolume(e) {
+    audio.volume = playerVolume.value / 100;
+    if (audio.volume === 0) {
+        muteButton.classList.add('mute-button-muted');
+    } else if (audio.volume !== 0) {
+        muteButton.classList.remove('mute-button-muted');
+    }
+}
 
+playerVolume.addEventListener('click', moveVolume);
+playerVolume.addEventListener('mousemove', (e) => mousedown && moveVolume(e));
+playerVolume.addEventListener('mousedown', () => mousedown = true);
+playerVolume.addEventListener('mouseup', () => mousedown = false);
+
+function toggleMute() {
+    if (audio.volume === 0) {
+        playerVolume.value = 50;
+        audio.volume = 0.5;
+        muteButton.classList.remove('mute-button-muted');
+        //progressVolume.style.background = `linear-gradient(to right, #710707 0%, #710707 50%, #C4C4C4 50%, #C4C4C4 100%)`;
+    } else {
+        playerVolume.value = 0;
+        audio.volume = 0;
+        muteButton.classList.add('mute-button-muted');
+        //progressVolume.style.background = `linear-gradient(to right, #710707 0%, #710707 0%, #C4C4C4 0%, #C4C4C4 100%)`;
+    }
+}
+function togglePlay() {
+    const method = audio.paused ? 'play' : 'pause';
+    audio[method]();
+    playButtonBig.classList.toggle('button-opacity');
+    playSmall.classList.toggle('play-button-opacity');
+}
+
+function handleProgress() {
+    const percent = (audio.currentTime / audio.duration) * 100;
+    playerProgress.value = percent;
+    playbackInfo.textContent =(Math.floor(audio.currentTime/60)).toString().padStart(2, "0")+":"+(Math.floor(audio.currentTime%60)).toString().padStart(2, "0");
+    /* if (audio.currentTime<60) {
+        playbackInfo.textContent = "00:"+(audio.currentTime%60).toFixed(0).padStart(2, "0");
+    } else {
+        playbackInfo.textContent = (Math.floor(audio.currentTime/60)).toFixed(0).padStart(2, "0")+":"+(audio.currentTime%60).toFixed(0).padStart(2, "0");
+    } */
+    //let bgNum = randomNum.toString().padStart(2, "0");
+    //playbackInfo.textContent = audio.currentTime.toFixed(0);
+    
+    //progress.style.background = `linear-gradient(to right, #710707 0%, #710707 ${percent}%, #C4C4C4 ${percent}%, #C4C4C4 100%)`;
+}
+
+function move(e) {
+    const moveTime = (e.offsetX / playerProgress.offsetWidth) * audio.duration;
+    audio.currentTime = moveTime;
+
+}
+
+playerProgress.addEventListener('mousemove', (e) => mousedown && move(e));
+playerProgress.addEventListener('mousedown', () => mousedown = true);
+playerProgress.addEventListener('mouseup', () => mousedown = false);
+
+let mousedown = false;
+audio.addEventListener('timeupdate', handleProgress);
+playerProgress.addEventListener('click', move);
+/* playButtonBig.addEventListener("click", togglePlay);
+audio.addEventListener("click", togglePlay);
+playSmall.addEventListener("click", togglePlay);
+audio.addEventListener('timeupdate', handleProgress);
+progress.addEventListener('click', move);
+
+progress.addEventListener('mousemove', (e) => mousedown && move(e));
+progress.addEventListener('mousedown', () => mousedown = true);
+progress.addEventListener('mouseup', () => mousedown = false);
+
+progressVolume.addEventListener('click', moveVolume);
+
+progressVolume.addEventListener('mousemove', (e) => mousedown && moveVolume(e));
+progressVolume.addEventListener('mousedown', () => mousedown = true);
+progressVolume.addEventListener('mouseup', () => mousedown = false);
+playMute.addEventListener("click", toggleMute);
+plFullscreen.addEventListener("click", playerFull);
+audioWrapper.addEventListener('keydown', keyboard); */
+
+muteButton.addEventListener("click", toggleMute);
 
 playNext.addEventListener("click", playNextTrack);
 
 
-playList.forEach(elem => {
-    const li = document.createElement('li');
-    li.classList.add('play-item');
-    li.textContent = elem.title;
-    playListContainer.append(li);
-  })
+
 
 /* if (!isPlayed) {
     playAudio();

@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <link href="./assets/favicon.ico" rel="shortcut icon" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="./css/owfont-regular.css" />
-  <link rel="stylesheet" href="./css/style.css" />  
+  <link rel="stylesheet" href="./css/style.css" />
   <title>Мomentum</title>
-
 </head>
+
 <body>
   <header class="header">
     <div class="player">
@@ -16,11 +17,23 @@
         <button class="play-prev player-icon"></button>
         <button class="play player-icon"></button>
         <button class="play-next player-icon"></button>
+        <div class="player-extended">
+          <div class="track-name"></div>
+          <div class="player-extended-controls">
+            <input type="range" value="0" min="0" max="100" step="1" class="player-progress">
+            <div class="playback-info-wrapper">
+            <span class="playback-info"></span>
+            <span class="playback-duration"></span>
+            </div>
+            <button class ="mute"></button>
+            <input type="range" value="50" min="0" max="100" step="1" class="player-volume">
+          </div>
+        </div>
       </div>
       <ul class="play-list"></ul>
     </div>
     <div class="weather">
-      <input type="text" class="city" value="Минск"/>
+      <input type="text" class="city" value="Минск" />
       <i class="weather-icon owf"></i>
       <div class="weather-error hide">Ошибка при выполнении запроса</div>
       <div class="description-container">
@@ -51,9 +64,8 @@
       <div class="author"></div>
     </div>
   </footer>
-  <div class="settings">
-    TEST
-  </div>
+  <div class="settings"> TEST </div>
   <script src="./script.js"></script>
 </body>
+
 </html>
