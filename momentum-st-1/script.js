@@ -28,14 +28,17 @@ const settings = document.querySelector('.settings');
 const play = document.querySelector('.play');
 const playPrev = document.querySelector('.play-prev');
 const playNext = document.querySelector('.play-next');
+const playListContainer = document.querySelector('.play-list');
 
-let isPlay = false;
+let isPlayed = false;
+
+let playNum = 0;
 
 const state = {
     language: 'en',
     photoSource: 'github',
-    blocks: ['time', 'date','greeting', 'quote', 'weather', 'audio', 'todolist']
-  }
+    blocks: ['time', 'date', 'greeting', 'quote', 'weather', 'audio', 'todolist']
+}
 
 
 const playList = [
@@ -60,6 +63,8 @@ const playList = [
         duration: '01:50'
     }
 ]
+
+
 
 
 function showTime() {
@@ -128,15 +133,21 @@ function setBg() {
     };
 }
 
-leftArrow.onclick = function () {
+
+function slidePrev() {
     (randomNum > 1) ? randomNum-- : randomNum = 20;
     setBg();
 }
 
-rightArrow.onclick = function () {
+leftArrow.addEventListener("click", slidePrev);
+
+
+function slideNext() {
     (randomNum < 20) ? randomNum++ : randomNum = 1;
     setBg();
 }
+
+rightArrow.addEventListener("click", slideNext);
 
 
 async function getWeather() {
@@ -204,21 +215,94 @@ changeQuote.addEventListener('click', getQuotes);
 
 
 const audio = new Audio();
+audio.src = playList[playNum].src;
 
 function playAudio() {
-    audio.src = './assets/sounds/Aqua Caelestis.mp3';
-    audio.currentTime = 0;
-    audio.play();
-  }
+    console.log('src ', playNum);
+    console.log('container', playListContainer);
+    playListCurrent = playListContainer.querySelectorAll('.play-item');
+    playListCurrent.forEach(item=>{
+        item.classList.remove('item-active');
+    });
+    playListCurrent[playNum].classList.add('item-active');
 
-  play.addEventListener("click", () =>{
+    if (!isPlayed) {
+        /* audio.currentTime = 0; */
+        audio.play();
+        isPlayed = true;
+        play.classList.add("pause");
+    } else {
+        audio.pause();
+        isPlayed = false;
+        play.classList.remove("pause");
+    }
+
+
+    /* audio.currentTime = 0;
+    audio.play(); */
+}
+
+/* function pauseAudio() {
+  audio.pause();
+} */
+
+audio.addEventListener("ended", ()=>{
+    //console.log('ended');
+    /* audio.currentTime = 0;
+    play.classList.remove("pause");
+    isPlayed = false; */
+    playNextTrack();
+});
+
+play.addEventListener("click", playAudio);
+
+function playPrevTrack() {    
+    (playNum > 0) ? playNum-- : playNum = playList.length - 1;
+    audio.src = playList[playNum].src;
+    audio.currentTime = 0;//
+    isPlayed = false;
     playAudio();
-  });
+}
+
+playPrev.addEventListener("click", playPrevTrack);
+
+function playNextTrack() {      
+    (playList.length - 1 > playNum) ? playNum++ : playNum = 0;
+    audio.src = playList[playNum].src;
+    audio.currentTime = 0;//
+    isPlayed = false;
+    playAudio();
+}
 
 
 
 
-settingsButton.addEventListener("click",()=>{
+playNext.addEventListener("click", playNextTrack);
+
+
+playList.forEach(elem => {
+    const li = document.createElement('li');
+    li.classList.add('play-item');
+    li.textContent = elem.title;
+    playListContainer.append(li);
+  })
+
+/* if (!isPlayed) {
+    playAudio();
+    isPlayed = true;
+    play.classList.add("pause");
+} else {
+    pauseAudio();
+    isPlayed = false;
+    play.classList.remove("pause");
+}
+*/
+
+
+
+
+
+settingsButton.addEventListener("click", () => {
     settings.classList.toggle('settings-show');
 });
 
