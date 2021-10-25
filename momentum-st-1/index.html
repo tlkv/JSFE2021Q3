@@ -22,10 +22,10 @@
           <div class="player-extended-controls">
             <input type="range" value="0" min="0" max="100" step="1" class="player-progress">
             <div class="playback-info-wrapper">
-            <span class="playback-info"></span>
-            <span class="playback-duration"></span>
+              <span class="playback-info"></span>
+              <span class="playback-duration"></span>
             </div>
-            <button class ="mute"></button>
+            <button class="mute"></button>
             <input type="range" value="50" min="0" max="100" step="1" class="player-volume">
           </div>
         </div>
@@ -33,9 +33,9 @@
       <ul class="play-list"></ul>
     </div>
     <div class="weather">
-      <input type="text" class="city" value="Минск" />
+      <input type="text" class="city" value="Минск" placeholder="[Enter city]" />
       <i class="weather-icon owf"></i>
-      <div class="weather-error hide">Ошибка при выполнении запроса</div>
+      <div class="weather-error hide">Error getting weather</div>
       <div class="description-container">
         <span class="temperature"></span>
         <span class="weather-description"></span>
@@ -58,13 +58,77 @@
   </main>
   <footer class="footer">
     <button class="open-settings"></button>
-    <button class="change-quote"></button>
-    <div>
-      <div class="quote"></div>
-      <div class="author"></div>
+    <div class="quote-containter">
+      <button class="change-quote"></button>
+      <div>
+        <div class="quote"></div>
+        <div class="author"></div>
+      </div>
+    </div>
+    <div class="course-footer">
+      <div><a class="git" href="https://github.com/tlkv">tlkv</a></div>
+      <div>© 2021</div>
+      <div><a href="https://rs.school/js/"><img class="rslogo" src="./assets/svg/rs_school.svg" alt="rs"></a></div>
     </div>
   </footer>
-  <div class="settings"> TEST </div>
+  <div class="settings">
+    <div class="close-btn">
+      <button class="close-button"></button>
+    </div>
+    <h2 class="setting-title">Settings</h2>
+    <div class="select-options">
+      <h4 class="descr-photo">Photo Source</h4>
+      <select class="select-background-source">
+        <option value="git" selected>Github</option>
+        <option value="flickr">Flickr</option>
+        <option value="unsplash">Unsplash</option>
+      </select>
+    </div>
+    <div class="select-options select-options-custom">
+      <h4 class="custom-theme">Photo Tags (Flickr or Unsplash)</h4>
+      <input type="text" class="select-background-tag">
+    </div>
+    <div class="select-options">
+      <h4 class="descr-lang">Language</h4>
+      <select class="select-language">
+        <option value="en" selected>English</option>
+        <option value="ru">Русский</option>
+      </select>
+    </div>
+    <div class=" display-options">
+      <h4 class="descr-show">Show/Hide blocks</h4>
+      <div class="select-on-page">
+        <div class="on-page-item">
+          <input type="checkbox" id="topplayer" name="topplayer" checked>
+          <label class="label-player" for="player">Player</label>
+        </div>
+        <div class="on-page-item">
+          <input type="checkbox" id="weather" name="weather" checked>
+          <label class="label-weather" for="weather">Weather</label>
+        </div>
+        <div class="on-page-item">
+          <input type="checkbox" id="time" name="time" checked>
+          <label class="label-time" for="time">Time</label>
+        </div>
+        <div class="on-page-item">
+          <input type="checkbox" id="date" name="date" checked>
+          <label class="label-date" for="date">Date</label>
+        </div>
+        <div class="on-page-item">
+          <input type="checkbox" id="greeting" name="greeting" checked>
+          <label class="label-greeting" for="greeting">Greeting</label>
+        </div>
+        <div class="on-page-item">
+          <input type="checkbox" id="quotes" name="quotes" checked>
+          <label class="label-quotes" for="quotes">Quotes</label>
+        </div>
+        <div class="on-page-item">
+          <input type="checkbox" id="todo" name="todo" checked>
+          <label class="label-todo" for="todo">TO DO list</label>
+        </div>
+      </div>
+    </div>
+  </div>
   <script src="./script.js"></script>
 </body>
 
