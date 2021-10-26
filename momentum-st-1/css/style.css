@@ -23,6 +23,7 @@
     color: #fff;
     text-align: center;
     background: center/cover,  rgba(0, 0, 0, 0.5);
+    background-image: url("../assets/img_old/bg.jpg");
     background-blend-mode: multiply;
     transition: background-image 1s ease-in-out;
   }

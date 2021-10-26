@@ -58,7 +58,7 @@ const labelTime = document.querySelector('.label-time');
 const labelDate = document.querySelector('.label-date');
 const labelGreeting = document.querySelector('.label-greeting');
 const labelQuotes = document.querySelector('.label-quotes');
-const labelTodo = document.querySelector('.label-todo');
+//const labelTodo = document.querySelector('.label-todo');
 const customTheme = document.querySelector('.custom-theme');
 
 const settingsButton = document.querySelector('.open-settings');
@@ -134,7 +134,6 @@ function showOrHide() {
 
 const translations = {
     en: {
-
         cityPlacelolder: "[Enter city]",
         userPlacelolder: "[Enter name]",
         windText1: "Wind",
@@ -347,14 +346,14 @@ function getLocalStorage() {
     } else {
         showTime();
     }
-    translateApp();
     if (localStorage.getItem('city')) {
         city.value = localStorage.getItem('city');
-
     } else {
         city.value = 'Минск';
 
     }
+    translateApp();
+    
 }
 
 window.addEventListener('load', getLocalStorage);
@@ -634,7 +633,7 @@ function translateApp() {
     labelDate.textContent = translations[lang].labelDate;
     labelGreeting.textContent = translations[lang].labelGreeting;
     labelQuotes.textContent = translations[lang].labelQuotes;
-    labelTodo.textContent = translations[lang].labelTodo;
+    //labelTodo.textContent = translations[lang].labelTodo;
 
     getWeather();
     /* getTimeOfDay(now, language);*/
