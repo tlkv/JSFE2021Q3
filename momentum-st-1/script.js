@@ -349,11 +349,14 @@ function getLocalStorage() {
     if (localStorage.getItem('city')) {
         city.value = localStorage.getItem('city');
     } else {
-        city.value = 'Минск';
-
+        if (lang === 'en') {
+            city.value = 'Minsk';
+        } else if (lang === 'ru') {
+            city.value = 'Минск';
+        }
     }
     translateApp();
-    
+
 }
 
 window.addEventListener('load', getLocalStorage);
@@ -448,14 +451,7 @@ async function getWeather() {
     }
 }
 
-function setCity(event) {
-    if (event.code === 'Enter') {
-        getWeather();
-        city.blur();
-    }
-}
-
-city.addEventListener('keypress', setCity);
+city.addEventListener('change', getWeather);
 
 async function getQuotes() {
 
@@ -612,8 +608,14 @@ closeBtn.addEventListener("click", () => {
 function translateApp() {
     if (selectLanguage.value === 'en') {
         lang = "en";
+        if (city.value === 'Минск') {
+            city.value = 'Minsk'
+        }
     } else if (selectLanguage.value === 'ru') {
         lang = "ru";
+        if (city.value === 'Minsk') {
+            city.value = 'Минск';
+        }
     }
 
     city.placeholder = translations[lang].cityPlacelolder;
