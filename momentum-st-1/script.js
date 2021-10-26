@@ -22,8 +22,6 @@ const quote = document.querySelector('.quote');
 const author = document.querySelector('.author');
 const changeQuote = document.querySelector('.change-quote');
 
-
-
 const play = document.querySelector('.play');
 const playPrev = document.querySelector('.play-prev');
 const playNext = document.querySelector('.play-next');
@@ -63,7 +61,6 @@ const labelQuotes = document.querySelector('.label-quotes');
 const labelTodo = document.querySelector('.label-todo');
 const customTheme = document.querySelector('.custom-theme');
 
-
 const settingsButton = document.querySelector('.open-settings');
 const settings = document.querySelector('.settings');
 const closeBtn = document.querySelector('.close-button');
@@ -94,8 +91,6 @@ backTag.addEventListener("change", () => {
     tag = backTag.value;
     setBg();
 });
-
-
 
 let tag = getTimeOfDay();
 
@@ -136,58 +131,6 @@ function showOrHide() {
         quoteCont.classList.add('hide');
     }
 }
-
-/* function showOptions () {
-    if (timeSettings.checked == false) {
-      time.style.opacity = 0;
-    } else {
-      time.style.opacity = 1;
-    }
-    if (dateSettings.checked == false) {
-      date.style.opacity = 0;
-    } else {
-      date.style.opacity = 1;
-    }
-    if (greetingSettings.checked == false) {
-      greetingContainer.style.opacity = 0;
-    } else {
-      greetingContainer.style.opacity = 1;
-    }
-    if (quotesSettings.checked == false) {
-      changeQuote.style.opacity = 0;
-      quote.style.opacity = 0;
-      author.style.opacity = 0;
-    } else {
-      changeQuote.style.opacity = 1;
-      quote.style.opacity = 1;
-      author.style.opacity =1;
-    }
-    if (weatherSettings.checked == false) {
-      weather.style.opacity = 0;
-    } else {
-      weather.style.opacity = 1;
-    }
-    if (audioplayerSettings.checked == false) {
-      player.style.opacity = 0;
-    } else {
-      player.style.opacity = 1;
-    }
-     if (todoSettings.checked == false) {
-       todo.style.opacity = 0;
-       todoButton.style.opacity = 0;
-    } else {
-       todo.style.opacity = 1;
-       todoButton.style.opacity = 1;
-    } 
-    if (changePhotosource.value == 'unsplash' || changePhotosource.value == 'flickr' ) {
-      textChooseBackground.style.opacity = 1;
-      chooseBackground.style.opacity = 1;
-    } else {
-      textChooseBackground.style.opacity = 0;
-      chooseBackground.style.opacity = 0;
-    }
-}; */
-
 
 const translations = {
     en: {
@@ -286,7 +229,6 @@ for (let i = 0; i < playListCurrent.length; i++) {
             isPlayed = false;
         }
 
-
         playAudio();
     });
 }
@@ -351,8 +293,6 @@ function setLocalStorage() {
     localStorage.setItem('select-background-source', selectBackgroundSource.value);
     localStorage.setItem('back-tag', backTag.value);
 
-
-
 }
 
 window.addEventListener('beforeunload', setLocalStorage);
@@ -362,7 +302,6 @@ function getLocalStorage() {
 
     if (localStorage.getItem('select-background-source')) {
         selectBackgroundSource.value = localStorage.getItem('select-background-source');
-
     }
 
     if (localStorage.getItem('back-tag')) {
@@ -395,8 +334,6 @@ function getLocalStorage() {
         (localStorage.getItem('quotes-setting') === "true") ? quotesSetting.checked = true : quotesSetting.checked = false;
     }
 
-
-
     showOrHide();
 
     if (localStorage.getItem('user-name')) {
@@ -408,9 +345,7 @@ function getLocalStorage() {
         showTime();
 
     } else {
-
         showTime();
-
     }
     translateApp();
     if (localStorage.getItem('city')) {
@@ -429,61 +364,42 @@ function getRandomNum() {
 }
 
 async function setBg() {
-
-
     const img = new Image();
     let timeOfDay = getTimeOfDay();
     let bgNum = randomNum.toString().padStart(2, "0");
     let backgroundUrl = `https://raw.githubusercontent.com/tlkv/stage1-tasks/assets/images/${timeOfDay}/${bgNum}.jpg`;
     if (selectBackgroundSource.value === 'git') {
-
-
-
         img.src = backgroundUrl;
-
     } else if (selectBackgroundSource.value === 'unsplash') {
         img.src = await fetchUnsplash();
     } else if (selectBackgroundSource.value === 'flickr') {
         img.src = await fetchFlickr();
     }
 
-
-
     img.onload = () => {
         body.style.backgroundImage = `url(${img.src})`;
     };
 }
-
-
-
-
 
 async function fetchUnsplash() {
 
     const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${tag}&client_id=FKMf0BwZVmjUFUokYEOdzhCzYYWtfUDpLa-5TFSVPtA`;
     const res = await fetch(url);
     const data = await res.json();
-
-
     return (data.urls.regular);
 }
 
 async function fetchFlickr() {
-
     const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=aef1fa45481a7c7f4ad98865b314829c&tags=${tag}&extras=url_l&format=json&nojsoncallback=1`;
     const res = await fetch(url);
     const data = await res.json();
-
     let randomPhoto = Math.ceil(Math.random() * 20);
-
-
     return (data.photos.photo[randomPhoto].url_l);
 }
 
 
 
-function getRandomNum1(min, max) {//
-
+function getRandomNum1(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -542,9 +458,6 @@ function setCity(event) {
 
 city.addEventListener('keypress', setCity);
 
-
-
-
 async function getQuotes() {
 
     const quotes = 'data.json';
@@ -553,7 +466,6 @@ async function getQuotes() {
 
     if (!quoteFlag) {
         quoteRandom = Math.floor(Math.random() * 9);
-
     }
     quoteFlag = false;
     quote.textContent = data[lang][quoteRandom].quote;
@@ -574,9 +486,7 @@ playbackInfo.textContent = '00:00';
 function playAudio() {
 
     updateTrackData();
-
     if (!isPlayed) {
-        /* audio.currentTime = 0; */
         audio.play();
         isPlayed = true;
         play.classList.add("pause");
@@ -587,15 +497,11 @@ function playAudio() {
         play.classList.remove("pause");
         playListCurrentButtons[playNum].classList.remove('play-pause');
     }
-
-
-
 }
 
 
 
 audio.addEventListener("ended", () => {
-
     playNextTrack();
 });
 
@@ -603,7 +509,6 @@ audio.addEventListener("ended", () => {
 play.addEventListener("click", playAudio);
 
 function updateTrackData() {
-
     playListCurrent.forEach(item => {
         item.classList.remove('item-active');
     });
@@ -618,7 +523,6 @@ function playPrevTrack() {
     playListCurrentButtons[playNum].classList.remove('play-pause');
     (playNum > 0) ? playNum-- : playNum = playList.length - 1;
     audio.src = playList[playNum].src;
-
     audio.currentTime = 0;//
     isPlayed = false;
     playAudio();
@@ -630,7 +534,6 @@ function playNextTrack() {
     playListCurrentButtons[playNum].classList.remove('play-pause');
     (playList.length - 1 > playNum) ? playNum++ : playNum = 0;
     audio.src = playList[playNum].src;
-
     audio.currentTime = 0;//
     isPlayed = false;
     playAudio();
@@ -741,9 +644,7 @@ function translateApp() {
 
 selectLanguage.addEventListener("change", translateApp);
 
-
 getRandomNum();
-
 //setBg();
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -752,5 +653,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-
-console.log('Score: 150 из 150. Сделаны все пункты кроме доп.функционала');//TODO
+console.log('Score: 150 из 150. Сделаны все пункты кроме доп.функционала');
