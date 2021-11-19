@@ -1,20 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="./favicon.png" />
+  <link rel="icon" type="image/png" href="./assets/favicon.png" />
   <link rel="stylesheet" href="./css/main.css" class="stylesheet">
-  <title>Quiz</title>
+  <title>Football Quiz</title>
 </head>
+
 <body>
   <div class="header">header</div>
   <div class="main-wrapper">
-    <div class="game"></div>
-    <div class="game-buttons"></div>
+    <div class="menu-component app-top-component">
+      <div class="menu-components-wrapper">
+        <button class="menu-element clubs-button">Clubs</button>
+        <button class="menu-element players-button">Players</button>
+        <button class="menu-element settings-button">Settings</button>        
+      </div>
+    </div>
+    <div class="settings-component app-top-component">
+      <h2>Settings</h2>
+      <button class="settings-element menu-back">Back to Menu</button>
+    </div>
+    <div class="categories-clubs-component categories-clubs app-top-component">
+      <h2>Clubs</h2>
+      <div class="categories-wrapper">
+        <div class="quiz-category clubs-round-1" data-round="1">Round 1</div>
+        <div class="quiz-category clubs-round-2" data-round="2">Round 2</div>
+        <div class="quiz-category clubs-round-3" data-round="3">Round 3</div>
+        <div class="quiz-category clubs-round-4" data-round="4">Round 4</div>
+        <div class="quiz-category clubs-round-5" data-round="5">Round 5</div>
+        <div class="quiz-category clubs-round-6" data-round="6">Round 6</div>
+        <div class="quiz-category clubs-round-7" data-round="7">Round 7</div>
+        <div class="quiz-category clubs-round-8" data-round="8">Round 8</div>
+        <div class="quiz-category clubs-round-9" data-round="9">Round 9</div>
+        <div class="quiz-category clubs-round-10" data-round="10">Round 10</div>
+      </div>
+      <button class="menu-back">Back to Menu</button>
+    </div>
+    <div class="categories-players-component categories-players app-top-component">
+      <h2>Players</h2>
+      <div class="categories-wrapper">
+        <div class="quiz-category players-round-1" data-round="1">Round 1</div>
+        <div class="quiz-category players-round-2" data-round="2">Round 2</div>
+        <div class="quiz-category players-round-3" data-round="3">Round 3</div>
+        <div class="quiz-category players-round-4" data-round="4">Round 4</div>
+        <div class="quiz-category players-round-5" data-round="5">Round 5</div>
+        <div class="quiz-category players-round-6" data-round="6">Round 6</div>
+        <div class="quiz-category players-round-7" data-round="7">Round 7</div>
+        <div class="quiz-category players-round-8" data-round="8">Round 8</div>
+        <div class="quiz-category players-round-9" data-round="9">Round 9</div>
+        <div class="quiz-category players-round-10" data-round="10">Round 10 </div>
+      </div>
+      <button class="menu-back">Back to Menu</button>
+    </div>
+    <div class="question-component question-clubs-component app-top-component">
+      <div class="question-text">Which football club is represented on this picture?</div>
+      <div class="question-img"></div>
+      <div class="answers">
+        <div class="answer answer-1">answer1</div>
+        <div class="answer answer-2">answer2</div>
+        <div class="answer answer-3">answer3</div>
+        <div class="answer answer-4">answer4</div>
+      </div>      
+      <button class="menu-back">Back to Menu</button>
+    </div>
+    <div class="question-player question-players-component app-top-component">
+      <div class="question-text"></div>
+      <div class="question-img"></div> <!-- NEW -->
+      <div class="answers">
+        <div class="answer answer-img answer-1">answer1</div>
+        <div class="answer answer-img answer-2">answer2</div>
+        <div class="answer answer-img answer-3">answer3</div>
+        <div class="answer answer-img answer-4">answer4</div>
+      </div>      
+      <button class="menu-back">Back to Menu</button>
+    </div>
+    <div class="answer-component app-top-component modal-component">
+      <div class="answer-modal-indicator"></div>
+      <div class="answer-modal-img"></div>      
+      <div class="answer-modal-text"></div>
+      <button class="next-button-players">NEXT Pl(Remove)</button>
+      <button class="next-button-clubs">NEXT Cl(Remove)</button>
+    </div>
+    
+    <div class="round-score-component app-top-component modal-component">
+      <h2>Round Over!</h2>
+      <div class="round-pic-animated"></div>
+      <div class="round-results-count"><span class="round-count"></span>/10</div>
+      <button class="clubs-button">Clubs</button>
+        <button class="players-button">Players</button>
+      <button class="menu-back">Back to Menu</button>
+    </div>
+    <!-- <div class="game-results app-top-component">
+      <h2>Results Page</h2>
+    </div> -->
   </div>
-  <script type="module" src="./index.js"></script>  
+  <script type="module" src="./index.js"></script>
   <div class="footer">footer</div>
+  <div class="modal-background"></div>
 </body>
+
 </html>

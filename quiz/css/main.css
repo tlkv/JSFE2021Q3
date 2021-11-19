@@ -1,7 +1,14 @@
-body {
+@import url('https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,900');
+
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: 'Inter';
+  transition: background .6s ease-in-out .3s;
+}
+
+body {
   min-height: 100vh;
 }
 
@@ -12,30 +19,163 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  z-index: 3;
-  background-color: #000;
-  min-height: 70vh;
+  height: 70vh;
   position: relative;
-}
-.main-wrapper .test-block {
-  min-width: 900px;
-  height: 300px;
-  background: red;
-  margin-top: 20px;
-  /* display: none; */
-  position: absolute;
-  left: 0;
-  left: -130vw;
-  transition: all 0.6s;
-}
-.main-wrapper .hide-show {
-  left: 0;
 }
 
 .header,
 .footer {
   min-height: 10vh;
-  border: 1px solid red;
+  border: 1px solid blue;
 }
 
-/*# sourceMappingURL=main.css.map */
+.app-top-component {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border: 1px solid lightcoral;
+  position: absolute;
+  left: -90vw;
+  text-align: center;
+  transition: all 0.6s;
+}
+
+.component-show {
+  left: 0;
+}
+
+.menu-component {
+  text-align: center;
+}
+
+.game-results {
+  text-align: right;
+  left: -55wv;
+}
+
+.categories-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.quiz-category {
+  width: 20%;
+  height: 150px;
+  border-radius: 10px;
+  border: 1px solid lightblue;
+  cursor: pointer;
+}
+
+.answers {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.answer {
+  width: 50%;
+  cursor: pointer;
+}
+
+.question-img {
+  width: 400px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid purple;
+  margin: auto;
+}
+
+.question-img img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.menu-components-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+
+.menu-element {
+  font-size: 20px;
+  border: 2px solid green;
+  margin: 10px;
+  cursor: pointer;
+  width: 34%;
+}
+
+.menu-component .clubs-button, .menu-component .players-button {
+  height: 320px;
+  color: white;
+  font-size: 22px;
+  text-transform: uppercase;
+}
+
+.menu-component .clubs-button {
+  background: url('../assets/img/clubs.jpg') center /cover no-repeat;
+}
+
+.menu-component .players-button {
+  background: url('../assets/img/players.jpg') center /cover no-repeat;
+}
+
+.answer-component {
+  z-index: 2;
+}
+
+.modal-background {
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: none;
+  background-color: rgba(60, 60, 60, 0.8);
+  position: fixed;
+}
+
+.hide-button {
+  display: none;
+}
+
+.answer-modal-indicator {
+  margin: auto;
+  height: 100px;
+  width: 100px;
+  background: green;
+}
+
+.answer-indicator-wrong {
+  background: red;
+}
+
+.answer-modal-img {
+  width: 400px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid purple;
+  margin: auto;
+}
+
+.round-pic-animated{
+  width: 400px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid purple;
+  margin: auto;
+}
+
+.modal-back-show {
+  display: block;
+}
+
+.round-score-component {
+  z-index: 3;
+}
