@@ -65,6 +65,7 @@ body {
   border-radius: 10px;
   border: 1px solid lightblue;
   cursor: pointer;
+  filter: grayscale(100%);
 }
 
 .answers {
@@ -145,11 +146,11 @@ body {
   margin: auto;
   height: 100px;
   width: 100px;
-  background: green;
+  background: url('../assets/img/correct.svg') center /100% no-repeat;
 }
 
 .answer-indicator-wrong {
-  background: red;
+  background: url('../assets/img/wrong.svg') center /100% no-repeat;
 }
 
 .answer-modal-img {

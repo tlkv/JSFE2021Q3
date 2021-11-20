@@ -9,11 +9,6 @@ let gameState = {}; //
 
 //top level components
 const menuComponent = document.querySelector(".menu-component");
-const menuButtonClubs = document.querySelectorAll(".clubs-button");
-const menuButtonPlayers = document.querySelectorAll(".players-button");
-const menuButtonSettings = document.querySelectorAll(".settings-button");
-const backToMenu = document.querySelectorAll(".menu-back");
-
 const settingComponent = document.querySelector(".settings-component");
 const categoriesClubsComponent = document.querySelector(".categories-clubs-component");
 const categoriesPlayersComponent = document.querySelector(".categories-players-component");
@@ -26,9 +21,28 @@ const modalBackground = document.querySelector(".modal-background");
 
 const appTopComponents = [menuComponent, settingComponent, categoriesClubsComponent, categoriesPlayersComponent, questionClubsComponent, questionPlayersComponent, answerComponent, roundScoreComponent, modalBackground];
 
+const menuButtonClubs = document.querySelectorAll(".clubs-button");
+const menuButtonPlayers = document.querySelectorAll(".players-button");
+const menuButtonSettings = document.querySelectorAll(".settings-button");
+const backToMenu = document.querySelectorAll(".menu-back");
+const answerModalIndicator = document.querySelector(".answer-modal-indicator");
+const answerModalImg = document.querySelector(".answer-modal-img");
+const answerModalText = document.querySelector(".answer-modal-text");
+const roundPicAnimated = document.querySelector(".round-pic-animated");
+const clubsButtonModal = document.querySelector(".clubs-button-modal");
+const playersButtonModal = document.querySelector(".players-button-modal");
+const roundResultCurrent = document.querySelector(".round-results-current");
+
+const volumeScale = document.querySelector(".volume-scale");
+
+let audioVolume = 0.4;
 let currentQuestion = 0;
 let currentRoundQuestion = 0;
 let currentRoundRightAnswers = 0;
+
+volumeScale.addEventListener("change", e => {
+  audioVolume = e.target.value / 100;
+});
 
 function hideAllComponents() {
   appTopComponents.forEach(item => item.classList.remove("component-show"));
@@ -83,11 +97,22 @@ menuButtonSettings.forEach(item => {
   item.addEventListener("click", showSettings);
 });
 
-
-
 backToMenu.forEach(item => {
   item.addEventListener("click", showMenu);
 });
+
+function setLocalStorage() {
+  localStorage.setItem("ftb-audio-volume", audioVolume);
+}
+function getLocaleStorage() {
+  if (localStorage.getItem("ftb-audio-volume")) {
+    audioVolume = Number(localStorage.getItem("ftb-audio-volume"));
+    volumeScale.value = audioVolume * 100;
+  }
+}
+
+window.addEventListener("beforeunload", setLocalStorage);
+window.addEventListener("load", getLocaleStorage);
 
 const categoriesClubs = document.querySelectorAll(".categories-clubs-component .quiz-category");
 
@@ -124,19 +149,14 @@ const questionPlayersText = questionPlayersComponent.querySelector(".question-te
 const questionPlayersImg = questionPlayersComponent.querySelector(".question-img");
 
 const nextButtonClubs = document.querySelectorAll(".next-button-clubs");
-nextButtonClubs.forEach(item=>{
+nextButtonClubs.forEach(item => {
   item.addEventListener("click", clubsNextHandler);
 });
 
 const nextButtonPlayers = document.querySelectorAll(".next-button-players");
-nextButtonPlayers.forEach(item=>{
-  item.addEventListener("click", renderQuestionPlayers);//playersNextHandler
+nextButtonPlayers.forEach(item => {
+  item.addEventListener("click", renderQuestionPlayers); //playersNextHandler
 });
-
-const answerModalIndicator = document.querySelector(".answer-modal-indicator");
-const answerModalImg = document.querySelector(".answer-modal-img");
-const answerModalText = document.querySelector(".answer-modal-text");
-const roundPicAnimated = document.querySelector(".round-pic-animated");
 
 function startQuizClubs(e) {
   currentRoundQuestion = 0;
@@ -144,7 +164,7 @@ function startQuizClubs(e) {
   currentQuestion = Number(e.target.getAttribute("data-round") - 1) * 10;
 
   console.log("This Round ", Number(e.target.getAttribute("data-round")));
-  //quizStartSound();
+  quizStartSound();
   renderQuestionClubs();
 }
 
@@ -169,13 +189,15 @@ function renderQuestionClubs() {
       questionClubsAnswers[i].textContent = answersRandom[i];
     }
     answerModalText.textContent = clubs[currentQuestion].name;
+    clubsButtonModal.classList.remove("hide-button");
+
     nextButtonClubs.forEach(item => {
       item.classList.remove("hide-button");
     });
+    playersButtonModal.classList.add("hide-button");
     nextButtonPlayers.forEach(item => {
       item.classList.add("hide-button");
     });
- 
 
     img.addEventListener("load", () => {
       console.log("LOADED"); //rem
@@ -189,20 +211,44 @@ function renderQuestionClubs() {
 }
 
 function clubsNextHandler() {
-  (currentRoundQuestion === 2) ? renderRoundScore() : renderQuestionClubs();
+  currentRoundQuestion === 2 ? renderRoundScore() : renderQuestionClubs();
 }
 
 function quizStartSound() {
-  const startSound = new Audio();
-  startSound.src = "./assets/audio/lets-play.mp3";
-  startSound.play();
+  const audio = new Audio();
+  audio.src = "./assets/audio/lets-play.mp3";
+  audio.volume = audioVolume;
+  audio.play();
+}
+
+function quizCorrectAnswerSound() {
+  const audio = new Audio();
+  audio.src = "./assets/audio/correct.mp3";
+  audio.volume = audioVolume;
+  audio.play();
+}
+
+function quizWrongAnswerSound() {
+  const audio = new Audio();
+  audio.src = "./assets/audio/wrong.mp3";
+  audio.volume = audioVolume;
+  audio.play();
+}
+
+function quizFinishSound() {
+  const audio = new Audio();
+  audio.src = "./assets/audio/finished.mp3";
+  audio.volume = audioVolume;
+  audio.play();
 }
 
 function checkClubsAnswer(e) {
   if (e.target.textContent === clubs[currentQuestion - 1].name) {
+    quizCorrectAnswerSound();
     renderAnswer(true);
     //console.log("RIGHT");
   } else {
+    quizWrongAnswerSound();
     renderAnswer(false);
   }
 }
@@ -228,23 +274,24 @@ function renderAnswer(result) {
   showModalBackground();
 }
 
-function renderRoundScore () {
-  console.log('ROUND');
+function renderRoundScore() {
+  quizFinishSound();
   hideAllComponents();
-  roundScoreComponent.classList.add("component-show");  
+  roundScoreComponent.classList.add("component-show");
+  roundResultCurrent.textContent = currentRoundRightAnswers;
   const img = new Image();
   if (currentRoundRightAnswers < 3) {
     img.src = `./assets/img/bad.gif`;
   } else if (currentRoundRightAnswers >= 3 && currentRoundRightAnswers < 6) {
     img.src = `./assets/img/average.gif`;
-  }  else if (currentRoundRightAnswers >= 6 && currentRoundRightAnswers < 8) {
+  } else if (currentRoundRightAnswers >= 6 && currentRoundRightAnswers < 8) {
     img.src = `./assets/img/good.gif`;
-  } else if (currentRoundRightAnswers >=8) {
+  } else if (currentRoundRightAnswers >= 8) {
     img.src = `./assets/img/excellent.gif`;
-  } 
+  }
   img.addEventListener("load", () => {
-      console.log("LOADED"); //rem
-      roundPicAnimated.style.background = `url('${img.src}') center /cover no-repeat`;
+    console.log("LOADED"); //rem
+    roundPicAnimated.style.background = `url('${img.src}') center /cover no-repeat`;
   });
 }
 
