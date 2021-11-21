@@ -146,6 +146,23 @@ volumeScale.addEventListener('change', e => {
   quizStateVolume = e.target.value / 100;
 });
 
+function countRound (arr) {
+  return arr.reduce((a, b) => a + b, 0);
+}
+
+const categoriesClubs = categoriesClubsComponent.querySelectorAll('.quiz-category');
+const categoriesClubsResultsNum = categoriesClubsComponent.querySelectorAll('.category-info-results-num');
+const categoriesClubsResultsAll = categoriesClubsComponent.querySelectorAll('.category-results-all');
+
+
+const categoriesPlayers = categoriesPlayersComponent.querySelectorAll('.quiz-category');
+const categoriesPlayersResultsNum = categoriesPlayersComponent.querySelectorAll('.category-info-results-num');
+const categoriesPlayersResultsAll = categoriesPlayersComponent.querySelectorAll('.category-results-all');
+
+[...categoriesClubs, ...categoriesPlayers].forEach(item => {
+  item.addEventListener('click', startQuiz);
+});
+
 function setLocalStorage() {
   localStorage.setItem('ftb-quiz-state-volume', quizStateVolume);
   localStorage.setItem('ftb-quiz-state-mute', quizStateMute);
@@ -178,22 +195,25 @@ function renderState() {
   for (let i = 0; i < roundsQuestionsAmount; i++) {
     if (quizStateClubs[i]) {
       categoriesClubs[i].classList.remove('category-not-played');
+      //console.log('categoriesClubsResultsNum', categoriesClubsResultsNum);
+      categoriesClubsResultsNum[i].textContent = `${countRound(quizStateClubs[i])}/10`;
+
+      categoriesClubsResultsAll[i].classList.remove('category-results-hidden');
     }
     if (quizStatePlayers[i]) {
       categoriesPlayers[i].classList.remove('category-not-played');
+      categoriesPlayersResultsNum[i].textContent = `${countRound(quizStatePlayers[i])}/10`;
+
+      categoriesPlayersResultsAll[i].classList.remove('category-results-hidden');
     }
+    
   }
 }
 
 window.addEventListener('beforeunload', setLocalStorage);
 window.addEventListener('load', getLocaleStorage);
 
-const categoriesClubs = categoriesClubsComponent.querySelectorAll('.quiz-category');
-const categoriesPlayers = categoriesPlayersComponent.querySelectorAll('.quiz-category');
 
-[...categoriesClubs, ...categoriesPlayers].forEach(item => {
-  item.addEventListener('click', startQuiz);
-});
 
 function renderCards() {
   for (let i = 0; i < roundsQuestionsAmount; i++) {
@@ -399,8 +419,8 @@ function renderRoundScore(type) {
   soundEffect('finished');
   hideAllComponents();
   roundScoreComponent.classList.add('component-show');
-  const currentRoundRightAnswers = currentRoundAllAnswers.reduce((a, b) => a + b, 0);
-  roundResultCurrent.textContent = currentRoundRightAnswers;
+
+  roundResultCurrent.textContent = countRound(currentRoundAllAnswers);
 
   type === 'clubs' ? (quizStateClubs[(currentQuestion - currentRoundQuestion) / 10] = currentRoundAllAnswers) : (quizStatePlayers[(currentQuestion - currentRoundQuestion) / 10] = currentRoundAllAnswers);
   console.log('quizStateClubs ', quizStateClubs);
@@ -408,7 +428,7 @@ function renderRoundScore(type) {
   renderState();
   const img = new Image();
 
-  img.src = `./assets/img/results/${currentRoundRightAnswers}.gif`;
+  img.src = `./assets/img/results/${countRound(currentRoundAllAnswers)}.gif`;
   img.addEventListener('load', () => {
     //console.log('LOADED'); //rem
     roundPicAnimated.style.background = `url('${img.src}') center /cover no-repeat`;

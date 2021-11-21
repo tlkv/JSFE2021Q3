@@ -18,7 +18,6 @@
       </div>
       <div class="app-header-text">Football <br>Quiz</div>
     </div>
-    
   </header>
   <div class="main-wrapper">
     <div class="menu-component app-top-component">
@@ -30,9 +29,14 @@
     </div>
     <div class="settings-component app-top-component">
       <h2>Settings</h2>
+      <div class="minutes-count-wrapper">
+        <button type="button" onclick="this.nextElementSibling.stepDown()">–</button>
+        <input type="number" min="5" max="30" value="5" readonly="" class="minutes-number" step="5">
+        <button type="button" onclick="this.previousElementSibling.stepUp()">+</button>
+      </div>
       <input type="range" name="volume-scale" id="volume-scale" min="0" max="100" step="1" class="volume-scale">
       <input type="checkbox" name="mute" id="mute">
-      <div class="slideOne">  
+      <div class="slideOne">
         <input type="checkbox" value="None" id="slideOne" name="check" checked />
         <label for="slideOne"></label>
       </div>
@@ -41,32 +45,134 @@
     <div class="categories-clubs-component categories-clubs app-top-component">
       <h2>Clubs</h2>
       <div class="categories-wrapper">
-        <div class="quiz-category category-not-played clubs-round-1" data-category="clubs" data-round="1">Round 1</div>
-        <div class="quiz-category category-not-played clubs-round-2" data-category="clubs" data-round="2">Round 2</div>
-        <div class="quiz-category category-not-played clubs-round-3" data-category="clubs" data-round="3">Round 3</div>
-        <div class="quiz-category category-not-played clubs-round-4" data-category="clubs" data-round="4">Round 4</div>
-        <div class="quiz-category category-not-played clubs-round-5" data-category="clubs" data-round="5">Round 5</div>
-        <div class="quiz-category category-not-played clubs-round-6" data-category="clubs" data-round="6">Round 6</div>
-        <div class="quiz-category category-not-played clubs-round-7" data-category="clubs" data-round="7">Round 7</div>
-        <div class="quiz-category category-not-played clubs-round-8" data-category="clubs" data-round="8">Round 8</div>
-        <div class="quiz-category category-not-played clubs-round-9" data-category="clubs" data-round="9">Round 9</div>
-        <div class="quiz-category category-not-played clubs-round-10" data-category="clubs" data-round="10">Round 10</div>
+        <div class="quiz-category category-not-played clubs-round-1" data-category="clubs" data-round="1">
+          <div class="category-info">
+            <div class="category-info-name">Round 1</div>
+            <div class="category-info-results-num"></div>
+          </div>
+          <div class="category-results-all category-results-hidden" data-category="clubs" data-round="1">Score</div>
+        </div>
+        <div class="quiz-category category-not-played clubs-round-2" data-category="clubs" data-round="2">
+          <div class="category-info">
+            <div class="category-info-name">Round 2</div>
+            <div class="category-info-results-num"></div>
+          </div>
+          <div class="category-results-all category-results-hidden" data-category="clubs" data-round="2">Score</div>
+        </div>
+        <div class="quiz-category category-not-played clubs-round-3" data-category="clubs" data-round="3">
+          <div class="category-info">
+            <div class="category-info-name">Round 3</div>
+            <div class="category-info-results-num"></div>
+          </div>
+          <div class="category-results-all category-results-hidden" data-category="clubs" data-round="3">Score</div>
+        </div>
+        <div class="quiz-category category-not-played clubs-round-4" data-category="clubs" data-round="4">
+          <div class="category-info">
+            <div class="category-info-name">Round 4</div>
+            <div class="category-info-results-num"></div>
+          </div>
+          <div class="category-results-all category-results-hidden" data-category="clubs" data-round="4">Score</div>
+        </div>
+        <div class="quiz-category category-not-played clubs-round-5" data-category="clubs" data-round="5">
+          <div class="category-info">
+            <div class="category-info-name">Round 5</div>
+            <div class="category-info-results-num"></div>
+          </div>
+          <div class="category-results-all category-results-hidden" data-category="clubs" data-round="5">Score</div>
+        </div>
+        <div class="quiz-category category-not-played clubs-round-6" data-category="clubs" data-round="6">
+          <div class="category-info">
+            <div class="category-info-name">Round 6</div>
+            <div class="category-info-results-num"></div>
+          </div>
+          <div class="category-results-all category-results-hidden" data-category="clubs" data-round="6">Score</div>
+        </div>
+        <div class="quiz-category category-not-played clubs-round-7" data-category="clubs" data-round="7">
+          <div class="category-info">
+            <div class="category-info-name">Round 7</div>
+            <div class="category-info-results-num"></div>
+          </div>
+          <div class="category-results-all category-results-hidden" data-category="clubs" data-round="7">Score</div>
+        </div>
+        <div class="quiz-category category-not-played clubs-round-8" data-category="clubs" data-round="8">
+          <div class="category-info">
+            <div class="category-info-name">Round 8</div>
+            <div class="category-info-results-num"></div>
+          </div>
+          <div class="category-results-all category-results-hidden" data-category="clubs" data-round="8">Score</div>
+        </div>
+        <div class="quiz-category category-not-played clubs-round-9" data-category="clubs" data-round="9">
+          <div class="category-info">
+            <div class="category-info-name">Round 9</div>
+            <div class="category-info-results-num"></div>
+          </div>
+          <div class="category-results-all category-results-hidden" data-category="clubs" data-round="9">Score</div>
+        </div>
+        <div class="quiz-category category-not-played clubs-round-10" data-category="clubs" data-round="10">
+          <div class="category-info">
+            <div class="category-info-name">Round 10</div>
+            <div class="category-info-results-num"></div>
+          </div>
+          <div class="category-results-all category-results-hidden" data-category="clubs" data-round="10">Score</div>
+        </div>
       </div>
       <button class="menu-back open-menu">Home</button>
     </div>
     <div class="categories-players-component categories-players app-top-component">
       <h2>Players</h2>
       <div class="categories-wrapper">
-        <div class="quiz-category category-not-played category-not-played players-round-1" data-category="players" data-round="1">Round 1</div>
-        <div class="quiz-category category-not-played players-round-2" data-category="players" data-round="2">Round 2</div>
-        <div class="quiz-category category-not-played players-round-3" data-category="players" data-round="3">Round 3</div>
-        <div class="quiz-category category-not-played players-round-4" data-category="players" data-round="4">Round 4</div>
-        <div class="quiz-category category-not-played players-round-5" data-category="players" data-round="5">Round 5</div>
-        <div class="quiz-category category-not-played players-round-6" data-category="players" data-round="6">Round 6</div>
-        <div class="quiz-category category-not-played players-round-7" data-category="players" data-round="7">Round 7</div>
-        <div class="quiz-category category-not-played players-round-8" data-category="players" data-round="8">Round 8</div>
-        <div class="quiz-category category-not-played players-round-9" data-category="players" data-round="9">Round 9</div>
-        <div class="quiz-category category-not-played players-round-10" data-category="players" data-round="10">Round 10 </div>
+        <div class="quiz-category category-not-played category-not-played players-round-1" data-category="players" data-round="1">
+          <div class="category-info">
+            <div class="category-info-name">Round 1</div>
+            <div class="category-info-results-num"></div>
+          </div>
+          <div class="category-results-all category-results-hidden" data-category="players" data-round="1">Score</div>
+        </div>
+        <div class="quiz-category category-not-played players-round-2" data-category="players" data-round="2"><div class="category-info">
+          <div class="category-info-name">Round 2</div>
+          <div class="category-info-results-num"></div>
+        </div>
+        <div class="category-results-all category-results-hidden" data-category="players" data-round="2">Score</div></div>
+        <div class="quiz-category category-not-played players-round-3" data-category="players" data-round="3"><div class="category-info">
+          <div class="category-info-name">Round 3</div>
+          <div class="category-info-results-num"></div>
+        </div>
+        <div class="category-results-all category-results-hidden" data-category="players" data-round="3">Score</div></div>
+        <div class="quiz-category category-not-played players-round-4" data-category="players" data-round="4"><div class="category-info">
+          <div class="category-info-name">Round 4</div>
+          <div class="category-info-results-num"></div>
+        </div>
+        <div class="category-results-all category-results-hidden" data-category="players" data-round="4">Score</div></div>
+        <div class="quiz-category category-not-played players-round-5" data-category="players" data-round="5"><div class="category-info">
+          <div class="category-info-name">Round 5</div>
+          <div class="category-info-results-num"></div>
+        </div>
+        <div class="category-results-all category-results-hidden" data-category="players" data-round="5">Score</div></div>
+        <div class="quiz-category category-not-played players-round-6" data-category="players" data-round="6"><div class="category-info">
+          <div class="category-info-name">Round 6</div>
+          <div class="category-info-results-num"></div>
+        </div>
+        <div class="category-results-all category-results-hidden" data-category="players" data-round="6">Score</div></div>
+        <div class="quiz-category category-not-played players-round-7" data-category="players" data-round="7"><div class="category-info">
+          <div class="category-info-name">Round 7</div>
+          <div class="category-info-results-num"></div>
+        </div>
+        <div class="category-results-all category-results-hidden" data-category="players" data-round="7">Score</div></div>
+        <div class="quiz-category category-not-played players-round-8" data-category="players" data-round="8"><div class="category-info">
+          <div class="category-info-name">Round 8</div>
+          <div class="category-info-results-num"></div>
+        </div>
+        <div class="category-results-all category-results-hidden" data-category="players" data-round="8">Score</div></div>
+        <div class="quiz-category category-not-played players-round-9" data-category="players" data-round="9"><div class="category-info">
+          <div class="category-info-name">Round 9</div>
+          <div class="category-info-results-num"></div>
+        </div>
+        <div class="category-results-all category-results-hidden" data-category="players" data-round="9">Score</div></div>
+        <div class="quiz-category category-not-played players-round-10" data-category="players" data-round="10"><div class="category-info">
+          <div class="category-info-name">Round 10</div>
+          <div class="category-info-results-num"></div>
+        </div>
+        <div class="category-results-all category-results-hidden" data-category="players" data-round="10">Score</div> </div>
       </div>
       <button class="menu-back open-menu">Home</button>
     </div>
@@ -115,7 +221,7 @@
       <button class="menu-back open-menu">Home</button>
     </div>
     <div class="quiz-results app-top-component">
-      <h2>Results Page</h2>
+      <h2>Result Page</h2>
       <button class="clubs-button open-clubs-category">Categories</button>
       <button class="players-button open-players-category">Categories</button>
     </div>

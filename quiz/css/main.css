@@ -44,7 +44,7 @@ body {
   position: absolute;
   left: -90vw;
   text-align: center;
-  transition: all 0.6s;
+  transition: all .6s;
 }
 
 .component-show {
@@ -68,10 +68,16 @@ body {
 
 .quiz-category {
   width: 20%;
-  height: 150px;
+  height: 250px;
   border-radius: 10px;
   border: 1px solid lightblue;
-  cursor: pointer;  
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.quiz-category:hover .category-results-all {
+  bottom: 0;
 }
 
 .category-not-played {
@@ -255,6 +261,47 @@ footer div {
 
 
 
+.category-info {
+  display: flex;
+  background: darkblue;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: white;
+  height: 30px;
+}
+.category-info-name {
+  width: 65%;
+}
+
+.category-info-results-num {
+  width: 35%;
+}
+
+.category-results-all {
+  width: 100%;
+  bottom: -35px;
+   
+    height: 27px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background: yellow;
+    position: absolute;
+    transition: all .5s;
+}
+
+.category-results-hidden {
+  display: none;
+}
+
+
+
+
+
+
+
+
+
+
 input[type=range] {
   -webkit-appearance: none;
   margin: 18px 0;
@@ -362,7 +409,7 @@ input[type=range]:focus::-ms-fill-upper {
   background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
   border-radius: 50px;
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
-  transition: all 0.4s ease;
+  transition: all .4s ease;
 }
 .slideOne input[type=checkbox] {
   visibility: hidden;
