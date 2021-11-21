@@ -28,7 +28,7 @@ async function getQuizData() {
 
 getQuizData();
 const gameOn = false; //
-let cards = []; //
+
 let gameState = {}; //
 
 //delegate
@@ -52,15 +52,17 @@ const questionClubsComponent = document.querySelector('.question-clubs-component
 const questionPlayersComponent = document.querySelector('.question-players-component');
 const answerComponent = document.querySelector('.answer-component');
 const roundScoreComponent = document.querySelector('.round-score-component');
+const quizResultsComponent = document.querySelector('.quiz-results-component');
 
 const modalBackground = document.querySelector('.modal-background');
 
-const appTopComponents = [menuComponent, settingComponent, categoriesClubsComponent, categoriesPlayersComponent, questionClubsComponent, questionPlayersComponent, answerComponent, roundScoreComponent, modalBackground];
 
-const menuButtonClubs = document.querySelectorAll('.clubs-button');
-const menuButtonPlayers = document.querySelectorAll('.players-button');
+const appTopComponents = [menuComponent, settingComponent, categoriesClubsComponent, categoriesPlayersComponent, questionClubsComponent, questionPlayersComponent, answerComponent, roundScoreComponent, modalBackground, quizResultsComponent];
+
+const menuButtonClubs = document.querySelectorAll('.clubs-button');//
+const menuButtonPlayers = document.querySelectorAll('.players-button');//
 const menuButtonSettings = document.querySelectorAll('.settings-button'); //not needed
-const backToMenu = document.querySelectorAll('.menu-back');
+const backToMenu = document.querySelectorAll('.menu-back');//
 const answerModalIndicator = document.querySelector('.answer-modal-indicator');
 const answerModalImg = document.querySelector('.answer-modal-img');
 const answerModalText = document.querySelector('.answer-modal-text');
@@ -68,6 +70,17 @@ const roundPicAnimated = document.querySelector('.round-pic-animated');
 const clubsButtonModal = document.querySelector('.clubs-button-modal');
 const playersButtonModal = document.querySelector('.players-button-modal');
 const roundResultCurrent = document.querySelector('.round-results-current');
+
+const clubsButtonResults = document.querySelector('.clubs-button-results');
+const playersButtonResults = document.querySelector('.players-button-results');
+const resultsRound  = document.querySelector('.results-round');
+const resultsScore = document.querySelector('.results-score');
+
+
+const questionsClubsIndicator = document.querySelectorAll('.question-clubs-indicator .questions-indicator');
+const questionsPlayersIndicator = document.querySelectorAll('.question-players-indicator .questions-indicator');
+
+
 
 const volumeScale = document.querySelector('.volume-scale');
 
@@ -134,6 +147,13 @@ function showModalBackground() {
   modalBackground.classList.add('modal-back-show');
 }
 
+function showQuizResults() {
+  hideAllComponents();
+  quizResultsComponent.classList.add('component-show');
+}
+
+
+
 function hideModalBackground() {
   modalBackground.classList.remove('modal-back-show');
 }
@@ -161,6 +181,10 @@ const categoriesPlayersResultsAll = categoriesPlayersComponent.querySelectorAll(
 
 [...categoriesClubs, ...categoriesPlayers].forEach(item => {
   item.addEventListener('click', startQuiz);
+});
+
+[...categoriesClubsResultsAll, ...categoriesPlayersResultsAll].forEach(item => {
+  item.addEventListener('click', renderQuizResults);
 });
 
 function setLocalStorage() {
@@ -231,6 +255,70 @@ function renderCards() {
   }
 }
 
+//const resultsContainer = document.querySelector('.results-container');
+const resultsCardsImg = document.querySelectorAll('.results-container .results-img');
+const resultsExtendedInfo = document.querySelectorAll('.results-extended-info');
+resultsCardsImg.forEach(item=>{
+  item.addEventListener('click', ()=>{
+    /* console.log(item.parentNode); */
+    item.parentNode.querySelector('.results-extended-info').classList.toggle('extended-hide');      
+    //img.src = `./assets/img/clubs/${currentQuestion}.jpg`;
+  })
+});
+
+function renderQuizResults(e) {
+  showQuizResults();
+  resultsCardsImg.forEach(item=>{
+    item.classList.remove('not-guessed'); 
+    item.parentNode.querySelector('.results-extended-info').classList.add('extended-hide');   
+  });
+  
+  /* results-extended-info
+  results-img
+  results-container */
+  const eRound = Number(e.target.getAttribute('data-round') - 1) 
+  const eType = e.target.getAttribute('data-category');
+  resultsRound.textContent = eRound+1;
+  
+  if (eType === 'clubs') {    
+    clubsButtonResults.classList.remove('hide-button');
+    playersButtonResults.classList.add('hide-button');
+    resultsScore.textContent =  countRound(quizStateClubs[eRound]);
+  } else {
+    clubsButtonResults.classList.add('hide-button');
+    playersButtonResults.classList.remove('hide-button');
+    resultsScore.textContent =  countRound(quizStatePlayers[eRound]);
+  }
+  for (let i=0; i<resultsCardsImg.length; i++) {
+    resultsExtendedInfo[i].textContent = quizData[eType][eRound*10+i].name;
+    const img = new Image();
+    img.src = `./assets/img/${eType}/${quizData[eType][eRound*10+i].imageNum}.jpg`;
+    
+    img.onload = () => {
+      resultsCardsImg[i].style.background = `url('${img.src}') center /cover no-repeat`;
+      if (eType === 'clubs') {
+        if (quizStateClubs[eRound][i] !== 1) {
+          resultsCardsImg[i].classList.add('not-guessed');
+        } 
+      } else if (eType === 'players') {
+        if (quizStatePlayers[eRound][i] !== 1) {
+          resultsCardsImg[i].classList.add('not-guessed');
+        }
+      }
+    };
+  }
+  
+  
+  /* for(let i=0; i<resultsCardsImg; i++) {
+    resultCards[i].addEventListener('click', ()=>{
+      console.log('FIRE ');
+      resultsExtendedInfo[i].classList.toggle('extended-hide');
+    })
+  } */
+  
+
+}
+
 //const questionClubsText = questionClubsComponent.querySelector('.question-text');
 const questionClubsImg = questionClubsComponent.querySelector('.question-img');
 const questionClubsAnswers = questionClubsComponent.querySelectorAll('.answer');
@@ -293,7 +381,11 @@ function startQuiz(e) {
   const category = e.target.getAttribute('data-category');
   showCategoryButtons(category);
   resetCurrentRound();
-  soundEffect('lets-play');
+  /* soundEffect('lets-play'); */
+  [...questionsClubsIndicator, ...questionsPlayersIndicator].forEach((item)=>{
+    item.classList.remove('questions-indicator-wrong');
+    item.classList.remove('questions-indicator-right');
+  });
   category === 'clubs' ? renderQuestionClubs() : renderQuestionPlayers();
 }
 
@@ -302,7 +394,7 @@ function renderQuestionClubs() {
 
   let answersRandom = [quizData['clubs'][currentQuestion].name];
   while (answersRandom.length < answersAmount) {
-    const randAnswer = quizData['clubs'][Math.round(Math.random() * 99)].name;
+    const randAnswer = quizData['clubs'][Math.round(Math.random() * 100)].name;
     if (!answersRandom.includes(randAnswer)) {
       Math.random() > 0.5 ? answersRandom.push(randAnswer) : answersRandom.unshift(randAnswer);
     }
@@ -378,11 +470,24 @@ function soundEffect(path) {
 } */
 
 function checkClubsAnswer(e) {
-  e.target.textContent === quizData['clubs'][currentQuestion - 1].name ? renderAnswer(true) : renderAnswer(false);
+  if (e.target.textContent === quizData['clubs'][currentQuestion - 1].name) {
+    renderAnswer(true);
+    questionsClubsIndicator[currentRoundQuestion - 1].classList.add('questions-indicator-right');
+  } else {
+    renderAnswer(false);
+    questionsClubsIndicator[currentRoundQuestion - 1].classList.add('questions-indicator-wrong');
+  }
 }
 
 function checkPlayersAnswerImg(e) {
-  e.target.getAttribute('data-img-num') === quizData['players'][currentQuestion - 1].imageNum ? renderAnswer(true) : renderAnswer(false);
+  if (e.target.getAttribute('data-img-num') === quizData['players'][currentQuestion - 1].imageNum) {
+    renderAnswer(true);
+    questionsPlayersIndicator[currentRoundQuestion - 1].classList.add('questions-indicator-right');
+  } else {
+    renderAnswer(false);
+    questionsPlayersIndicator[currentRoundQuestion - 1].classList.add('questions-indicator-wrong');
+  }
+  /* e.target.getAttribute('data-img-num') === quizData['players'][currentQuestion - 1].imageNum ? renderAnswer(true) : renderAnswer(false); */
 }
 
 function renderAnswer(result) {
@@ -441,7 +546,7 @@ function renderQuestionPlayers() {
 
   let pictRandom = [quizData['players'][currentQuestion].imageNum];
   while (pictRandom.length < answersAmount) {
-    const randPic = quizData['players'][Math.round(Math.random() * 99)].imageNum;
+    const randPic = quizData['players'][Math.round(Math.random() * 100)].imageNum;
     if (!pictRandom.includes(randPic)) {
       Math.random() > 0.5 ? pictRandom.push(randPic) : pictRandom.unshift(randPic);
     }
