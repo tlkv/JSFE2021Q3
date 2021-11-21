@@ -16,7 +16,9 @@
     "url": "https://github.com/rolling-scopes-school/tlkv-JSFE2021Q3/issues"
   },
   "homepage": "https://github.com/rolling-scopes-school/tlkv-JSFE2021Q3#readme",
-  "devDependencies": {    
-    "eslint": "^7.32.0"
+  "devDependencies": {
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.3"
   }
 }

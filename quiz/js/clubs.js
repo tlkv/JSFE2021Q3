@@ -1,417 +1,417 @@
 const clubs = [
   {
-    name: "Bayern Munchen",
-    imageNum: "00",
+    name: 'Bayern Munchen',
+    imageNum: '00',
   },
   {
-    name: "Manchester City",
-    imageNum: "01",
+    name: 'Manchester City',
+    imageNum: '01',
   },
   {
-    name: "Liverpool",
-    imageNum: "02",
-  },
-
-  {
-    name: "Chelsea",
-    imageNum: "03",
-  },
-  {
-    name: "Barcelona",
-    imageNum: "04",
-  },
-  {
-    name: "Real Madrid",
-    imageNum: "05",
-  },
-  {
-    name: "Paris Saint-Germain",
-    imageNum: "06",
-  },
-  {
-    name: "Juventus",
-    imageNum: "07",
-  },
-  {
-    name: "Manchester United",
-    imageNum: "08",
-  },
-  {
-    name: "Atletico",
-    imageNum: "09",
-  },
-  {
-    name: "Sevilla",
-    imageNum: "10",
-  },
-  {
-    name: "Tottenham Hotspur",
-    imageNum: "11",
-  },
-  {
-    name: "AS Roma",
-    imageNum: "12",
+    name: 'Liverpool',
+    imageNum: '02',
   },
 
   {
-    name: "Arsenal",
-    imageNum: "13",
+    name: 'Chelsea',
+    imageNum: '03',
   },
   {
-    name: "FC Porto",
-    imageNum: "14",
+    name: 'Barcelona',
+    imageNum: '04',
   },
   {
-    name: "Borussia Dortmund",
-    imageNum: "15",
+    name: 'Real Madrid',
+    imageNum: '05',
   },
   {
-    name: "AFC Ajax",
-    imageNum: "16",
+    name: 'Paris Saint-Germain',
+    imageNum: '06',
   },
   {
-    name: "RB Leipzig",
-    imageNum: "17",
+    name: 'Juventus',
+    imageNum: '07',
   },
   {
-    name: "FC Shakhtar Donetsk",
-    imageNum: "18",
+    name: 'Manchester United',
+    imageNum: '08',
   },
   {
-    name: "Villarreal CF",
-    imageNum: "19",
+    name: 'Atletico',
+    imageNum: '09',
   },
   {
-    name: "FC Salzburg",
-    imageNum: "20",
+    name: 'Sevilla',
+    imageNum: '10',
   },
   {
-    name: "Olympique Lyonnais",
-    imageNum: "21",
+    name: 'Tottenham Hotspur',
+    imageNum: '11',
   },
   {
-    name: "SSC Napoli",
-    imageNum: "22",
-  },
-
-  {
-    name: "Atalanta BC",
-    imageNum: "23",
-  },
-  {
-    name: "Inter",
-    imageNum: "24",
-  },
-  {
-    name: "FC Basel 1893",
-    imageNum: "25",
-  },
-  {
-    name: "SL Benfica",
-    imageNum: "26",
-  },
-  {
-    name: "Lazio",
-    imageNum: "27",
-  },
-  {
-    name: "Sporting",
-    imageNum: "28",
-  },
-  {
-    name: "Bayer 04 Leverkusen",
-    imageNum: "29",
-  },
-  {
-    name: "SK Slavia Praha",
-    imageNum: "30",
-  },
-  {
-    name: "GNK Dinamo Zagreb",
-    imageNum: "31",
-  },
-  {
-    name: "Zenit",
-    imageNum: "32",
+    name: 'AS Roma',
+    imageNum: '12',
   },
 
   {
-    name: "Eintracht Frankfurt",
-    imageNum: "33",
+    name: 'Arsenal',
+    imageNum: '13',
   },
   {
-    name: "Valencia CF",
-    imageNum: "34",
+    name: 'FC Porto',
+    imageNum: '14',
   },
   {
-    name: "Club Brugge",
-    imageNum: "35",
+    name: 'Borussia Dortmund',
+    imageNum: '15',
   },
   {
-    name: "Olympiacos FC",
-    imageNum: "36",
+    name: 'AFC Ajax',
+    imageNum: '16',
   },
   {
-    name: "SC Braga",
-    imageNum: "37",
+    name: 'RB Leipzig',
+    imageNum: '17',
   },
   {
-    name: "AC Milan",
-    imageNum: "38",
+    name: 'FC Shakhtar Donetsk',
+    imageNum: '18',
   },
   {
-    name: "AC Milan",
-    imageNum: "39",
+    name: 'Villarreal CF',
+    imageNum: '19',
   },
   {
-    name: "Crvena zvezda",
-    imageNum: "40",
+    name: 'FC Salzburg',
+    imageNum: '20',
   },
   {
-    name: "BSC Young Boys",
-    imageNum: "41",
+    name: 'Olympique Lyonnais',
+    imageNum: '21',
   },
   {
-    name: "Rangers FC",
-    imageNum: "42",
-  },
-
-  {
-    name: "F.C. Copenhagen",
-    imageNum: "43",
-  },
-  {
-    name: "Beşiktaş JK",
-    imageNum: "44",
-  },
-  {
-    name: "FC Lokomotiv Moskva",
-    imageNum: "45",
-  },
-  {
-    name: "PFC CSKA Moskva",
-    imageNum: "46",
-  },
-  {
-    name: "Olympique de Marseille",
-    imageNum: "47",
-  },
-  {
-    name: "Celtic FC",
-    imageNum: "48",
-  },
-  {
-    name: "FC Viktoria Plzeň",
-    imageNum: "49",
-  },
-  {
-    name: "LASK",
-    imageNum: "50",
-  },
-  {
-    name: "PSV Eindhoven",
-    imageNum: "51",
-  },
-  {
-    name: "FC Krasnodar",
-    imageNum: "52",
+    name: 'SSC Napoli',
+    imageNum: '22',
   },
 
   {
-    name: "Stade Rennais FC",
-    imageNum: "53",
+    name: 'Atalanta BC',
+    imageNum: '23',
   },
   {
-    name: "İstanbul Başakşehir",
-    imageNum: "54",
+    name: 'Inter',
+    imageNum: '24',
   },
   {
-    name: "KAA Gent",
-    imageNum: "55",
+    name: 'FC Basel 1893',
+    imageNum: '25',
   },
   {
-    name: "Feyenoord",
-    imageNum: "56",
+    name: 'SL Benfica',
+    imageNum: '26',
   },
   {
-    name: "Qarabağ FK",
-    imageNum: "57",
+    name: 'Lazio',
+    imageNum: '27',
   },
   {
-    name: "Galatasaray AŞ",
-    imageNum: "58",
+    name: 'Sporting',
+    imageNum: '28',
   },
   {
-    name: "TSG 1899 Hoffenheim",
-    imageNum: "59",
+    name: 'Bayer 04 Leverkusen',
+    imageNum: '29',
   },
   {
-    name: "VfL Wolfsburg",
-    imageNum: "60",
+    name: 'SK Slavia Praha',
+    imageNum: '30',
   },
   {
-    name: "Maccabi Tel-Aviv FC",
-    imageNum: "61",
+    name: 'GNK Dinamo Zagreb',
+    imageNum: '31',
   },
   {
-    name: "AZ Alkmaar",
-    imageNum: "62",
-  },
-
-  {
-    name: "FK Partizan",
-    imageNum: "63",
-  },
-  {
-    name: "Malmö FF",
-    imageNum: "64",
-  },
-  {
-    name: "Real Sociedad",
-    imageNum: "65",
-  },
-  {
-    name: "FC Sheriff Tiraspol",
-    imageNum: "66",
-  },
-  {
-    name: "LOSC Lille",
-    imageNum: "67",
-  },
-  {
-    name: "PFC Ludogorets",
-    imageNum: "68",
-  },
-  {
-    name: "Borussia Mönchengladbach",
-    imageNum: "69",
-  },
-  {
-    name: "FC Spartak Moskva",
-    imageNum: "70",
-  },
-  {
-    name: "FC Astana",
-    imageNum: "71",
-  },
-  {
-    name: "AEK Athens FC",
-    imageNum: "72",
+    name: 'Zenit',
+    imageNum: '32',
   },
 
   {
-    name: "Molde FK",
-    imageNum: "73",
+    name: 'Eintracht Frankfurt',
+    imageNum: '33',
   },
   {
-    name: "West Ham United FC",
-    imageNum: "74",
+    name: 'Valencia CF',
+    imageNum: '34',
   },
   {
-    name: "Leicester City FC",
-    imageNum: "75",
+    name: 'Club Brugge',
+    imageNum: '35',
   },
   {
-    name: "Wolverhampton Wanderers FC",
-    imageNum: "76",
+    name: 'Olympiacos FC',
+    imageNum: '36',
   },
   {
-    name: "Burnley FC",
-    imageNum: "77",
+    name: 'SC Braga',
+    imageNum: '37',
   },
   {
-    name: "Everton FC",
-    imageNum: "78",
+    name: 'AC Milan',
+    imageNum: '38',
   },
   {
-    name: "APOEL FC",
-    imageNum: "79",
+    name: 'AC Milan',
+    imageNum: '39',
   },
   {
-    name: "FCSB",
-    imageNum: "80",
+    name: 'Crvena zvezda',
+    imageNum: '40',
   },
   {
-    name: "FC BATE Borisov",
-    imageNum: "81",
+    name: 'BSC Young Boys',
+    imageNum: '41',
   },
   {
-    name: "CFR 1907 Cluj",
-    imageNum: "82",
-  },
-
-  {
-    name: "AS Monaco FC",
-    imageNum: "83",
-  },
-  {
-    name: "PAOK FC",
-    imageNum: "84",
-  },
-  {
-    name: "Zorya Luhansk",
-    imageNum: "85",
-  },
-  {
-    name: "KRC Genk",
-    imageNum: "86",
-  },
-  {
-    name: "FC Schalke 04",
-    imageNum: "87",
-  },
-  {
-    name: "Real Betis Balompié",
-    imageNum: "88",
-  },
-  {
-    name: "Granada CF",
-    imageNum: "89",
-  },
-  {
-    name: "Getafe CF",
-    imageNum: "90",
-  },
-  {
-    name: "RCD Espanyol",
-    imageNum: "91",
-  },
-  {
-    name: "Athletic Club",
-    imageNum: "92",
+    name: 'Rangers FC',
+    imageNum: '42',
   },
 
   {
-    name: "FC Midtjylland",
-    imageNum: "93",
+    name: 'F.C. Copenhagen',
+    imageNum: '43',
   },
   {
-    name: "R. Standard de Liège",
-    imageNum: "94",
+    name: 'Beşiktaş JK',
+    imageNum: '44',
   },
   {
-    name: "HNK Rijeka",
-    imageNum: "95",
+    name: 'FC Lokomotiv Moskva',
+    imageNum: '45',
   },
   {
-    name: "Rosenborg BK",
-    imageNum: "96",
+    name: 'PFC CSKA Moskva',
+    imageNum: '46',
   },
   {
-    name: "Hapoel Beer-Sheva FC",
-    imageNum: "97",
+    name: 'Olympique de Marseille',
+    imageNum: '47',
   },
   {
-    name: "SK Rapid Wien",
-    imageNum: "98",
+    name: 'Celtic FC',
+    imageNum: '48',
   },
   {
-    name: "Apollon Limassol FC",
-    imageNum: "99",
+    name: 'FC Viktoria Plzeň',
+    imageNum: '49',
   },
   {
-    name: "Torino",
-    imageNum: "100",
+    name: 'LASK',
+    imageNum: '50',
+  },
+  {
+    name: 'PSV Eindhoven',
+    imageNum: '51',
+  },
+  {
+    name: 'FC Krasnodar',
+    imageNum: '52',
+  },
+
+  {
+    name: 'Stade Rennais FC',
+    imageNum: '53',
+  },
+  {
+    name: 'İstanbul Başakşehir',
+    imageNum: '54',
+  },
+  {
+    name: 'KAA Gent',
+    imageNum: '55',
+  },
+  {
+    name: 'Feyenoord',
+    imageNum: '56',
+  },
+  {
+    name: 'Qarabağ FK',
+    imageNum: '57',
+  },
+  {
+    name: 'Galatasaray AŞ',
+    imageNum: '58',
+  },
+  {
+    name: 'TSG 1899 Hoffenheim',
+    imageNum: '59',
+  },
+  {
+    name: 'VfL Wolfsburg',
+    imageNum: '60',
+  },
+  {
+    name: 'Maccabi Tel-Aviv FC',
+    imageNum: '61',
+  },
+  {
+    name: 'AZ Alkmaar',
+    imageNum: '62',
+  },
+
+  {
+    name: 'FK Partizan',
+    imageNum: '63',
+  },
+  {
+    name: 'Malmö FF',
+    imageNum: '64',
+  },
+  {
+    name: 'Real Sociedad',
+    imageNum: '65',
+  },
+  {
+    name: 'FC Sheriff Tiraspol',
+    imageNum: '66',
+  },
+  {
+    name: 'LOSC Lille',
+    imageNum: '67',
+  },
+  {
+    name: 'PFC Ludogorets',
+    imageNum: '68',
+  },
+  {
+    name: 'Borussia Mönchengladbach',
+    imageNum: '69',
+  },
+  {
+    name: 'FC Spartak Moskva',
+    imageNum: '70',
+  },
+  {
+    name: 'FC Astana',
+    imageNum: '71',
+  },
+  {
+    name: 'AEK Athens FC',
+    imageNum: '72',
+  },
+
+  {
+    name: 'Molde FK',
+    imageNum: '73',
+  },
+  {
+    name: 'West Ham United FC',
+    imageNum: '74',
+  },
+  {
+    name: 'Leicester City FC',
+    imageNum: '75',
+  },
+  {
+    name: 'Wolverhampton Wanderers FC',
+    imageNum: '76',
+  },
+  {
+    name: 'Burnley FC',
+    imageNum: '77',
+  },
+  {
+    name: 'Everton FC',
+    imageNum: '78',
+  },
+  {
+    name: 'APOEL FC',
+    imageNum: '79',
+  },
+  {
+    name: 'FCSB',
+    imageNum: '80',
+  },
+  {
+    name: 'FC BATE Borisov',
+    imageNum: '81',
+  },
+  {
+    name: 'CFR 1907 Cluj',
+    imageNum: '82',
+  },
+
+  {
+    name: 'AS Monaco FC',
+    imageNum: '83',
+  },
+  {
+    name: 'PAOK FC',
+    imageNum: '84',
+  },
+  {
+    name: 'Zorya Luhansk',
+    imageNum: '85',
+  },
+  {
+    name: 'KRC Genk',
+    imageNum: '86',
+  },
+  {
+    name: 'FC Schalke 04',
+    imageNum: '87',
+  },
+  {
+    name: 'Real Betis Balompié',
+    imageNum: '88',
+  },
+  {
+    name: 'Granada CF',
+    imageNum: '89',
+  },
+  {
+    name: 'Getafe CF',
+    imageNum: '90',
+  },
+  {
+    name: 'RCD Espanyol',
+    imageNum: '91',
+  },
+  {
+    name: 'Athletic Club',
+    imageNum: '92',
+  },
+
+  {
+    name: 'FC Midtjylland',
+    imageNum: '93',
+  },
+  {
+    name: 'R. Standard de Liège',
+    imageNum: '94',
+  },
+  {
+    name: 'HNK Rijeka',
+    imageNum: '95',
+  },
+  {
+    name: 'Rosenborg BK',
+    imageNum: '96',
+  },
+  {
+    name: 'Hapoel Beer-Sheva FC',
+    imageNum: '97',
+  },
+  {
+    name: 'SK Rapid Wien',
+    imageNum: '98',
+  },
+  {
+    name: 'Apollon Limassol FC',
+    imageNum: '99',
+  },
+  {
+    name: 'Torino',
+    imageNum: '100',
   },
 ];
 

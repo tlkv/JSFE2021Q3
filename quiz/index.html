@@ -11,19 +11,27 @@
 </head>
 
 <body>
-  <div class="header">header</div>
+  <header class="header">
+    <div class="app-header-wrapper">
+      <div class="app-header-logo">
+        <img src="./assets/img/cl_logo.png" alt="logo">
+      </div>
+      <div class="app-header-text">Football <br>Quiz</div>
+    </div>
+    
+  </header>
   <div class="main-wrapper">
     <div class="menu-component app-top-component">
       <div class="menu-components-wrapper">
-        <button class="menu-element clubs-button">Clubs</button>
-        <button class="menu-element players-button">Players</button>
-        <button class="menu-element settings-button">Settings</button>        
+        <button class="menu-element clubs-button open-clubs-category">Clubs</button>
+        <button class="menu-element players-button open-players-category">Players</button>
+        <button class="menu-element settings-button">Settings</button>
       </div>
     </div>
     <div class="settings-component app-top-component">
       <h2>Settings</h2>
       <input type="range" name="volume-scale" id="volume-scale" min="0" max="100" step="10" class="volume-scale">
-      <button class="settings-element menu-back">Home</button>
+      <button class="settings-element menu-back open-menu">Home</button>
     </div>
     <div class="categories-clubs-component categories-clubs app-top-component">
       <h2>Clubs</h2>
@@ -39,7 +47,7 @@
         <div class="quiz-category clubs-round-9" data-category="clubs" data-round="9">Round 9</div>
         <div class="quiz-category clubs-round-10" data-category="clubs" data-round="10">Round 10</div>
       </div>
-      <button class="menu-back">Home</button>
+      <button class="menu-back open-menu">Home</button>
     </div>
     <div class="categories-players-component categories-players app-top-component">
       <h2>Players</h2>
@@ -55,7 +63,7 @@
         <div class="quiz-category players-round-9" data-category="players" data-round="9">Round 9</div>
         <div class="quiz-category players-round-10" data-category="players" data-round="10">Round 10 </div>
       </div>
-      <button class="menu-back">Home</button>
+      <button class="menu-back open-menu">Home</button>
     </div>
     <div class="question-component question-clubs-component app-top-component">
       <div class="question-text">Which football club is represented on this picture?</div>
@@ -65,42 +73,54 @@
         <div class="answer answer-2">answer2</div>
         <div class="answer answer-3">answer3</div>
         <div class="answer answer-4">answer4</div>
-      </div>      
-      <button class="menu-back">Home</button>
+      </div>
+      <button class="menu-back open-menu">Home</button>
+      <button class="clubs-button open-clubs-category">Categories</button>
     </div>
     <div class="question-player question-players-component app-top-component">
       <div class="question-text"></div>
-      <div class="question-img"></div> <!-- NEW -->
+      <!-- <div class="question-img"></div>  -->
+      <!-- DEL -->
       <div class="answers">
-        <div class="answer answer-img answer-1">answer1</div>
-        <div class="answer answer-img answer-2">answer2</div>
-        <div class="answer answer-img answer-3">answer3</div>
-        <div class="answer answer-img answer-4">answer4</div>
-      </div>      
-      <button class="menu-back">Home</button>
+        <!-- <div class="answer  answer-1">answer1</div>
+        <div class="answer  answer-2">answer2</div>
+        <div class="answer  answer-3">answer3</div>
+        <div class="answer  answer-4">answer4</div> -->
+        <div class=" answer-img answer-1" data-img-num="0">answer1</div>
+        <div class=" answer-img answer-2" data-img-num="0">answer2</div>
+        <div class=" answer-img answer-3" data-img-num="0">answer3</div>
+        <div class=" answer-img answer-4" data-img-num="0">answer4</div>
+      </div>
+      <button class="menu-back open-menu">Home</button>
+      <button class="players-button open-players-category">Categories</button>
     </div>
     <div class="answer-component app-top-component modal-component">
       <div class="answer-modal-indicator"></div>
-      <div class="answer-modal-img"></div>      
+      <div class="answer-modal-img"></div>
       <div class="answer-modal-text"></div>
-      <button class="next-button-players">NEXT Pl(Remove)</button>
-      <button class="next-button-clubs">NEXT Cl(Remove)</button>
+      <button class="next-button-clubs">Next</button>
+      <button class="next-button-players">Next</button>
     </div>
-    
     <div class="round-score-component app-top-component modal-component">
       <h2>Round Over!</h2>
       <div class="round-pic-animated"></div>
       <div class="round-results-wrapper"><span class="round-results-current"></span>/10</div>
-      <button class="clubs-button clubs-button-modal">Next Quiz</button>
-      <button class="players-button players-button-modal">Next Quiz</button>
-      <button class="menu-back">Home</button>
+      <button class="clubs-button  clubs-button-modal open-clubs-category">Next Quiz</button>
+      <button class="players-button players-button-modal open-players-category">Next Quiz</button>
+      <button class="menu-back open-menu">Home</button>
     </div>
-    <!-- <div class="game-results app-top-component">
+    <div class="quiz-results app-top-component">
       <h2>Results Page</h2>
-    </div> -->
+      <button class="clubs-button open-clubs-category">Categories</button>
+      <button class="players-button open-players-category">Categories</button>
+    </div>
   </div>
   <script type="module" src="./index.js"></script>
-  <div class="footer">footer</div>
+  <footer class="footer">
+    <div><a class="git" href="https://github.com/tlkv"></i>GitHub</a></div>
+    <div>© 2021</div>
+    <div><a href="https://rs.school/js/"><img class="rslogo" src="./assets/img/rs_school_js.svg" alt="rs"></a></div>
+  </footer>
   <div class="modal-background"></div>
 </body>
 

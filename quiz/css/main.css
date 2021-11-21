@@ -8,6 +8,13 @@
   transition: background .6s ease-in-out .3s;
 }
 
+button {
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}
+
+
 body {
   min-height: 100vh;
 }
@@ -25,7 +32,7 @@ body {
 
 .header,
 .footer {
-  min-height: 10vh;
+  min-height: 120px;
   border: 1px solid blue;
 }
 
@@ -75,6 +82,17 @@ body {
 
 .answer {
   width: 50%;
+  cursor: pointer;
+}
+
+.answer-img {
+  width: 40%;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid purple;
+  margin: auto;
   cursor: pointer;
 }
 
@@ -163,7 +181,7 @@ body {
   margin: auto;
 }
 
-.round-pic-animated{
+.round-pic-animated {
   width: 400px;
   height: 300px;
   display: flex;
@@ -179,4 +197,54 @@ body {
 
 .round-score-component {
   z-index: 3;
+}
+
+footer {
+  background: #eaeef3;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+footer div {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rslogo {
+  max-width: 100px;
+  max-height: 100px;
+  height: auto;
+  width: 100%;
+}
+
+.app-header-wrapper {
+  width: 320px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.app-header-logo {
+  max-width: 35%;
+  max-height: 100px;
+  
+  
+}
+
+.app-header-logo img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.app-header-text {
+  max-width: 65%;
+  text-transform: uppercase;
+  
+  font-size: 28px;
+  padding: 10px;
 }
