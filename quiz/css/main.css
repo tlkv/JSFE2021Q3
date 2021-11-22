@@ -1,5 +1,3 @@
-
-
 * {
   padding: 0;
   margin: 0;
@@ -61,7 +59,8 @@ body {
 }
 
 .component-show {
-  left: 0;
+  left: 0 !important;
+  top: 0 !important;
 }
 
 .menu-component {
@@ -91,13 +90,6 @@ body {
 
 .quiz-category {
   height: 100%;
-  /* width: 20%;
-  height: 250px;
-  border-radius: 10px;
-  border: 1px solid lightblue;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden; */
 }
 
 .results-extended-info {
@@ -229,7 +221,7 @@ body {
 .menu-component .players-button {
   background: rgba(0, 0, 0, 0.4) url('../assets/img/players.jpg') center /cover no-repeat;
   background-blend-mode: darken;
-  
+
 }
 
 .menu-component .players-button:hover, .menu-component .clubs-button:hover {
@@ -293,6 +285,8 @@ body {
 }
 
 .round-score-component {
+  left: 0;
+  top: -100vh;
   z-index: 3;
 }
 
@@ -340,7 +334,7 @@ footer div {
 }
 
 .app-header-text {
-  
+
   text-transform: uppercase;
 
   font-size: 28px;
@@ -384,13 +378,6 @@ footer div {
   display: none;
 }
 
-/* .cat-team-card {
-  background-position: left;
-}
-  
-  .cat-team-card:hover {
-    background-position: right;
-  } */
 
 .question-clubs-indicator, .question-players-indicator {
 
@@ -416,7 +403,7 @@ footer div {
 
 
 .timer-hidden {
-  visibility: hidden; 
+  visibility: hidden;
 }
 
 
