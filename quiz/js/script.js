@@ -349,6 +349,8 @@ function renderQuestionClubs() {
     timeID = setTimeout(() => {
       checkClubsAnswer();
     }, rolloutDelay + roundTimeStored.value * 1000);
+  } else {
+    clubsTimer.classList.add ('timer-hidden');
   }
 
   hideAllComponents();
@@ -465,7 +467,10 @@ function renderQuestionPlayers() {
     timeID = setTimeout(() => {
       checkPlayersAnswerImg();
     }, rolloutDelay + roundTimeStored.value * 1000);
+  } else {
+    playersTimer.classList.add ('timer-hidden');
   }
+
   hideAllComponents();
   questionPlayersText.textContent = `On which picture you see ${quizData['players'][currentQuestion].name}?`;
 
