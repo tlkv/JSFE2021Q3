@@ -1,54 +1,18 @@
-import players from './players.js';
-import clubs from './clubs.js';
-
-//let quizStateVolumeDefault = 0.4;
-//let quizStateSecNumDefault = 10;
-//let quizStateMuteDefault = false;
-//let quizStateClubsDefault = [null, null, null, null, null, null, null, null, null, null];
-//let quizStatePlayersDefault = [null, null, null, null, null, null, null, null, null, null];
-
-////let quizStateVolume = 0.4;
-//let quizStateSecNum = 10;
-let quizStateMute = false;
 let quizStateClubs = [null, null, null, null, null, null, null, null, null, null];
 let quizStatePlayers = [null, null, null, null, null, null, null, null, null, null];
-/* import quizData from './quizData.js';
-console.log('qD ',quizData['clubs'] ); */
 const volumeScaleStored = document.querySelector('.volume-scale');
 const isMuteStored = document.querySelector('#muteCheck');
-isMuteStored.addEventListener('change', handleMute);
-function handleMute() {
-  if (isMuteStored.checked) {
-    volumeScaleStored.disabled = true;
-    volumeScaleStored.value = 0;
-  } else {
-    volumeScaleStored.disabled = false;
-  }
-}
-
 const roundTimeStored = document.querySelector('.minutes-number');
 const isTimeGameStored = document.querySelector('#timeCheck');
 let quizData;
-/* 
-import textObj from './settings.js'; */
-//console.log('testF Bef', textObj['testF'][0]);
-/* textObj['testF'][0] = 123;
-console.log('testF aft', textObj['testF'][0]); */
+
 async function getQuizData() {
   const quizJson = 'quizData.json';
   const res = await fetch(quizJson);
   quizData = await res.json();
-  //quizData = data;
-  console.log('json ', quizData);
 }
 
 getQuizData();
-const gameOn = false; //
-
-let gameState = {}; //
-
-//delegate
-
 
 const mainWrapper = document.querySelector('.main-wrapper');
 
@@ -62,15 +26,11 @@ const questionPlayersComponent = document.querySelector('.question-players-compo
 const answerComponent = document.querySelector('.answer-component');
 const roundScoreComponent = document.querySelector('.round-score-component');
 const quizResultsComponent = document.querySelector('.quiz-results-component');
-
 const modalBackground = document.querySelector('.modal-background');
 
 const appTopComponents = [menuComponent, settingComponent, categoriesClubsComponent, categoriesPlayersComponent, questionClubsComponent, questionPlayersComponent, answerComponent, roundScoreComponent, modalBackground, quizResultsComponent];
 
-const menuButtonClubs = document.querySelectorAll('.clubs-button'); //
-const menuButtonPlayers = document.querySelectorAll('.players-button'); //
-const menuButtonSettings = document.querySelectorAll('.settings-button'); //not needed
-const backToMenu = document.querySelectorAll('.menu-back'); //
+const menuButtonSettings = document.querySelectorAll('.settings-button');
 const answerModalIndicator = document.querySelector('.answer-modal-indicator');
 const answerModalImg = document.querySelector('.answer-modal-img');
 const answerModalText = document.querySelector('.answer-modal-text');
@@ -78,19 +38,32 @@ const roundPicAnimated = document.querySelector('.round-pic-animated');
 const clubsButtonModal = document.querySelector('.clubs-button-modal');
 const playersButtonModal = document.querySelector('.players-button-modal');
 const roundResultCurrent = document.querySelector('.round-results-current');
-
 const clubsButtonResults = document.querySelector('.clubs-button-results');
 const playersButtonResults = document.querySelector('.players-button-results');
 const resultsRound = document.querySelector('.results-round');
 const resultsScore = document.querySelector('.results-score');
-
+const categoriesClubs = categoriesClubsComponent.querySelectorAll('.quiz-category');
+const categoriesClubsResultsNum = categoriesClubsComponent.querySelectorAll('.category-info-results-num');
+const categoriesClubsResultsAll = categoriesClubsComponent.querySelectorAll('.category-results-all');
+const categoriesPlayers = categoriesPlayersComponent.querySelectorAll('.quiz-category');
+const categoriesPlayersResultsNum = categoriesPlayersComponent.querySelectorAll('.category-info-results-num');
+const categoriesPlayersResultsAll = categoriesPlayersComponent.querySelectorAll('.category-results-all');
 const questionsClubsIndicator = document.querySelectorAll('.question-clubs-indicator .questions-indicator');
 const questionsPlayersIndicator = document.querySelectorAll('.question-players-indicator .questions-indicator');
+const resultsCardsImg = document.querySelectorAll('.results-container .results-img');
+const resultsExtendedInfo = document.querySelectorAll('.results-extended-info');
+const questionClubsImg = questionClubsComponent.querySelector('.question-img');
+const questionClubsAnswers = questionClubsComponent.querySelectorAll('.answer');
+const questionPlayersText = questionPlayersComponent.querySelector('.question-text');
+const questionPlayersAnswersImg = questionPlayersComponent.querySelectorAll('.answer-img');
+const nextButtonClubs = document.querySelector('.next-button-clubs');
+const nextButtonPlayers = document.querySelector('.next-button-players');
+const clubsTimer = document.querySelector('.clubs-timer');
+const playersTimer = document.querySelector('.players-timer');
 
-const questionsInRound = 2; //change 9 or 10
+const questionsInRound = 10; //10
 const roundsQuestionsAmount = 10;
 const answersAmount = 4;
-/* let effectsVolume = 0.4; */
 let currentQuestion = 0;
 let currentRoundQuestion = 0;
 
@@ -98,22 +71,27 @@ let currentRoundAllAnswers = [];
 
 //delegated button handlers
 mainWrapper.addEventListener('click', e => {
-  //console.log('NO', e.target.classList);
   if (e.target.classList.contains('open-clubs-category')) {
     showClubs();
     clearTimeout(timeID);
-    //console.log('YES');
   } else if (e.target.classList.contains('open-players-category')) {
     showPlayers();
     clearTimeout(timeID);
-    //console.log('YES');
   } else if (e.target.classList.contains('open-menu')) {
     showMenu();
-    
     clearTimeout(timeID);
-    //console.log('YES');
   }
 });
+
+isMuteStored.addEventListener('change', handleMute);
+function handleMute() {
+  if (isMuteStored.checked) {
+    volumeScaleStored.disabled = true;
+    volumeScaleStored.value = 0;
+  } else {
+    volumeScaleStored.disabled = false;
+  }
+}
 
 function hideAllComponents() {
   appTopComponents.forEach(item => item.classList.remove('component-show'));
@@ -141,12 +119,10 @@ function showPlayers() {
 }
 
 function showClubsQuestion() {
-  //hideAllComponents();
   questionClubsComponent.classList.add('component-show');
 }
 
 function showPlayersQuestion() {
-  //hideAllComponents();
   questionPlayersComponent.classList.add('component-show');
 }
 
@@ -168,16 +144,10 @@ menuButtonSettings.forEach(item => {
 });
 
 function countRound(arr) {
-  return arr.reduce((a, b) => a + b, 0);
+  if (arr) {
+    return arr.reduce((a, b) => a + b, 0);
+  }
 }
-
-const categoriesClubs = categoriesClubsComponent.querySelectorAll('.quiz-category');
-const categoriesClubsResultsNum = categoriesClubsComponent.querySelectorAll('.category-info-results-num');
-const categoriesClubsResultsAll = categoriesClubsComponent.querySelectorAll('.category-results-all');
-
-const categoriesPlayers = categoriesPlayersComponent.querySelectorAll('.quiz-category');
-const categoriesPlayersResultsNum = categoriesPlayersComponent.querySelectorAll('.category-info-results-num');
-const categoriesPlayersResultsAll = categoriesPlayersComponent.querySelectorAll('.category-results-all');
 
 [...categoriesClubs, ...categoriesPlayers].forEach(item => {
   item.addEventListener('click', startQuiz);
@@ -190,11 +160,8 @@ const categoriesPlayersResultsAll = categoriesPlayersComponent.querySelectorAll(
 function setLocalStorage() {
   localStorage.setItem('ftb-quiz-state-volume', volumeScaleStored.value);
   localStorage.setItem('ftb-quiz-state-mute', isMuteStored.checked);
-
   localStorage.setItem('ftb-quiz-state-sec-num', roundTimeStored.value);
-  //isTimeGameStored
   localStorage.setItem('ftb-quiz-state-time-game', isTimeGameStored.checked);
-
   localStorage.setItem('ftb-quiz-state-clubs', JSON.stringify(quizStateClubs));
   localStorage.setItem('ftb-quiz-state-players', JSON.stringify(quizStatePlayers));
 }
@@ -217,11 +184,9 @@ function getLocaleStorage() {
   }
 
   if (localStorage.getItem('ftb-quiz-state-clubs')) {
-    //quizStateMute = Boolean (localStorage.getItem('ftb-quiz-state-mute'));
-
-    //console.log('load ', JSON.parse(localStorage.getItem('ftb-quiz-state-clubs')));
     quizStateClubs = JSON.parse(localStorage.getItem('ftb-quiz-state-clubs'));
   }
+
   if (localStorage.getItem('ftb-quiz-state-players')) {
     quizStatePlayers = JSON.parse(localStorage.getItem('ftb-quiz-state-players'));
   }
@@ -232,15 +197,12 @@ function renderState() {
   for (let i = 0; i < roundsQuestionsAmount; i++) {
     if (quizStateClubs[i]) {
       categoriesClubs[i].classList.remove('category-not-played');
-      //console.log('categoriesClubsResultsNum', categoriesClubsResultsNum);
       categoriesClubsResultsNum[i].textContent = `${countRound(quizStateClubs[i])}/10`;
-
       categoriesClubsResultsAll[i].classList.remove('category-results-hidden');
     }
     if (quizStatePlayers[i]) {
       categoriesPlayers[i].classList.remove('category-not-played');
       categoriesPlayersResultsNum[i].textContent = `${countRound(quizStatePlayers[i])}/10`;
-
       categoriesPlayersResultsAll[i].classList.remove('category-results-hidden');
     }
   }
@@ -253,7 +215,6 @@ function renderCards() {
   for (let i = 0; i < roundsQuestionsAmount; i++) {
     const imgCl = new Image();
     const imgPl = new Image();
-    //path consts
     imgCl.src = `./assets/img/clubs/${i * roundsQuestionsAmount + 1}.jpg`;
     imgPl.src = `./assets/img/players/${i * roundsQuestionsAmount + 1}.jpg`;
     imgCl.onload = () => {
@@ -265,14 +226,9 @@ function renderCards() {
   }
 }
 
-//const resultsContainer = document.querySelector('.results-container');
-const resultsCardsImg = document.querySelectorAll('.results-container .results-img');
-const resultsExtendedInfo = document.querySelectorAll('.results-extended-info');
 resultsCardsImg.forEach(item => {
   item.addEventListener('click', () => {
-    /* console.log(item.parentNode); */
     item.parentNode.querySelector('.results-extended-info').classList.toggle('extended-hide');
-    //img.src = `./assets/img/clubs/${currentQuestion}.jpg`;
   });
 });
 
@@ -282,10 +238,6 @@ function renderQuizResults(e) {
     item.classList.remove('not-guessed');
     item.parentNode.querySelector('.results-extended-info').classList.add('extended-hide');
   });
-
-  /* results-extended-info
-  results-img
-  results-container */
   const eRound = Number(e.target.getAttribute('data-round') - 1);
   const eType = e.target.getAttribute('data-category');
   resultsRound.textContent = eRound + 1;
@@ -317,49 +269,20 @@ function renderQuizResults(e) {
       }
     };
   }
-
-  /* for(let i=0; i<resultsCardsImg; i++) {
-    resultCards[i].addEventListener('click', ()=>{
-      console.log('FIRE ');
-      resultsExtendedInfo[i].classList.toggle('extended-hide');
-    })
-  } */
 }
 
-//const questionClubsText = questionClubsComponent.querySelector('.question-text');
-const questionClubsImg = questionClubsComponent.querySelector('.question-img');
-const questionClubsAnswers = questionClubsComponent.querySelectorAll('.answer');
 questionClubsAnswers.forEach(item => {
   item.addEventListener('click', checkClubsAnswer);
 });
-
-const questionPlayersText = questionPlayersComponent.querySelector('.question-text');
-/* const questionPlayersImg = questionPlayersComponent.querySelector('.question-img'); */
-
-/* const questionPlayersAnswers = questionPlayersComponent.querySelectorAll('.answer');
-questionPlayersAnswers.forEach(item => {
-  item.addEventListener('click', checkPlayersAnswer);
-});*/
-
-const questionPlayersAnswersImg = questionPlayersComponent.querySelectorAll('.answer-img');
 
 questionPlayersAnswersImg.forEach(item => {
   item.addEventListener('click', checkPlayersAnswerImg);
 });
 
-console.log(questionPlayersAnswersImg);
-
-/* const nextButtonClubs = document.querySelectorAll('.next-button-clubs');
-nextButtonClubs.forEach(item => {
-  item.addEventListener('click', clubsNextHandler);
-}); */
-
-const nextButtonClubs = document.querySelector('.next-button-clubs');
 nextButtonClubs.addEventListener('click', () => {
   nextHandler('clubs');
 });
 
-const nextButtonPlayers = document.querySelector('.next-button-players');
 nextButtonPlayers.addEventListener('click', () => {
   nextHandler('players');
 });
@@ -388,7 +311,7 @@ function startQuiz(e) {
   const category = e.target.getAttribute('data-category');
   showCategoryButtons(category);
   resetCurrentRound();
-  /* soundEffect('lets-play'); */
+
   [...questionsClubsIndicator, ...questionsPlayersIndicator].forEach(item => {
     item.classList.remove('questions-indicator-wrong');
     item.classList.remove('questions-indicator-right');
@@ -396,14 +319,11 @@ function startQuiz(e) {
   category === 'clubs' ? renderQuestionClubs() : renderQuestionPlayers();
 }
 
-const clubsTimer = document.querySelector('.clubs-timer');
-const playersTimer = document.querySelector('.players-timer');
 let timeLeft;
 let timeID;
-const rolloutDelay = 900;//ms
+const rolloutDelay = 900; //ms
 
 function timer(elem) {
-  console.log(`timer ${timeLeft}`);
   setTimeout(() => {
     timeLeft -= 1;
     elem.textContent = `Time left: ${timeLeft} s`;
@@ -417,13 +337,13 @@ function renderQuestionClubs() {
   if (isTimeGameStored.checked) {
     clubsTimer.classList.remove('timer-hidden');
     timeLeft = roundTimeStored.value;
-    clubsTimer.textContent= `Time left: ${roundTimeStored.value} s`;
+    clubsTimer.textContent = `Time left: ${roundTimeStored.value} s`;
     setTimeout(() => {
-      timer(clubsTimer);//
+      timer(clubsTimer);
     }, rolloutDelay);
-    timeID = setTimeout(()=>{
+    timeID = setTimeout(() => {
       checkClubsAnswer();
-    }, rolloutDelay+roundTimeStored.value*1000);
+    }, rolloutDelay + roundTimeStored.value * 1000);
   }
 
   hideAllComponents();
@@ -441,14 +361,10 @@ function renderQuestionClubs() {
 
   setTimeout(() => {
     answerModalText.textContent = quizData['clubs'][currentQuestion].name;
-
     showClubsQuestion();
-
     const img = new Image();
     img.src = `./assets/img/clubs/${currentQuestion}.jpg`;
-
     img.addEventListener('load', () => {
-      console.log('LOADED'); //rem
       questionClubsImg.style.background = `url('${img.src}') center /cover no-repeat`;
       answerModalImg.style.background = `url('${img.src}') center /cover no-repeat`;
     });
@@ -463,15 +379,6 @@ function nextHandler(type) {
   } else {
     type === 'clubs' ? renderQuestionClubs() : renderQuestionPlayers();
   }
-  /*  if (type === 'clubs') {
-    console.log('test cl Handler');
-    renderQuestionClubs();
-    
-  } else if (type === 'players') {
-    console.log('test Pl  Handler');
-    renderQuestionPlayers();
-    
-  } */
 }
 
 //sounds
@@ -479,38 +386,14 @@ function soundEffect(path) {
   const audio = new Audio();
   audio.src = `./assets/audio/${path}.mp3`;
   audio.volume = volumeScaleStored.value / 100;
-  console.log('aud volume', audio.volume);
   audio.play();
 }
-
-/* function checkPlayersAnswer(e) {
-  if (e.target.textContent === quizData['players'][currentQuestion - 1].name) {
-    soundEffect('correct');
-    renderAnswer(true);
-    //console.log("RIGHT");
-  } else {
-    soundEffect('wrong');
-    renderAnswer(false);
-  }
-} */
-
-/* function checkClubsAnswer(e) {
-  if (e.target.textContent === quizData['clubs'][currentQuestion - 1].name) {
-    soundEffect('correct');
-    renderAnswer(true);
-
-    //console.log("RIGHT");
-  } else {
-    soundEffect('wrong');
-    renderAnswer(false);
-  }
-} */
 
 function checkClubsAnswer(e) {
   clearTimeout(timeID);
   if (!e) {
     renderAnswer(false);
-    questionsClubsIndicator[currentRoundQuestion - 1].classList.add('questions-indicator-wrong');    
+    questionsClubsIndicator[currentRoundQuestion - 1].classList.add('questions-indicator-wrong');
   } else if (e.target.textContent === quizData['clubs'][currentQuestion - 1].name) {
     renderAnswer(true);
     questionsClubsIndicator[currentRoundQuestion - 1].classList.add('questions-indicator-right');
@@ -524,64 +407,42 @@ function checkPlayersAnswerImg(e) {
   clearTimeout(timeID);
   if (!e) {
     renderAnswer(false);
-    questionsPlayersIndicator[currentRoundQuestion - 1].classList.add('questions-indicator-wrong');  
+    questionsPlayersIndicator[currentRoundQuestion - 1].classList.add('questions-indicator-wrong');
   } else if (e.target.getAttribute('data-img-num') === quizData['players'][currentQuestion - 1].imageNum) {
     renderAnswer(true);
     questionsPlayersIndicator[currentRoundQuestion - 1].classList.add('questions-indicator-right');
-    
   } else {
     renderAnswer(false);
     questionsPlayersIndicator[currentRoundQuestion - 1].classList.add('questions-indicator-wrong');
   }
-  /* e.target.getAttribute('data-img-num') === quizData['players'][currentQuestion - 1].imageNum ? renderAnswer(true) : renderAnswer(false); */
 }
 
 function renderAnswer(result) {
-  /* if (type === 'clubs') {
-    nextButtonClubs.classList.remove('hide-button');
-    nextButtonPlayers.classList.add('hide-button');    
-  } else {
-    nextButtonClubs.classList.add('hide-button');
-    nextButtonPlayers.classList.remove('hide-button');
-  } */
   if (result) {
     soundEffect('correct');
-
     currentRoundAllAnswers.push(1);
-    console.log('arr c ', currentRoundAllAnswers);
     answerModalIndicator.classList.remove('answer-indicator-wrong');
   } else {
     soundEffect('wrong');
     currentRoundAllAnswers.push(0);
-    console.log('arr c ', currentRoundAllAnswers);
     answerModalIndicator.classList.add('answer-indicator-wrong');
   }
-
-  //hideAllComponents();
 
   answerComponent.classList.add('component-show');
   showModalBackground();
 }
 
 function renderRoundScore(type) {
-  //currentRoundAllAnswers
-  console.log('currentRoundQuestion ', currentRoundQuestion);
-  console.log('currentQuestion ', currentQuestion);
   soundEffect('finished');
   hideAllComponents();
   roundScoreComponent.classList.add('component-show');
-
   roundResultCurrent.textContent = countRound(currentRoundAllAnswers);
-
   type === 'clubs' ? (quizStateClubs[(currentQuestion - currentRoundQuestion) / 10] = currentRoundAllAnswers) : (quizStatePlayers[(currentQuestion - currentRoundQuestion) / 10] = currentRoundAllAnswers);
-  console.log('quizStateClubs ', quizStateClubs);
-  console.log('quizStatePlayers ', quizStatePlayers);
   renderState();
   const img = new Image();
 
   img.src = `./assets/img/results/${countRound(currentRoundAllAnswers)}.gif`;
   img.addEventListener('load', () => {
-    //console.log('LOADED'); //rem
     roundPicAnimated.style.background = `url('${img.src}') center /cover no-repeat`;
   });
 }
@@ -590,13 +451,13 @@ function renderQuestionPlayers() {
   if (isTimeGameStored.checked) {
     playersTimer.classList.remove('timer-hidden');
     timeLeft = roundTimeStored.value;
-    playersTimer.textContent= `Time left: ${roundTimeStored.value} s`;
+    playersTimer.textContent = `Time left: ${roundTimeStored.value} s`;
     setTimeout(() => {
-      timer(playersTimer);//
+      timer(playersTimer);
     }, rolloutDelay);
-    timeID = setTimeout(()=>{
+    timeID = setTimeout(() => {
       checkPlayersAnswerImg();
-    }, rolloutDelay+roundTimeStored.value*1000);
+    }, rolloutDelay + roundTimeStored.value * 1000);
   }
   hideAllComponents();
   questionPlayersText.textContent = `On which picture you see ${quizData['players'][currentQuestion].name}?`;
@@ -610,9 +471,7 @@ function renderQuestionPlayers() {
   }
   setTimeout(() => {
     answerModalText.textContent = quizData['players'][currentQuestion].name;
-
     showPlayersQuestion();
-
     for (let i = 0; i < answersAmount; i++) {
       const pic = new Image();
       pic.src = `./assets/img/players/${pictRandom[i]}.jpg`;
@@ -629,18 +488,6 @@ function renderQuestionPlayers() {
     currentRoundQuestion++;
     currentQuestion++;
   }, 600);
-
-  /* hideAllComponents();
-  setTimeout(() => {
-    const img = new Image();
-    img.src = `./assets/img/players/${currentQuestion}.jpg`;
-
-    showPlayersQuestion();
-    img.addEventListener('load', () => {
-      console.log('LOADED'); //rem
-      questionPlayersImg.style.background = `url('${img.src}') center /cover no-repeat`;
-    });
-  }, 600); */
 }
 renderCards();
 showMenu();
