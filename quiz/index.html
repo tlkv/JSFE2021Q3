@@ -22,8 +22,9 @@
   <div class="main-wrapper">
     <div class="menu-component app-top-component">
       <div class="menu-components-wrapper">
-        <button class="menu-element clubs-button open-clubs-category">Clubs</button>
+        
         <button class="menu-element players-button open-players-category">Players</button>
+        <button class="menu-element clubs-button open-clubs-category">Clubs</button>
         <button class="menu-element settings-button">Settings</button>
       </div>
     </div>
@@ -36,13 +37,14 @@
       </div>
       <input type="range" name="volume-scale" id="volume-scale" min="0" max="100" step="1" class="volume-scale">
       <input type="checkbox" name="mute" id="mute">
-      <div class="slideOne">
-        <input type="checkbox" value="None" id="slideOne" name="check" checked />
-        <label for="slideOne"></label>
+      <div class="squaredTwo">
+        <input type="checkbox" value="None" id="squaredTwo" name="check" checked />
+        <label for="squaredTwo">TTTT</label>
       </div>
-      <button class="settings-element menu-back open-menu">Home</button>
+      <button class="settings-element menu-back open-menu">Save</button>
     </div>
     <div class="categories-clubs-component categories-clubs app-top-component">
+      <button class="menu-back open-menu">Home</button>
       <h2>Clubs</h2>
       <div class="categories-wrapper">
         <div class="categories-card">
@@ -136,9 +138,10 @@
           <div class="category-results-all category-results-hidden" data-category="clubs" data-round="10">Score</div>
         </div>
       </div>
-      <button class="menu-back open-menu">Home</button>
+      
     </div>
     <div class="categories-players-component categories-players app-top-component">
+      <button class="menu-back open-menu">Home</button>
       <h2>Players</h2>
       <div class="categories-wrapper">
         <div class="categories-card">
@@ -232,7 +235,7 @@
           <div class="category-results-all category-results-hidden" data-category="players" data-round="10">Score</div>
         </div>
       </div>
-      <button class="menu-back open-menu">Home</button>
+      
     </div>
     <div class="question-component question-clubs-component app-top-component">
       <button class="menu-back open-menu">Home</button>
@@ -275,7 +278,7 @@
         <div class="questions-indicator"></div>        
       </div>
       <div class="question-text"></div>
-      <div class="answers">
+      <div class="answers answers-img">
         <div class=" answer-img answer-1" data-img-num="0"></div>
         <div class=" answer-img answer-2" data-img-num="0"></div>
         <div class=" answer-img answer-3" data-img-num="0"></div>
@@ -294,15 +297,17 @@
       <h2>Round Over!</h2>
       <div class="round-pic-animated"></div>
       <div class="round-results-wrapper"><span class="round-results-current"></span>/10</div>
+      <button class="menu-back open-menu">Home</button>
       <button class="clubs-button  clubs-button-modal open-clubs-category">Next Quiz</button>
       <button class="players-button players-button-modal open-players-category">Next Quiz</button>
-      <button class="menu-back open-menu">Home</button>
+      
     </div>
     <div class="quiz-results-component app-top-component">
-      <h2>Round <span class="results-round"></span> score: <span class="results-score"></span>/10</h2>
+      
       <button class="menu-back open-menu">Home</button>
       <button class="clubs-button clubs-button-results open-clubs-category">Categories</button>
       <button class="players-button players-button-results  open-players-category">Categories</button>
+      <h2>Round <span class="results-round"></span> score: <span class="results-score"></span>/10</h2>
       <div class="results-container">
         <div class="results-card">
           <div class="results-img"></div>

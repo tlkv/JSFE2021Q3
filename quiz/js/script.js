@@ -2,11 +2,13 @@ import players from './players.js';
 import clubs from './clubs.js';
 
 let quizStateVolumeDefault = 0.4;
+let quizStateSecNumDefault = 10;
 let quizStateMuteDefault = false;
 let quizStateClubsDefault = [null, null, null, null, null, null, null, null, null, null];
 let quizStatePlayersDefault = [null, null, null, null, null, null, null, null, null, null];
 
 let quizStateVolume = 0.4;
+let quizStateSecNum = 10;
 let quizStateMute = false;
 let quizStateClubs = [null, null, null, null, null, null, null, null, null, null];
 let quizStatePlayers = [null, null, null, null, null, null, null, null, null, null];
@@ -83,6 +85,8 @@ const questionsPlayersIndicator = document.querySelectorAll('.question-players-i
 
 
 const volumeScale = document.querySelector('.volume-scale');
+const quizSecNum = document.querySelector('.minutes-number');
+
 
 const questionsInRound = 2; //change 9 or 10
 const roundsQuestionsAmount = 10;
@@ -166,6 +170,7 @@ volumeScale.addEventListener('change', e => {
   quizStateVolume = e.target.value / 100;
 });
 
+
 function countRound (arr) {
   return arr.reduce((a, b) => a + b, 0);
 }
@@ -190,6 +195,8 @@ const categoriesPlayersResultsAll = categoriesPlayersComponent.querySelectorAll(
 function setLocalStorage() {
   localStorage.setItem('ftb-quiz-state-volume', quizStateVolume);
   localStorage.setItem('ftb-quiz-state-mute', quizStateMute);
+  localStorage.setItem('ftb-quiz-state-sec-num', quizSecNum.value);
+
   localStorage.setItem('ftb-quiz-state-clubs', JSON.stringify(quizStateClubs));
   localStorage.setItem('ftb-quiz-state-players', JSON.stringify(quizStatePlayers));
 }
@@ -197,6 +204,10 @@ function getLocaleStorage() {
   if (localStorage.getItem('ftb-quiz-state-volume')) {
     quizStateVolume = Number(localStorage.getItem('ftb-quiz-state-volume'));
     volumeScale.value = quizStateVolume * 100;
+  }
+
+  if (localStorage.getItem('ftb-quiz-state-sec-num')) {
+    quizSecNum.value = Number(localStorage.getItem('ftb-quiz-state-sec-num'));
   }
 
   if (localStorage.getItem('ftb-quiz-state-mute')) {
