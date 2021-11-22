@@ -40,8 +40,6 @@ const playersButtonModal = document.querySelector('.players-button-modal');
 const roundResultCurrent = document.querySelector('.round-results-current');
 const clubsButtonResults = document.querySelector('.clubs-button-results');
 const playersButtonResults = document.querySelector('.players-button-results');
-const resultsRound = document.querySelector('.results-round');
-const resultsScore = document.querySelector('.results-score');
 const categoriesClubs = categoriesClubsComponent.querySelectorAll('.quiz-category');
 const categoriesClubsResultsNum = categoriesClubsComponent.querySelectorAll('.category-info-results-num');
 const categoriesClubsResultsAll = categoriesClubsComponent.querySelectorAll('.category-results-all');
@@ -61,25 +59,33 @@ const nextButtonPlayers = document.querySelector('.next-button-players');
 const clubsTimer = document.querySelector('.clubs-timer');
 const playersTimer = document.querySelector('.players-timer');
 
-const questionsInRound = 10; //10
+const questionsInRound = 10;
 const roundsQuestionsAmount = 10;
 const answersAmount = 4;
+
 let currentQuestion = 0;
 let currentRoundQuestion = 0;
-
 let currentRoundAllAnswers = [];
+
+let timeLeft;
+let timeID;
+let timeRoundID;
+const rolloutDelay = 900; //ms
 
 //delegated button handlers
 mainWrapper.addEventListener('click', e => {
   if (e.target.classList.contains('open-clubs-category')) {
     showClubs();
     clearTimeout(timeID);
+    clearTimeout(timeRoundID);
   } else if (e.target.classList.contains('open-players-category')) {
     showPlayers();
     clearTimeout(timeID);
+    clearTimeout(timeRoundID);
   } else if (e.target.classList.contains('open-menu')) {
     showMenu();
     clearTimeout(timeID);
+    clearTimeout(timeRoundID);
   }
 });
 
@@ -238,25 +244,24 @@ function renderQuizResults(e) {
     item.classList.remove('not-guessed');
     item.parentNode.querySelector('.results-extended-info').classList.add('extended-hide');
   });
-  const eRound = Number(e.target.getAttribute('data-round') - 1);
+  let eRound = Number(e.target.getAttribute('data-round') - 1);
+  if (eRound < 0) {
+    eRound = 0;
+  }
   const eType = e.target.getAttribute('data-category');
-  resultsRound.textContent = eRound + 1;
 
   if (eType === 'clubs') {
     clubsButtonResults.classList.remove('hide-button');
     playersButtonResults.classList.add('hide-button');
-    resultsScore.textContent = countRound(quizStateClubs[eRound]);
   } else {
     clubsButtonResults.classList.add('hide-button');
     playersButtonResults.classList.remove('hide-button');
-    resultsScore.textContent = countRound(quizStatePlayers[eRound]);
   }
-  for (let i = 0; i < resultsCardsImg.length; i++) {
-    resultsExtendedInfo[i].textContent = quizData[eType][eRound * 10 + i].name;
-    const img = new Image();
+  for (let i = 0; i < resultsCardsImg.length; i++) {    
+    const img = new Image();    
     img.src = `./assets/img/${eType}/${quizData[eType][eRound * 10 + i].imageNum}.jpg`;
-
     img.onload = () => {
+      resultsExtendedInfo[i].textContent = quizData[eType][eRound * 10 + i].name;
       resultsCardsImg[i].style.background = `url('${img.src}') center /cover no-repeat`;
       if (eType === 'clubs') {
         if (quizStateClubs[eRound][i] !== 1) {
@@ -319,16 +324,16 @@ function startQuiz(e) {
   category === 'clubs' ? renderQuestionClubs() : renderQuestionPlayers();
 }
 
-let timeLeft;
-let timeID;
-const rolloutDelay = 900; //ms
+
 
 function timer(elem) {
-  setTimeout(() => {
+  timeRoundID = setTimeout(() => {
     timeLeft -= 1;
     elem.textContent = `Time left: ${timeLeft} s`;
     if (timeLeft > 0) {
       timer(elem);
+    } else {
+      clearTimeout(timeRoundID);
     }
   }, 1000);
 }
@@ -391,6 +396,7 @@ function soundEffect(path) {
 
 function checkClubsAnswer(e) {
   clearTimeout(timeID);
+  clearTimeout(timeRoundID);
   if (!e) {
     renderAnswer(false);
     questionsClubsIndicator[currentRoundQuestion - 1].classList.add('questions-indicator-wrong');
@@ -405,6 +411,7 @@ function checkClubsAnswer(e) {
 
 function checkPlayersAnswerImg(e) {
   clearTimeout(timeID);
+  clearTimeout(timeRoundID);
   if (!e) {
     renderAnswer(false);
     questionsPlayersIndicator[currentRoundQuestion - 1].classList.add('questions-indicator-wrong');
