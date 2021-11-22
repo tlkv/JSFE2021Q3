@@ -7,39 +7,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="./assets/favicon.png" />
   <link rel="stylesheet" href="./css/main.css" class="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/2f1b1f79d4.js" crossorigin="anonymous"></script>
   <title>Football Quiz</title>
 </head>
 
 <body>
   <header class="header">
     <div class="app-header-wrapper">
-      <div class="app-header-logo">
+      <!-- <div class="app-header-logo">
         <img src="./assets/img/cl_logo.png" alt="logo">
+      </div> -->
+      <div class="app-header-text"><i class="fas fa-futbol"></i> Football Quiz <i class="fas fa-futbol"></i>
       </div>
-      <div class="app-header-text">Football <br>Quiz</div>
     </div>
   </header>
   <div class="main-wrapper">
     <div class="menu-component app-top-component">
       <div class="menu-components-wrapper">
-        
-        <button class="menu-element players-button open-players-category">Players</button>
         <button class="menu-element clubs-button open-clubs-category">Clubs</button>
-        <button class="menu-element settings-button">Settings</button>
+        <button class="menu-element players-button open-players-category">Players</button>
+        <button class="menu-element settings-button"><i class="fas fa-cog"></i> Settings</button>
       </div>
     </div>
     <div class="settings-component app-top-component">
-      <h2>Settings</h2>
-      <div class="minutes-count-wrapper">
-        <button type="button" onclick="this.nextElementSibling.stepDown()">–</button>
-        <input type="number" min="5" max="30" value="5" readonly="" class="minutes-number" step="5">
-        <button type="button" onclick="this.previousElementSibling.stepUp()">+</button>
-      </div>
-      <input type="range" name="volume-scale" id="volume-scale" min="0" max="100" step="1" class="volume-scale">
-      <input type="checkbox" name="mute" id="mute">
-      <div class="squaredTwo">
-        <input type="checkbox" value="None" id="squaredTwo" name="check" checked />
-        <label for="squaredTwo">TTTT</label>
+      <h2><i class="fas fa-cog"></i> Settings</h2>
+      <div class="settings-wrapper">
+        <h4>Volume</h4>
+        <input type="range" name="volume-scale" id="volume-scale" min="0" max="100" step="1" class="volume-scale">
+        <h4>Mute</h4>
+        <div class="boxContainer">
+          <input type="checkbox" id="muteCheck" name="check" />
+          <label for="muteCheck"></label>
+        </div>
+        <h4>Time Game</h4>
+        <div class="boxContainer">
+          <input type="checkbox" id="timeCheck" name="check" />
+          <label for="timeCheck"></label>
+        </div>
+        <h4>Time to answer</h4>
+        <div class="minutes-count-wrapper">
+          <button type="button" onclick="this.nextElementSibling.stepDown()">–</button>
+          <input type="number" min="5" max="30" value="10" readonly="" class="minutes-number" step="5">
+          <button type="button" onclick="this.previousElementSibling.stepUp()">+</button>
+        </div>
       </div>
       <button class="settings-element menu-back open-menu">Save</button>
     </div>
@@ -48,7 +61,7 @@
       <h2>Clubs</h2>
       <div class="categories-wrapper">
         <div class="categories-card">
-          <div class="quiz-category category-not-played clubs-round-1" data-category="clubs" data-round="1">
+          <div class="quiz-category cat-team-card category-not-played clubs-round-1" data-category="clubs" data-round="1">
             <div class="category-info">
               <div class="category-info-name">Round 1</div>
               <div class="category-info-results-num"></div>
@@ -57,7 +70,7 @@
           <div class="category-results-all category-results-hidden" data-category="clubs" data-round="1">Score</div>
         </div>
         <div class="categories-card">
-          <div class="quiz-category category-not-played clubs-round-2" data-category="clubs" data-round="2">
+          <div class="quiz-category cat-team-card category-not-played clubs-round-2" data-category="clubs" data-round="2">
             <div class="category-info">
               <div class="category-info-name">Round 2</div>
               <div class="category-info-results-num"></div>
@@ -66,7 +79,7 @@
           <div class="category-results-all category-results-hidden" data-category="clubs" data-round="2">Score</div>
         </div>
         <div class="categories-card">
-          <div class="quiz-category category-not-played clubs-round-3" data-category="clubs" data-round="3">
+          <div class="quiz-category cat-team-card category-not-played clubs-round-3" data-category="clubs" data-round="3">
             <div class="category-info">
               <div class="category-info-name">Round 3</div>
               <div class="category-info-results-num"></div>
@@ -75,7 +88,7 @@
           <div class="category-results-all category-results-hidden" data-category="clubs" data-round="3">Score</div>
         </div>
         <div class="categories-card">
-          <div class="quiz-category category-not-played clubs-round-4" data-category="clubs" data-round="4">
+          <div class="quiz-category cat-team-card category-not-played clubs-round-4" data-category="clubs" data-round="4">
             <div class="category-info">
               <div class="category-info-name">Round 4</div>
               <div class="category-info-results-num"></div>
@@ -84,7 +97,7 @@
           <div class="category-results-all category-results-hidden" data-category="clubs" data-round="4">Score</div>
         </div>
         <div class="categories-card">
-          <div class="quiz-category category-not-played clubs-round-5" data-category="clubs" data-round="5">
+          <div class="quiz-category cat-team-card category-not-played clubs-round-5" data-category="clubs" data-round="5">
             <div class="category-info">
               <div class="category-info-name">Round 5</div>
               <div class="category-info-results-num"></div>
@@ -93,7 +106,7 @@
           <div class="category-results-all category-results-hidden" data-category="clubs" data-round="5">Score</div>
         </div>
         <div class="categories-card">
-          <div class="quiz-category category-not-played clubs-round-6" data-category="clubs" data-round="6">
+          <div class="quiz-category cat-team-card category-not-played clubs-round-6" data-category="clubs" data-round="6">
             <div class="category-info">
               <div class="category-info-name">Round 6</div>
               <div class="category-info-results-num"></div>
@@ -102,7 +115,7 @@
           <div class="category-results-all category-results-hidden" data-category="clubs" data-round="6">Score</div>
         </div>
         <div class="categories-card">
-          <div class="quiz-category category-not-played clubs-round-7" data-category="clubs" data-round="7">
+          <div class="quiz-category cat-team-card category-not-played clubs-round-7" data-category="clubs" data-round="7">
             <div class="category-info">
               <div class="category-info-name">Round 7</div>
               <div class="category-info-results-num"></div>
@@ -111,7 +124,7 @@
           <div class="category-results-all category-results-hidden" data-category="clubs" data-round="7">Score</div>
         </div>
         <div class="categories-card">
-          <div class="quiz-category category-not-played clubs-round-8" data-category="clubs" data-round="8">
+          <div class="quiz-category cat-team-card category-not-played clubs-round-8" data-category="clubs" data-round="8">
             <div class="category-info">
               <div class="category-info-name">Round 8</div>
               <div class="category-info-results-num"></div>
@@ -120,7 +133,7 @@
           <div class="category-results-all category-results-hidden" data-category="clubs" data-round="8">Score</div>
         </div>
         <div class="categories-card">
-          <div class="quiz-category category-not-played clubs-round-9" data-category="clubs" data-round="9">
+          <div class="quiz-category cat-team-card category-not-played clubs-round-9" data-category="clubs" data-round="9">
             <div class="category-info">
               <div class="category-info-name">Round 9</div>
               <div class="category-info-results-num"></div>
@@ -129,7 +142,7 @@
           <div class="category-results-all category-results-hidden" data-category="clubs" data-round="9">Score</div>
         </div>
         <div class="categories-card">
-          <div class="quiz-category category-not-played clubs-round-10" data-category="clubs" data-round="10">
+          <div class="quiz-category cat-team-card category-not-played clubs-round-10" data-category="clubs" data-round="10">
             <div class="category-info">
               <div class="category-info-name">Round 10</div>
               <div class="category-info-results-num"></div>
@@ -138,7 +151,6 @@
           <div class="category-results-all category-results-hidden" data-category="clubs" data-round="10">Score</div>
         </div>
       </div>
-      
     </div>
     <div class="categories-players-component categories-players app-top-component">
       <button class="menu-back open-menu">Home</button>
@@ -235,11 +247,11 @@
           <div class="category-results-all category-results-hidden" data-category="players" data-round="10">Score</div>
         </div>
       </div>
-      
     </div>
     <div class="question-component question-clubs-component app-top-component">
       <button class="menu-back open-menu">Home</button>
       <button class="clubs-button open-clubs-category">Categories</button>
+      <div class="clubs-timer timer-hidden">TIME</div>
       <div class="question-clubs-indicator">
         <div class="questions-indicator"></div>
         <div class="questions-indicator"></div>
@@ -250,7 +262,7 @@
         <div class="questions-indicator"></div>
         <div class="questions-indicator"></div>
         <div class="questions-indicator"></div>
-        <div class="questions-indicator"></div>        
+        <div class="questions-indicator"></div>
       </div>
       <div class="question-text">Which football club is represented on this picture?</div>
       <div class="question-img"></div>
@@ -260,11 +272,11 @@
         <div class="answer answer-3"></div>
         <div class="answer answer-4"></div>
       </div>
-      
     </div>
     <div class="question-player question-players-component app-top-component">
       <button class="menu-back open-menu">Home</button>
       <button class="players-button open-players-category">Categories</button>
+      <div class="players-timer timer-hidden"></div>
       <div class="question-players-indicator">
         <div class="questions-indicator"></div>
         <div class="questions-indicator"></div>
@@ -275,7 +287,7 @@
         <div class="questions-indicator"></div>
         <div class="questions-indicator"></div>
         <div class="questions-indicator"></div>
-        <div class="questions-indicator"></div>        
+        <div class="questions-indicator"></div>
       </div>
       <div class="question-text"></div>
       <div class="answers answers-img">
@@ -284,7 +296,6 @@
         <div class=" answer-img answer-3" data-img-num="0"></div>
         <div class=" answer-img answer-4" data-img-num="0"></div>
       </div>
-      
     </div>
     <div class="answer-component app-top-component modal-component">
       <div class="answer-modal-indicator"></div>
@@ -300,10 +311,8 @@
       <button class="menu-back open-menu">Home</button>
       <button class="clubs-button  clubs-button-modal open-clubs-category">Next Quiz</button>
       <button class="players-button players-button-modal open-players-category">Next Quiz</button>
-      
     </div>
     <div class="quiz-results-component app-top-component">
-      
       <button class="menu-back open-menu">Home</button>
       <button class="clubs-button clubs-button-results open-clubs-category">Categories</button>
       <button class="players-button players-button-results  open-players-category">Categories</button>
@@ -350,13 +359,12 @@
           <div class="results-extended-info extended-hide"></div>
         </div>
       </div>
-      
     </div>
   </div>
   <footer class="footer">
-    <div><a class="git" href="https://github.com/tlkv">GitHub</a></div>
+    <div><a class="git" href="https://github.com/tlkv" target="_blank">GitHub</a></div>
     <div>© 2021</div>
-    <div><a href="https://rs.school/js/"><img class="rslogo" src="./assets/img/rs_school_js.svg" alt="rs"></a></div>
+    <div><a href="https://rs.school/js/" target="_blank"><img class="rslogo" src="./assets/img/rs_school_js.svg" alt="rs"></a></div>
   </footer>
   <div class="modal-background"></div>
   <script type="module" src="./index.js"></script>

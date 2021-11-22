@@ -1,19 +1,33 @@
 import players from './players.js';
 import clubs from './clubs.js';
 
-let quizStateVolumeDefault = 0.4;
-let quizStateSecNumDefault = 10;
-let quizStateMuteDefault = false;
-let quizStateClubsDefault = [null, null, null, null, null, null, null, null, null, null];
-let quizStatePlayersDefault = [null, null, null, null, null, null, null, null, null, null];
+//let quizStateVolumeDefault = 0.4;
+//let quizStateSecNumDefault = 10;
+//let quizStateMuteDefault = false;
+//let quizStateClubsDefault = [null, null, null, null, null, null, null, null, null, null];
+//let quizStatePlayersDefault = [null, null, null, null, null, null, null, null, null, null];
 
-let quizStateVolume = 0.4;
-let quizStateSecNum = 10;
+////let quizStateVolume = 0.4;
+//let quizStateSecNum = 10;
 let quizStateMute = false;
 let quizStateClubs = [null, null, null, null, null, null, null, null, null, null];
 let quizStatePlayers = [null, null, null, null, null, null, null, null, null, null];
 /* import quizData from './quizData.js';
 console.log('qD ',quizData['clubs'] ); */
+const volumeScaleStored = document.querySelector('.volume-scale');
+const isMuteStored = document.querySelector('#muteCheck');
+isMuteStored.addEventListener('change', handleMute);
+function handleMute() {
+  if (isMuteStored.checked) {
+    volumeScaleStored.disabled = true;
+    volumeScaleStored.value = 0;
+  } else {
+    volumeScaleStored.disabled = false;
+  }
+}
+
+const roundTimeStored = document.querySelector('.minutes-number');
+const isTimeGameStored = document.querySelector('#timeCheck');
 let quizData;
 /* 
 import textObj from './settings.js'; */
@@ -34,14 +48,7 @@ const gameOn = false; //
 let gameState = {}; //
 
 //delegate
-const footerTest = document.querySelector('.footer');
-footerTest.addEventListener('click', e => {
-  if (e.target.classList.contains('fbut1')) {
-    //console.log('YES');
-  } else {
-    //console.log('NO');
-  }
-});
+
 
 const mainWrapper = document.querySelector('.main-wrapper');
 
@@ -58,13 +65,12 @@ const quizResultsComponent = document.querySelector('.quiz-results-component');
 
 const modalBackground = document.querySelector('.modal-background');
 
-
 const appTopComponents = [menuComponent, settingComponent, categoriesClubsComponent, categoriesPlayersComponent, questionClubsComponent, questionPlayersComponent, answerComponent, roundScoreComponent, modalBackground, quizResultsComponent];
 
-const menuButtonClubs = document.querySelectorAll('.clubs-button');//
-const menuButtonPlayers = document.querySelectorAll('.players-button');//
+const menuButtonClubs = document.querySelectorAll('.clubs-button'); //
+const menuButtonPlayers = document.querySelectorAll('.players-button'); //
 const menuButtonSettings = document.querySelectorAll('.settings-button'); //not needed
-const backToMenu = document.querySelectorAll('.menu-back');//
+const backToMenu = document.querySelectorAll('.menu-back'); //
 const answerModalIndicator = document.querySelector('.answer-modal-indicator');
 const answerModalImg = document.querySelector('.answer-modal-img');
 const answerModalText = document.querySelector('.answer-modal-text');
@@ -75,18 +81,11 @@ const roundResultCurrent = document.querySelector('.round-results-current');
 
 const clubsButtonResults = document.querySelector('.clubs-button-results');
 const playersButtonResults = document.querySelector('.players-button-results');
-const resultsRound  = document.querySelector('.results-round');
+const resultsRound = document.querySelector('.results-round');
 const resultsScore = document.querySelector('.results-score');
-
 
 const questionsClubsIndicator = document.querySelectorAll('.question-clubs-indicator .questions-indicator');
 const questionsPlayersIndicator = document.querySelectorAll('.question-players-indicator .questions-indicator');
-
-
-
-const volumeScale = document.querySelector('.volume-scale');
-const quizSecNum = document.querySelector('.minutes-number');
-
 
 const questionsInRound = 2; //change 9 or 10
 const roundsQuestionsAmount = 10;
@@ -102,12 +101,16 @@ mainWrapper.addEventListener('click', e => {
   //console.log('NO', e.target.classList);
   if (e.target.classList.contains('open-clubs-category')) {
     showClubs();
+    clearTimeout(timeID);
     //console.log('YES');
   } else if (e.target.classList.contains('open-players-category')) {
     showPlayers();
+    clearTimeout(timeID);
     //console.log('YES');
   } else if (e.target.classList.contains('open-menu')) {
     showMenu();
+    
+    clearTimeout(timeID);
     //console.log('YES');
   }
 });
@@ -156,8 +159,6 @@ function showQuizResults() {
   quizResultsComponent.classList.add('component-show');
 }
 
-
-
 function hideModalBackground() {
   modalBackground.classList.remove('modal-back-show');
 }
@@ -166,19 +167,13 @@ menuButtonSettings.forEach(item => {
   item.addEventListener('click', showSettings);
 });
 
-volumeScale.addEventListener('change', e => {
-  quizStateVolume = e.target.value / 100;
-});
-
-
-function countRound (arr) {
+function countRound(arr) {
   return arr.reduce((a, b) => a + b, 0);
 }
 
 const categoriesClubs = categoriesClubsComponent.querySelectorAll('.quiz-category');
 const categoriesClubsResultsNum = categoriesClubsComponent.querySelectorAll('.category-info-results-num');
 const categoriesClubsResultsAll = categoriesClubsComponent.querySelectorAll('.category-results-all');
-
 
 const categoriesPlayers = categoriesPlayersComponent.querySelectorAll('.quiz-category');
 const categoriesPlayersResultsNum = categoriesPlayersComponent.querySelectorAll('.category-info-results-num');
@@ -193,30 +188,37 @@ const categoriesPlayersResultsAll = categoriesPlayersComponent.querySelectorAll(
 });
 
 function setLocalStorage() {
-  localStorage.setItem('ftb-quiz-state-volume', quizStateVolume);
-  localStorage.setItem('ftb-quiz-state-mute', quizStateMute);
-  localStorage.setItem('ftb-quiz-state-sec-num', quizSecNum.value);
+  localStorage.setItem('ftb-quiz-state-volume', volumeScaleStored.value);
+  localStorage.setItem('ftb-quiz-state-mute', isMuteStored.checked);
+
+  localStorage.setItem('ftb-quiz-state-sec-num', roundTimeStored.value);
+  //isTimeGameStored
+  localStorage.setItem('ftb-quiz-state-time-game', isTimeGameStored.checked);
 
   localStorage.setItem('ftb-quiz-state-clubs', JSON.stringify(quizStateClubs));
   localStorage.setItem('ftb-quiz-state-players', JSON.stringify(quizStatePlayers));
 }
 function getLocaleStorage() {
   if (localStorage.getItem('ftb-quiz-state-volume')) {
-    quizStateVolume = Number(localStorage.getItem('ftb-quiz-state-volume'));
-    volumeScale.value = quizStateVolume * 100;
-  }
-
-  if (localStorage.getItem('ftb-quiz-state-sec-num')) {
-    quizSecNum.value = Number(localStorage.getItem('ftb-quiz-state-sec-num'));
+    volumeScaleStored.value = Number(localStorage.getItem('ftb-quiz-state-volume'));
   }
 
   if (localStorage.getItem('ftb-quiz-state-mute')) {
-    quizStateMute = Boolean(localStorage.getItem('ftb-quiz-state-mute'));
-    /* volumeScale.value = quizStateVolume * 100; */
+    localStorage.getItem('ftb-quiz-state-mute') === 'true' ? (isMuteStored.checked = true) : (isMuteStored.checked = false);
+    handleMute();
   }
+
+  if (localStorage.getItem('ftb-quiz-state-sec-num')) {
+    roundTimeStored.value = Number(localStorage.getItem('ftb-quiz-state-sec-num'));
+  }
+
+  if (localStorage.getItem('ftb-quiz-state-time-game')) {
+    localStorage.getItem('ftb-quiz-state-time-game') === 'true' ? (isTimeGameStored.checked = true) : (isTimeGameStored.checked = false);
+  }
+
   if (localStorage.getItem('ftb-quiz-state-clubs')) {
     //quizStateMute = Boolean (localStorage.getItem('ftb-quiz-state-mute'));
-    /* volumeScale.value = quizStateVolume * 100; */
+
     //console.log('load ', JSON.parse(localStorage.getItem('ftb-quiz-state-clubs')));
     quizStateClubs = JSON.parse(localStorage.getItem('ftb-quiz-state-clubs'));
   }
@@ -241,14 +243,11 @@ function renderState() {
 
       categoriesPlayersResultsAll[i].classList.remove('category-results-hidden');
     }
-    
   }
 }
 
 window.addEventListener('beforeunload', setLocalStorage);
 window.addEventListener('load', getLocaleStorage);
-
-
 
 function renderCards() {
   for (let i = 0; i < roundsQuestionsAmount; i++) {
@@ -269,48 +268,48 @@ function renderCards() {
 //const resultsContainer = document.querySelector('.results-container');
 const resultsCardsImg = document.querySelectorAll('.results-container .results-img');
 const resultsExtendedInfo = document.querySelectorAll('.results-extended-info');
-resultsCardsImg.forEach(item=>{
-  item.addEventListener('click', ()=>{
+resultsCardsImg.forEach(item => {
+  item.addEventListener('click', () => {
     /* console.log(item.parentNode); */
-    item.parentNode.querySelector('.results-extended-info').classList.toggle('extended-hide');      
+    item.parentNode.querySelector('.results-extended-info').classList.toggle('extended-hide');
     //img.src = `./assets/img/clubs/${currentQuestion}.jpg`;
-  })
+  });
 });
 
 function renderQuizResults(e) {
   showQuizResults();
-  resultsCardsImg.forEach(item=>{
-    item.classList.remove('not-guessed'); 
-    item.parentNode.querySelector('.results-extended-info').classList.add('extended-hide');   
+  resultsCardsImg.forEach(item => {
+    item.classList.remove('not-guessed');
+    item.parentNode.querySelector('.results-extended-info').classList.add('extended-hide');
   });
-  
+
   /* results-extended-info
   results-img
   results-container */
-  const eRound = Number(e.target.getAttribute('data-round') - 1) 
+  const eRound = Number(e.target.getAttribute('data-round') - 1);
   const eType = e.target.getAttribute('data-category');
-  resultsRound.textContent = eRound+1;
-  
-  if (eType === 'clubs') {    
+  resultsRound.textContent = eRound + 1;
+
+  if (eType === 'clubs') {
     clubsButtonResults.classList.remove('hide-button');
     playersButtonResults.classList.add('hide-button');
-    resultsScore.textContent =  countRound(quizStateClubs[eRound]);
+    resultsScore.textContent = countRound(quizStateClubs[eRound]);
   } else {
     clubsButtonResults.classList.add('hide-button');
     playersButtonResults.classList.remove('hide-button');
-    resultsScore.textContent =  countRound(quizStatePlayers[eRound]);
+    resultsScore.textContent = countRound(quizStatePlayers[eRound]);
   }
-  for (let i=0; i<resultsCardsImg.length; i++) {
-    resultsExtendedInfo[i].textContent = quizData[eType][eRound*10+i].name;
+  for (let i = 0; i < resultsCardsImg.length; i++) {
+    resultsExtendedInfo[i].textContent = quizData[eType][eRound * 10 + i].name;
     const img = new Image();
-    img.src = `./assets/img/${eType}/${quizData[eType][eRound*10+i].imageNum}.jpg`;
-    
+    img.src = `./assets/img/${eType}/${quizData[eType][eRound * 10 + i].imageNum}.jpg`;
+
     img.onload = () => {
       resultsCardsImg[i].style.background = `url('${img.src}') center /cover no-repeat`;
       if (eType === 'clubs') {
         if (quizStateClubs[eRound][i] !== 1) {
           resultsCardsImg[i].classList.add('not-guessed');
-        } 
+        }
       } else if (eType === 'players') {
         if (quizStatePlayers[eRound][i] !== 1) {
           resultsCardsImg[i].classList.add('not-guessed');
@@ -318,16 +317,13 @@ function renderQuizResults(e) {
       }
     };
   }
-  
-  
+
   /* for(let i=0; i<resultsCardsImg; i++) {
     resultCards[i].addEventListener('click', ()=>{
       console.log('FIRE ');
       resultsExtendedInfo[i].classList.toggle('extended-hide');
     })
   } */
-  
-
 }
 
 //const questionClubsText = questionClubsComponent.querySelector('.question-text');
@@ -393,14 +389,43 @@ function startQuiz(e) {
   showCategoryButtons(category);
   resetCurrentRound();
   /* soundEffect('lets-play'); */
-  [...questionsClubsIndicator, ...questionsPlayersIndicator].forEach((item)=>{
+  [...questionsClubsIndicator, ...questionsPlayersIndicator].forEach(item => {
     item.classList.remove('questions-indicator-wrong');
     item.classList.remove('questions-indicator-right');
   });
   category === 'clubs' ? renderQuestionClubs() : renderQuestionPlayers();
 }
 
+const clubsTimer = document.querySelector('.clubs-timer');
+const playersTimer = document.querySelector('.players-timer');
+let timeLeft;
+let timeID;
+const rolloutDelay = 900;//ms
+
+function timer(elem) {
+  console.log(`timer ${timeLeft}`);
+  setTimeout(() => {
+    timeLeft -= 1;
+    elem.textContent = `Time left: ${timeLeft} s`;
+    if (timeLeft > 0) {
+      timer(elem);
+    }
+  }, 1000);
+}
+
 function renderQuestionClubs() {
+  if (isTimeGameStored.checked) {
+    clubsTimer.classList.remove('timer-hidden');
+    timeLeft = roundTimeStored.value;
+    clubsTimer.textContent= `Time left: ${roundTimeStored.value} s`;
+    setTimeout(() => {
+      timer(clubsTimer);//
+    }, rolloutDelay);
+    timeID = setTimeout(()=>{
+      checkClubsAnswer();
+    }, rolloutDelay+roundTimeStored.value*1000);
+  }
+
   hideAllComponents();
 
   let answersRandom = [quizData['clubs'][currentQuestion].name];
@@ -453,7 +478,8 @@ function nextHandler(type) {
 function soundEffect(path) {
   const audio = new Audio();
   audio.src = `./assets/audio/${path}.mp3`;
-  audio.volume = quizStateVolume;
+  audio.volume = volumeScaleStored.value / 100;
+  console.log('aud volume', audio.volume);
   audio.play();
 }
 
@@ -481,7 +507,11 @@ function soundEffect(path) {
 } */
 
 function checkClubsAnswer(e) {
-  if (e.target.textContent === quizData['clubs'][currentQuestion - 1].name) {
+  clearTimeout(timeID);
+  if (!e) {
+    renderAnswer(false);
+    questionsClubsIndicator[currentRoundQuestion - 1].classList.add('questions-indicator-wrong');    
+  } else if (e.target.textContent === quizData['clubs'][currentQuestion - 1].name) {
     renderAnswer(true);
     questionsClubsIndicator[currentRoundQuestion - 1].classList.add('questions-indicator-right');
   } else {
@@ -491,9 +521,14 @@ function checkClubsAnswer(e) {
 }
 
 function checkPlayersAnswerImg(e) {
-  if (e.target.getAttribute('data-img-num') === quizData['players'][currentQuestion - 1].imageNum) {
+  clearTimeout(timeID);
+  if (!e) {
+    renderAnswer(false);
+    questionsPlayersIndicator[currentRoundQuestion - 1].classList.add('questions-indicator-wrong');  
+  } else if (e.target.getAttribute('data-img-num') === quizData['players'][currentQuestion - 1].imageNum) {
     renderAnswer(true);
     questionsPlayersIndicator[currentRoundQuestion - 1].classList.add('questions-indicator-right');
+    
   } else {
     renderAnswer(false);
     questionsPlayersIndicator[currentRoundQuestion - 1].classList.add('questions-indicator-wrong');
@@ -552,6 +587,17 @@ function renderRoundScore(type) {
 }
 
 function renderQuestionPlayers() {
+  if (isTimeGameStored.checked) {
+    playersTimer.classList.remove('timer-hidden');
+    timeLeft = roundTimeStored.value;
+    playersTimer.textContent= `Time left: ${roundTimeStored.value} s`;
+    setTimeout(() => {
+      timer(playersTimer);//
+    }, rolloutDelay);
+    timeID = setTimeout(()=>{
+      checkPlayersAnswerImg();
+    }, rolloutDelay+roundTimeStored.value*1000);
+  }
   hideAllComponents();
   questionPlayersText.textContent = `On which picture you see ${quizData['players'][currentQuestion].name}?`;
 
