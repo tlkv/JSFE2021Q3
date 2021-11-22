@@ -6,31 +6,54 @@
   transition: background .6s ease-in-out .3s;
 }
 
+h2, h3, h4 {
+  margin: 10px;
+}
+
 button {
   border: 0;
   outline: 0;
   cursor: pointer;
+  width: 120px;
+  height: 40px;
+  font-size: 16px;
+  margin: 10px 15px;
+  border-radius: 5px;
+
 }
 
+button:hover [class^="fa"] {
+  transform: scale(1.2);
+}
+
+[class^="fa"] {
+  transition: all .6s;
+  color: #03a9f4;
+}
 
 body {
   min-height: 100vh;
-  background: #ddd;
+  background: #000;
+  color: #fff;
 }
 
 .main-wrapper {
-  max-width: 1280px;
+  max-width: 1000px;
   margin: 15px auto 0 auto;
   padding-bottom: 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  min-height: 80vh;
+  min-height: 800px;
   position: relative;
 }
 
 .header {
-  background: #fff;
+  background: #000;
+  min-height: 70px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
 }
 
 .modal-component {
@@ -38,15 +61,16 @@ body {
 }
 
 
-.header,
 .footer {
-  min-height: 120px;
+  height: 100px;
+  position: fixed;
+  bottom: 0;
 }
 
 .app-top-component {
   width: 100%;
   height: 100%;
-  background-color: #888;
+  background-color: #000;
   position: absolute;
   left: -120vw;
   text-align: center;
@@ -54,8 +78,13 @@ body {
 }
 
 .settings-wrapper {
+
   max-width: 320px;
   margin: auto;
+}
+
+.settings-wrapper h3 {
+  margin-top: 40px;
 }
 
 .component-show {
@@ -81,11 +110,22 @@ body {
 .categories-card {
   width: 19%;
   margin-top: 1%;
-  height: 250px;
+  height: 200px;
   border-radius: 10px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
+}
+
+.question-text {
+  padding: 5px;
+  font-size: 20px;
+}
+
+.clubs-timer, .players-timer {
+  color: #03a9f4;
+  font-size: 20px;
+  padding: 5px;
 }
 
 .quiz-category {
@@ -96,9 +136,12 @@ body {
   position: absolute;
   width: 100%;
   bottom: 0;
-  background: yellow;
-  height: 30px;
+  background: #03a9f4;
+  height: 32px;
   transition: all .5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .extended-hide {
@@ -113,7 +156,7 @@ body {
 .results-card {
   width: 19%;
   margin-top: 1%;
-  height: 250px;
+  height: 200px;
   border-radius: 10px;
   cursor: pointer;
   position: relative;
@@ -151,6 +194,11 @@ body {
   background: #fff;
   border-radius: 5px;
   padding: 10px;
+  color: #000;
+}
+
+.answer:hover, .answer-img:hover {
+  outline: 2px solid #03a9f4;
 }
 
 .answers-img {
@@ -159,7 +207,7 @@ body {
 
 .answer-img {
   width: 48%;
-  height: 300px;
+  height: 240px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -170,8 +218,8 @@ body {
 }
 
 .question-img {
-  width: 400px;
-  height: 300px;
+  width: 600px;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -186,7 +234,7 @@ body {
 
 .menu-components-wrapper {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -198,29 +246,64 @@ body {
   width: 34%;
   border-radius: 10px;
   font-weight: 900;
-  font-size: 32px;
+  font-size: 28px;
   text-transform: uppercase;
 }
 
+#timeCheck, #muteCheck {
+  width: 28px;
+  height: 28px;
+}
+
+.minutes-count-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 25px 0;
+  align-items: center;
+}
+
+.minutes-count-wrapper input {
+  width: 33%;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 22px;
+  height: 40px;
+}
+
+.minutes-count-wrapper button {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 22px;
+}
+
 .menu-element:hover {
-  border: 2px solid blue;
+  outline: 2px solid #03a9f4;
 }
 
 .menu-component .clubs-button, .menu-component .players-button {
   height: 320px;
+  width: 320px;
   color: white;
   background-position: left;
   text-transform: uppercase;
 }
 
+.menu-button-wrap {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  pointer-events: none;
+}
+
 .menu-component .clubs-button {
-  background: rgba(0, 0, 0, 0.4) url('../assets/img/clubs.jpg') center /cover no-repeat;
-  background-blend-mode: darken;
+  background: url('../assets/img/clubs.jpg') center /cover no-repeat;
+
 }
 
 .menu-component .players-button {
-  background: rgba(0, 0, 0, 0.4) url('../assets/img/players.jpg') center /cover no-repeat;
-  background-blend-mode: darken;
+  background: url('../assets/img/players.jpg') center /cover no-repeat;
+
 
 }
 
@@ -230,6 +313,7 @@ body {
 
 .answer-component {
   z-index: 2;
+  height: auto;
 }
 
 .modal-background {
@@ -259,12 +343,17 @@ body {
 }
 
 .answer-modal-img {
-  width: 400px;
-  height: 300px;
+  width: 60%;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: auto;
+}
+
+.answer-modal-text {
+  font-size: 24px;
+  margin: 10px 5px;
 }
 
 .round-pic-animated {
@@ -288,10 +377,17 @@ body {
   left: 0;
   top: -100vh;
   z-index: 3;
+  height: auto;
+}
+
+.git {
+  text-decoration: none;
+  color: #000;
 }
 
 footer {
   background: #eaeef3;
+  color: #000;
   height: 100px;
   display: flex;
   justify-content: space-between;
@@ -346,7 +442,7 @@ footer div {
 .category-info {
   align-items: center;
   display: flex;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   color: white;
@@ -365,13 +461,16 @@ footer div {
 .category-results-all {
   width: 100%;
   bottom: -35px;
-
-  height: 27px;
+  font-size: 20px;
+  height: 32px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  background: yellow;
+  background: rgba(0, 0, 0, 0.7);
   position: absolute;
   transition: all .5s;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .category-results-hidden {
@@ -406,7 +505,16 @@ footer div {
   visibility: hidden;
 }
 
+.settings-button {
+  width: 50px;
+  height: 50px;
+  margin-left: calc(50% - 25px);
+  margin-right: calc(50% - 25px);
+}
 
+.settings-button:hover [class^="fa"] {
+  transform: rotate(180deg);
+}
 
 
 
@@ -556,8 +664,33 @@ input[type=range]:focus::-ms-fill-upper {
   opacity: 1;
 } */
 
-@media (max-width: 768px) {
-  .categories-card {
-    width: 49%;
+.round-results-wrapper {
+  padding: 10px;
+  font-size: 32px;
+  color: #03a9f4;
+}
+
+@media (max-width: 800px) {
+  .answer-img {
+
+    height: 200px;
+  }
+
+  .round-pic-animated, .answer-modal-img {
+    width: 300px;
+    height: 300px;
+  }
+
+  .question-img {
+    width: 300px;
+    height: 300px;
+  }
+
+  .categories-card, .results-card {
+    width: 48%;
+  }
+
+  .footer {
+    display: none;
   }
 }
