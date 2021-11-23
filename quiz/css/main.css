@@ -19,7 +19,10 @@ button {
   font-size: 16px;
   margin: 10px 15px;
   border-radius: 5px;
+}
 
+button:hover {
+  outline: 2px solid #03a9f4; 
 }
 
 button:hover [class^="fa"] {
@@ -29,6 +32,9 @@ button:hover [class^="fa"] {
 [class^="fa"] {
   transition: all .6s;
   color: #03a9f4;
+  pointer-events: none;
+  margin-right: 3px;
+  margin-left: 3px;
 }
 
 body {
@@ -78,7 +84,6 @@ body {
 }
 
 .settings-wrapper {
-
   max-width: 320px;
   margin: auto;
 }
@@ -120,6 +125,10 @@ body {
 .question-text {
   padding: 5px;
   font-size: 20px;
+}
+
+.categories-card:hover, .results-card:hover {
+  outline: 2px solid #03a9f4; 
 }
 
 .clubs-timer, .players-timer {
@@ -284,10 +293,22 @@ body {
 
 .menu-component .clubs-button, .menu-component .players-button {
   height: 320px;
-  width: 320px;
+  width: 300px;
   color: white;
   background-position: left;
   text-transform: uppercase;
+}
+
+.category-results-all [class^="fa"] {
+  margin-right: 12px;
+}
+
+.categories-card:hover .category-results-all [class^="fa"] {
+  transform: rotate(180deg);
+}
+
+.next-button-clubs:hover [class^="fa"], .next-button-players:hover [class^="fa"] {
+  transform: rotate(90deg);
 }
 
 .menu-button-wrap {
@@ -332,9 +353,9 @@ body {
 }
 
 .answer-modal-indicator {
-  margin: -50px auto 50px auto;
-  height: 100px;
-  width: 100px;
+  margin: -40px auto 40px auto;
+  height: 80px;
+  width: 80px;
   background: url('../assets/img/correct.svg') center /100% no-repeat;
 }
 
@@ -451,11 +472,11 @@ footer div {
 }
 
 .category-info-name {
-  width: 50%;
+  width: 60%;
 }
 
 .category-info-results-num {
-  width: 50%;
+  width: 40%;
 }
 
 .category-results-all {
@@ -488,6 +509,7 @@ footer div {
 .questions-indicator {
   width: 20px;
   height: 20px;
+  margin: 2px;
   border-radius: 50%;
   border: 1px solid grey;
 }
@@ -671,8 +693,12 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 @media (max-width: 800px) {
-  .answer-img {
+  .app-header-text {
+    text-transform: uppercase;
+    font-size: 24px;
+  }
 
+  .answer-img {
     height: 200px;
   }
 
