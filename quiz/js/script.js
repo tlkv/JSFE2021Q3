@@ -5,15 +5,6 @@ const volumeScaleStored = document.querySelector('.volume-scale');
 const isMuteStored = document.querySelector('#muteCheck');
 const roundTimeStored = document.querySelector('.minutes-number');
 const isTimeGameStored = document.querySelector('#timeCheck');
-/* let quizData;
-
-async function getQuizData() {
-  const quizJson = 'quizData.json';
-  const res = await fetch(quizJson);
-  quizData = await res.json();
-}
-
-getQuizData(); */
 
 const mainWrapper = document.querySelector('.main-wrapper');
 
