@@ -1,10 +1,11 @@
+import quizData from './quizData.js';
 let quizStateClubs = [null, null, null, null, null, null, null, null, null, null];
 let quizStatePlayers = [null, null, null, null, null, null, null, null, null, null];
 const volumeScaleStored = document.querySelector('.volume-scale');
 const isMuteStored = document.querySelector('#muteCheck');
 const roundTimeStored = document.querySelector('.minutes-number');
 const isTimeGameStored = document.querySelector('#timeCheck');
-let quizData;
+/* let quizData;
 
 async function getQuizData() {
   const quizJson = 'quizData.json';
@@ -12,7 +13,7 @@ async function getQuizData() {
   quizData = await res.json();
 }
 
-getQuizData();
+getQuizData(); */
 
 const mainWrapper = document.querySelector('.main-wrapper');
 
@@ -257,8 +258,8 @@ function renderQuizResults(e) {
     clubsButtonResults.classList.add('hide-button');
     playersButtonResults.classList.remove('hide-button');
   }
-  for (let i = 0; i < resultsCardsImg.length; i++) {    
-    const img = new Image();    
+  for (let i = 0; i < resultsCardsImg.length; i++) {
+    const img = new Image();
     img.src = `./assets/img/${eType}/${quizData[eType][eRound * 10 + i].imageNum}.jpg`;
     img.onload = () => {
       resultsExtendedInfo[i].textContent = quizData[eType][eRound * 10 + i].name;
@@ -324,8 +325,6 @@ function startQuiz(e) {
   category === 'clubs' ? renderQuestionClubs() : renderQuestionPlayers();
 }
 
-
-
 function timer(elem) {
   timeRoundID = setTimeout(() => {
     timeLeft -= 1;
@@ -350,7 +349,7 @@ function renderQuestionClubs() {
       checkClubsAnswer();
     }, rolloutDelay + roundTimeStored.value * 1000);
   } else {
-    clubsTimer.classList.add ('timer-hidden');
+    clubsTimer.classList.add('timer-hidden');
   }
 
   hideAllComponents();
@@ -468,7 +467,7 @@ function renderQuestionPlayers() {
       checkPlayersAnswerImg();
     }, rolloutDelay + roundTimeStored.value * 1000);
   } else {
-    playersTimer.classList.add ('timer-hidden');
+    playersTimer.classList.add('timer-hidden');
   }
 
   hideAllComponents();
