@@ -38,7 +38,7 @@ const quizData = {
       imageNum: '8',
     },
     {
-      name: 'Atletico',
+      name: 'Atletico M',
       imageNum: '9',
     },
     {
