@@ -22,7 +22,7 @@ button {
 }
 
 button:hover {
-  outline: 2px solid #03a9f4; 
+  box-shadow: 0 0 0 2px #03a9f4;
 }
 
 button:hover [class^="fa"] {
@@ -37,6 +37,8 @@ button:hover [class^="fa"] {
   margin-left: 3px;
 }
 
+
+
 body {
   min-height: 100vh;
   background: #000;
@@ -44,7 +46,7 @@ body {
 }
 
 .main-wrapper {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 15px auto 0 auto;
   padding-bottom: 10px;
   display: flex;
@@ -90,6 +92,12 @@ body {
 
 .settings-wrapper h3 {
   margin-top: 40px;
+  font-size: 22px;
+}
+
+.settings-wrapper h4 {
+  margin-top: 15px;
+  font-size: 18px;
 }
 
 .component-show {
@@ -128,7 +136,7 @@ body {
 }
 
 .categories-card:hover, .results-card:hover {
-  outline: 2px solid #03a9f4; 
+  box-shadow: 0 0 0 2px #03a9f4;
 }
 
 .clubs-timer, .players-timer {
@@ -207,7 +215,7 @@ body {
 }
 
 .answer:hover, .answer-img:hover {
-  outline: 2px solid #03a9f4;
+  box-shadow: 0 0 0 2px #03a9f4;
 }
 
 .answers-img {
@@ -260,14 +268,14 @@ body {
 }
 
 #timeCheck, #muteCheck {
-  width: 28px;
-  height: 28px;
+  width: 25px;
+  height: 25px;
 }
 
 .minutes-count-wrapper {
   display: flex;
   justify-content: space-evenly;
-  margin: 25px 0;
+  margin: 10px 5px 25px 5px;
   align-items: center;
 }
 
@@ -288,7 +296,7 @@ body {
 }
 
 .menu-element:hover {
-  outline: 2px solid #03a9f4;
+  box-shadow: 0 0 0 2px #03a9f4;
 }
 
 .menu-component .clubs-button, .menu-component .players-button {
@@ -301,6 +309,10 @@ body {
 
 .category-results-all [class^="fa"] {
   margin-right: 12px;
+}
+
+.categories-card .category-results-all [class^="fa"] {
+  margin-bottom: 5px;
 }
 
 .categories-card:hover .category-results-all [class^="fa"] {
@@ -636,6 +648,10 @@ input[type=range]:focus::-ms-fill-lower {
 
 input[type=range]:focus::-ms-fill-upper {
   background: #367ebd;
+}
+
+input[type=checkbox] {
+  cursor: pointer;
 }
 
 /* .boxContainer {
