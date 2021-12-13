@@ -1,4 +1,6 @@
+// @ts-nocheck
 import './sources.css';
+
 
 class Sources {
     draw(data) {

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import './news.css';
 
 class News {
