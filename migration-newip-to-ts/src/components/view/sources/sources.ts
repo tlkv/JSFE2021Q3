@@ -3,11 +3,11 @@ import './sources.css';
 
 
 class Sources {
-    draw(data: any) {
+    draw(data) {
         const fragment = document.createDocumentFragment();
         const sourceItemTemp = document.querySelector('#sourceItemTemp') as HTMLTemplateElement;
 
-        data.forEach((item: any) => {
+        data.forEach((item) => {
             const sourceClone = sourceItemTemp.content.cloneNode(true) as HTMLTemplateElement;
 
             sourceClone.querySelector('.source__item-name')!.textContent = item.name;

@@ -1,6 +1,9 @@
-// @ts-nocheck
-
 class Loader {
+    baseLink: string;
+    options: {
+        apiKey?: string;
+        sources?: string;
+    };
     constructor(baseLink, options) {
         this.baseLink = baseLink;
         this.options = options;

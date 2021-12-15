@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 import './news.css';
 
 class News {
@@ -9,7 +9,8 @@ class News {
         const newsItemTemp = document.querySelector('#newsItemTemp');
 
         news.forEach((item, idx) => {
-            const newsClone = newsItemTemp.content.cloneNode(true);
+            //@ts-ignore
+            const newsClone = newsItemTemp!.content.cloneNode(true);
 
             if (idx % 2) newsClone.querySelector('.news__item').classList.add('alt');
 
@@ -31,8 +32,8 @@ class News {
             fragment.append(newsClone);
         });
 
-        document.querySelector('.news').innerHTML = '';
-        document.querySelector('.news').appendChild(fragment);
+        document.querySelector('.news')!.innerHTML = '';
+        document.querySelector('.news')?.appendChild(fragment);
     }
 }
 
