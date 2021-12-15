@@ -10,6 +10,6 @@
         "sourceType": "module"
     },
     "plugins": ["@typescript-eslint"],
-    "ignorePatterns": ["*.config.js","*.ts"],
+    "ignorePatterns": ["*.config.js"],/* ["*.config.js","*.ts"], */
     "rules": {"@typescript-eslint/no-explicit-any": "error"}
 }
