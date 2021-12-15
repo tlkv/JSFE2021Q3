@@ -1,4 +1,5 @@
 import image from './images/lazy.png';
+import data from './components/data/data';
 
 const createImage = (src: string) =>
   new Promise<HTMLImageElement>((res, rej) => {
@@ -14,7 +15,7 @@ async function render() {
   const myImage = await createImage(image);
   document.body.appendChild(subHeader);
   document.body.appendChild(myImage);
-  console.log('fire! build is done '); //
+  console.log(data);
 }
 
 render();
