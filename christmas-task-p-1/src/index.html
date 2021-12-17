@@ -26,7 +26,7 @@
       </div>
     </div>
   </header>
-  <div class="page main-page hide" data-page="toysPage">
+  <div class="page main-page" data-page="toysPage">
     <div class="blur">
       <div class="controls">
         <div class="filters">
@@ -75,12 +75,14 @@
         <div class="sort">
           <div class="controls-title">Сортировка</div>
           <select class="sort-select">
-            <option selected value="sort-name-max">По названию от «А» до «Я»</option>
-            <option value="sort-name-min">По названию от «Я» до «А»</option>
-            <option value="sort-count-max">По количеству по возрастанию</option>
-            <option value="sort-count-min">По количеству по убыванию</option>
+            <option selected value="sort-name-max">По умолчанию</option>
+            <option value="sort-name-min">По названию от А до Я</option>
+            <option value="sort-name-min">По названию от Я до А</option>
+            <option value="sort-count-max">По году покупки по возрастанию</option>
+            <option value="sort-count-min">По году покупки по убыванию</option>
           </select>
-          <button class="reset">Сброс фильтров</button>
+          <button class="reset reset-filters">Сброс фильтров</button>
+          <button class="reset reset-local">Сброс localStorage</button>
         </div>
       </div>
       <div class="toy-container"></div>

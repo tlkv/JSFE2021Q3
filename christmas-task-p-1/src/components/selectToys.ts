@@ -1,19 +1,19 @@
-
 import { selectedCounter, maxSelected } from './storage';
 
 let selectedToys: Array<string | null> = [];
 
-function selectToys(e: Event) {
-  if (selectedToys.length === maxSelected) {
-    alert('got you');//run modal
+export function selectToys(e: Event) {
+  const toySelected = e.target as HTMLTemplateElement;
+  if (selectedToys.length === maxSelected && !toySelected.classList.contains('active')) {
+    toySelected.classList.add('maximum');
+    setTimeout(() => {
+      toySelected.classList.remove('maximum');
+    }, 1000);
   } else {
-    const toySelected = e.target as HTMLTemplateElement;
     toySelected.classList.toggle('active');
     const toySelectedNum = toySelected.getAttribute('data-num');
-    selectedToys.includes(toySelectedNum) ? selectedToys = selectedToys.filter(elem => elem !== toySelectedNum) : selectedToys.push(toySelectedNum);
+    selectedToys.includes(toySelectedNum) ? (selectedToys = selectedToys.filter(elem => elem !== toySelectedNum)) : selectedToys.push(toySelectedNum);
     if (selectedCounter) selectedCounter.textContent = String(selectedToys.length);
-    console.log(selectedToys);//
+    console.log(selectedToys); //
   }
 }
-
-export default selectToys;

@@ -1,8 +1,8 @@
 import { ToyData } from './interfaces';
-import selectToys from './selectToys';
+import { selectToys } from './selectToys';
+import { toyContainer } from './storage';
 
-function renderToys(toys: Array<ToyData>): void {
-  const toyContainer = document.querySelector('.toy-container');
+export function renderToys(toys: Array<ToyData>): void {  
   if (toyContainer) toyContainer.innerHTML = '';
   toys.forEach(({ num, name, count, year, shape, color, size, favorite }) => {
     const toyCard = document.createElement('div');
@@ -26,5 +26,3 @@ function renderToys(toys: Array<ToyData>): void {
     toyContainer?.append(toyCard);
   });
 }
-
-export default renderToys;

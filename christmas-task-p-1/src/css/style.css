@@ -35,11 +35,6 @@ body {
   color: #fff;
 }
 
-.hide {
-  /* display: none; */
-}
-
-
 /* Header */
 .header {
   position: relative;
@@ -311,6 +306,7 @@ body {
   background-color: rgba(31, 112, 127, .3);
   backdrop-filter: blur(6px);
   cursor: pointer;
+  overflow: hidden;
 }
 
 .toy>* {
@@ -375,6 +371,26 @@ body {
 
 .toy.active .ribbon:after {  
   border-left: 15px solid #CBB77A;
+}
+
+.toy::after {
+  opacity: 0;
+  background: #24C5DB;  
+  position: absolute;
+  content: "Извините, все слоты заполнены";
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  transition: opacity .6s;
+  pointer-events: none;
+}
+
+.toy.maximum::after {
+  opacity: 1;
 }
 
 .controls {
@@ -1107,4 +1123,8 @@ output {
 
 .rss-logo:hover {
   filter: invert(57%) sepia(100%) saturate(329%) hue-rotate(141deg) brightness(89%) contrast(90%);
+}
+
+.hide {
+  display: none;
 }
