@@ -1,8 +1,16 @@
 import { ToyData } from "../../data";
 
+export interface  FilterObj {
+  favorite: boolean,
+}
 
-function filterToys(toys: Array<ToyData>) {
-  return toys.filter(elem=>elem/* .favorite */);
+export function selectToys(e: Event) {
+  //add toy num to array
+  (e.target as HTMLTemplateElement)?.classList.toggle('active');
+}
+
+function filterToys(toys: Array<ToyData>, filter: FilterObj) {
+  return toys.filter(elem=>elem.favorite === filter.favorite);
 }
 
 /* class FilterToys {

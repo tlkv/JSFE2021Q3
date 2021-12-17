@@ -1,4 +1,5 @@
 import { ToyData } from '../../data';
+import { selectToys } from './filterToys';
 
 function renderToys(toys: Array<ToyData>): void {
   const toyContainer = document.querySelector('.toy-container');
@@ -25,10 +26,7 @@ function renderToys(toys: Array<ToyData>): void {
   });
 }
 
-function selectToys(e: Event) {
-  //add toy num to array
-  (e.target as HTMLTemplateElement)?.classList.toggle('active');
-}
+
 
 /* class FilterToys {
   unfiltered: Array<ToyData>;
