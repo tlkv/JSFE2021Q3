@@ -167,7 +167,7 @@ body {
   background-size: cover;
   background-attachment: fixed;
 }
-.blur {
+.blur {/* r */
   background: rgba(22, 41, 41, 0.5);
   backdrop-filter: blur(3px);
   height: 100%;
@@ -287,7 +287,7 @@ body {
   padding-top: 20px;
 }
 
-.card-container, .card-test-container {
+.toy-container, .toy-test-container {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -298,7 +298,7 @@ body {
   padding-bottom: 40px;
 }
 
-.card {
+.toy {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -313,30 +313,32 @@ body {
   cursor: pointer;
 }
 
-.card-title {
+.toy>* {
+  pointer-events: none;
+}
+
+.toy-title {
   width: 100%;
   font-size: 20px;
   font-stretch: condensed;
   padding-left: 10px;
 }
 
-.card-img {
+.toy-img {
   width: 90px;
   height: 112px;  
   object-fit: contain;
-  pointer-events: none;
 }
 
-.card-description {
+.toy-description {
   width: 195px;
   margin-top: -20px; 
   padding-left: 10px;
-  pointer-events: none;
   line-height: 1;
   user-select: none;
 }
 
-.card-description p span {
+.toy-description p span {
   padding-left: 7px;
 }
 
@@ -367,11 +369,11 @@ body {
   right: -15px;
 }
 
-.card.active .ribbon {
+.toy.active .ribbon {
   background: #CBB77A;
 }
 
-.card.active .ribbon:after {  
+.toy.active .ribbon:after {  
   border-left: 15px solid #CBB77A;
 }
 
@@ -804,7 +806,7 @@ output {
   height: 110px;
 }
 
-.favorites-card {
+.favorites-toy {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -815,7 +817,7 @@ output {
   background-color: rgba(255, 255, 255, .5);
 }
 
-.favorites-card-img {
+.favorites-toy-img {
   display: block;
   position: absolute;
   width: auto;

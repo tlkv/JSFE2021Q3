@@ -1,6 +1,9 @@
-//import data from "../../data";
-
 import { ToyData } from "../../data";
+
+
+function filterToys(toys: Array<ToyData>) {
+  return toys.filter(elem=>elem/* .favorite */);
+}
 
 /* class FilterToys {
   unfiltered: Array<ToyData>;
@@ -13,9 +16,5 @@ import { ToyData } from "../../data";
 }
 
 export default FilterToys; */
-
-function filterToys(toys: Array<ToyData>) {
-  return toys.filter(elem=>elem.favorite);
-}
 
 export default filterToys;
