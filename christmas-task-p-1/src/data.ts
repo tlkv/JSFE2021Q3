@@ -1,4 +1,16 @@
-const data = [
+export interface  ToyData {
+  num: string,
+  name: string,
+  count: string,
+  year: string,
+  shape: string,
+  color: string,
+  size: string,
+  favorite: boolean,
+}
+
+
+const data: Array<ToyData> = [
   {
     num: '1',
     name: 'Большой шар с рисунком',

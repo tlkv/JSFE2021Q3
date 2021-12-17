@@ -1,13 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Christmas Task</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="./assets/favicon.ico" />
+  <title>Christmas Task</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <h1>My Typescript App</h1>
+  <header class="header">
+    <div class="header-container">
+      <nav class="nav-bar">
+        <a class="logo"></a>
+        <a href="#" class="switch-main-page">Игрушки</a>
+      </nav>
+      <div class="header-controls">
+        <input type="search" class="search" autocomplete="off" />
+        <div class="select"><span>0</span></div>
+      </div>
+    </div>
+  </header>
+  <div class="page main-page hide" data-page="mainPage">
+    <div class="blur">
+      <div class="controls">
+        <div class="filters">
+          <div class="controls-title">Фильтры по значению</div>
+          <div class="shape">Форма: <button data-filter="шар"></button>
+            <button data-filter="колокольчик"></button>
+            <button data-filter="шишка"></button>
+            <button data-filter="снежинка"></button>
+            <button data-filter="фигурка"></button>
+          </div>
+          <div class="color">Цвет: <button data-filter="белый"></button>
+            <button data-filter="желтый"></button>
+            <button data-filter="красный"></button>
+            <button data-filter="синий"></button>
+            <button data-filter="зелёный"></button>
+          </div>
+          <div class="size">Размер: <button data-filter="большой"></button>
+            <button data-filter="средний"></button>
+            <button data-filter="малый"></button>
+          </div>
+          <div class="favorite-container">Только любимые: <div class="form-group">
+              <input type="checkbox" class="favorite-input" id="checkbox" />
+              <label for="checkbox" class="favorite-input-label"></label>
+            </div>
+          </div>
+        </div>
+        <div class="range">
+          <div class="controls-title">Фильтры по диапазону</div>
+          <div class="count">
+            <span class="control-span">Количество экземпляров:</span>
+            <div class="count-slider-container">
+              <output class="slider-output">1</output>
+              <div class="count-slider"></div>
+              <output class="slider-output">12</output>
+            </div>
+          </div>
+          <div class="year">
+            <span class="control-span">Год приобретения:</span>
+            <div class="year-slider-container">
+              <output class="slider-output">1940</output>
+              <div class="year-slider"></div>
+              <output class="slider-output">2020</output>
+            </div>
+          </div>
+        </div>
+        <div class="sort">
+          <div class="controls-title">Сортировка</div>
+          <select class="sort-select">
+            <option selected value="sort-name-max">По названию от «А» до «Я»</option>
+            <option value="sort-name-min">По названию от «Я» до «А»</option>
+            <option value="sort-count-max">По количеству по возрастанию</option>
+            <option value="sort-count-min">По количеству по убыванию</option>
+          </select>
+          <button class="reset">Сброс фильтров</button>
+        </div>
+      </div>
+      <div class="card-test-container">
+        <div class="card" data-num="1">
+          <h2 class="card-title">Большой шар с рисунком</h2>
+          <img class="card-img" src="assets/toys/1.png" alt="toy">
+          <div class="card-description">
+            <p class="count">Количество:<span>2</span></p>
+            <p class="year">Год покупки:<span>1960</span></p>
+            <p class="shape">Форма:<span>шар</span></p>
+            <p class="color">Цвет:<span>желтый</span></p>
+            <p class="size">Размер:<span>большой</span></p>
+            <p class="favorite">Любимая:<span>нет</span></p>
+          </div>
+          <div class="ribbon"></div>
+        </div>
+      </div>
+      <div class="card-container"></div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-data">
+        <p class="copyright">©</p>
+        <p class="year">2021</p>
+        <a class="github-username" href="https://github.com/tlkv" target="_blank"">TLKV</a>        
+      </div>
+      
+      <a class=" rss-logo" href="https://rs.school/js/" target="_blank" rel="noopener noreferrer"></a>
+      </div>
+  </footer>
 </body>
+
 </html>
