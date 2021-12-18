@@ -566,7 +566,7 @@ output {
   background-image: url("../assets/svg/toy.svg");
 }
 
-.color button {
+.color button, .favorite-container button {
   position: relative;
   width: 30px;
   height: 30px;
@@ -579,7 +579,7 @@ output {
   transition: .3s;
 }
 
-.color button:hover {
+.color button:hover, .favorite-container button:hover {
   border-color: #ccc;
 }
 
@@ -603,7 +603,7 @@ output {
   border-color: #08AA05;
 }
 
-.color button.active::after {
+.color button.active::after, .favorite-container button.active::after {
   content: '';
   display: block;
   position: absolute;

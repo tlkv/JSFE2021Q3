@@ -4,6 +4,7 @@ import { toyContainer } from './storage';
 
 export function renderToys(toys: Array<ToyData>): void {  
   if (toyContainer) toyContainer.innerHTML = '';
+  //if toys is Empty nothingFound?.classList.remove('hide') : nothingFound?.classList.add('hide');
   toys.forEach(({ num, name, count, year, shape, color, size, favorite }) => {
     const toyCard = document.createElement('div');
     toyCard.classList.add('toy');

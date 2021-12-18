@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="./assets/favicon.ico" />
   <title>Christmas Task</title>
   <link rel="stylesheet" href="./css/nouislider.css">
-  <link rel="stylesheet" href="./css/style.css">  
+  <link rel="stylesheet" href="./css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -32,25 +32,29 @@
       <div class="controls">
         <div class="filters">
           <div class="controls-title">Фильтры по значению</div>
-          <div class="shape">Форма: <button data-stored="шар"></button>
-            <button data-stored="колокольчик"></button>
-            <button data-stored="шишка"></button>
-            <button data-stored="снежинка"></button>
-            <button data-stored="фигурка"></button>
+          <div class="shape">Форма: 
+            <button class="filter-item" data-group="shape" data-value="шар"></button>
+            <button class="filter-item" data-group="shape" data-value="колокольчик"></button>
+            <button class="filter-item" data-group="shape" data-value="шишка"></button>
+            <button class="filter-item" data-group="shape" data-value="снежинка"></button>
+            <button class="filter-item" data-group="shape" data-value="фигурка"></button>
           </div>
-          <div class="color">Цвет: <button data-stored="белый"></button>
-            <button data-stored="желтый"></button>
-            <button data-stored="красный"></button>
-            <button data-stored="синий"></button>
-            <button data-stored="зелёный"></button>
+          <div class="color">Цвет: 
+            <button class="filter-item" data-group="color" data-value="белый"></button>
+            <button class="filter-item" data-group="color" data-value="желтый"></button>
+            <button class="filter-item" data-group="color" data-value="красный"></button>
+            <button class="filter-item" data-group="color" data-value="синий"></button>
+            <button class="filter-item" data-group="color" data-value="зелёный"></button>
           </div>
-          <div class="size">Размер: <button data-stored="большой"></button>
-            <button data-stored="средний"></button>
-            <button data-stored="малый"></button>
+          <div class="size">Размер:
+            <button class="filter-item" data-group="size" data-value="большой"></button>
+            <button class="filter-item" data-group="size" data-value="средний"></button>
+            <button class="filter-item" data-group="size" data-value="малый"></button>
           </div>
           <div class="favorite-container">Только любимые: <div class="form-group">
-              <input type="checkbox" class="favorite-input" id="checkbox" />
-              <label for="checkbox" class="favorite-input-label"></label>
+              <button class="filter-item" data-group="favorite" data-value="favorite"></button>
+              <!-- <input type="checkbox" class="favorite-input" id="checkbox" />
+              <label for="checkbox" class="favorite-input-label"></label> -->
             </div>
           </div>
         </div>
@@ -76,17 +80,18 @@
         <div class="sort">
           <div class="controls-title">Сортировка</div>
           <select class="sort-select">
-            <option selected value="sort-name-max">По умолчанию</option>
-            <option value="sort-name-min">По названию от А до Я</option>
-            <option value="sort-name-min">По названию от Я до А</option>
-            <option value="sort-count-max">По году покупки по возрастанию</option>
-            <option value="sort-count-min">По году покупки по убыванию</option>
+            <option selected value="sort-default">По умолчанию</option>
+            <option value="sort-name-asc">По названию от А до Я</option>
+            <option value="sort-name-desc">По названию от Я до А</option>
+            <option value="sort-year-asc">По году покупки по возрастанию</option>
+            <option value="sort-year-desc">По году покупки по убыванию</option>
           </select>
           <button class="reset reset-filters">Сброс фильтров</button>
           <button class="reset reset-local">Сброс localStorage</button>
         </div>
       </div>
-      <div class="toy-container"></div>
+      <div class="nothing-found hide">Извините, совпадений не обнаружено</div>
+      <div class="toy-container"></div>      
     </div>
   </div>
   <footer class="footer">

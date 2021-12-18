@@ -1,9 +1,29 @@
-import { countSlider, yearSlider } from "./storage";
+import { countSlider, yearSlider, filterItems, sortingOrder } from './storage';
 import noUiSlider from 'nouislider';
+import { target } from 'nouislider';
 
-export function initSliders() {
+filterItems.forEach(item => {
+  item.addEventListener('click', handleFilterItems);
+});
+
+sortingOrder.onchange = (e: Event) => {
+  //console.log(this?.value);
+  console.log((e.target as HTMLInputElement).value);   
+};
+
+export function handleFilterItems(e: Event) {
+  const filterElement = e.target as HTMLElement;
+  if (filterElement.classList.contains('active')) {
+    filterElement.classList.remove('active');
+  } else {
+    filterElement.classList.add('active');
+  }
+  console.log('filterElement ', filterElement.dataset);
+}
+
+export function initCountSlider(countStart: number, countEnd: number) {
   noUiSlider.create(countSlider, {
-    start: [1, 12],
+    start: [countStart, countEnd],
     step: 1,
     connect: true,
     tooltips: true,
@@ -16,30 +36,40 @@ export function initSliders() {
       },
     },
     range: {
-        'min': 1,
-        'max': 12
-    }
+      min: 1,
+      max: 12,
+    },
   });
-  noUiSlider.create(yearSlider, {
-    start: [1940, 2020],
-    step: 1,
-    connect: true,
-    tooltips: true,
-    format: {
-      to(value) {
-        return Math.floor(Number(value));
-      },
-      from(value) {
-        return Math.floor(Number(value));
-      },
-    },
-    range: {
-        'min': 1940,
-        'max': 2020
-    }
+  (countSlider as target).noUiSlider?.on('set', () => {
+    console.log('slider2');
+    console.log((countSlider as target).noUiSlider?.get());
   });
 }
 
+export function initYearSlider(yearStart: number, yearEnd: number) {
+  noUiSlider.create(yearSlider, {
+    start: [yearStart, yearEnd],
+    step: 10,
+    connect: true,
+    tooltips: true,
+    format: {
+      to(value) {
+        return Math.floor(Number(value));
+      },
+      from(value) {
+        return Math.floor(Number(value));
+      },
+    },
+    range: {
+      min: 1940,
+      max: 2020,
+    },
+  });
+  (yearSlider as target).noUiSlider?.on('set', () => {
+    console.log('slider');
+    console.log((yearSlider as target).noUiSlider?.get());
+  });
+}
 
 /* import { ToyData } from "../../data";
 import data from "../../data";
