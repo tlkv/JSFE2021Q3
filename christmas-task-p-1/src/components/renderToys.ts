@@ -22,7 +22,7 @@ export function renderToys(toys: Array<ToyData>): void {
       `;
 
     toyCard.addEventListener('click', selectToys);
-    toyCard.setAttribute('data-num', String(num));
+    toyCard.dataset.num = String(num); //  setAttribute('data-num', String(num));
     toyContainer?.append(toyCard);
   });
 }

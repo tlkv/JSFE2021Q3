@@ -1,3 +1,46 @@
+import { countSlider, yearSlider } from "./storage";
+import noUiSlider from 'nouislider';
+
+export function initSliders() {
+  noUiSlider.create(countSlider, {
+    start: [1, 12],
+    step: 1,
+    connect: true,
+    tooltips: true,
+    format: {
+      to(value) {
+        return Math.floor(Number(value));
+      },
+      from(value) {
+        return Math.floor(Number(value));
+      },
+    },
+    range: {
+        'min': 1,
+        'max': 12
+    }
+  });
+  noUiSlider.create(yearSlider, {
+    start: [1940, 2020],
+    step: 1,
+    connect: true,
+    tooltips: true,
+    format: {
+      to(value) {
+        return Math.floor(Number(value));
+      },
+      from(value) {
+        return Math.floor(Number(value));
+      },
+    },
+    range: {
+        'min': 1940,
+        'max': 2020
+    }
+  });
+}
+
+
 /* import { ToyData } from "../../data";
 import data from "../../data";
 import renderToys from "./renderToys";
@@ -25,7 +68,7 @@ export function selectToys(e: Event) {
   //add toy num to array
   const toySelected = e.target as HTMLTemplateElement;
   toySelected.classList.toggle('active');
-  const toySelectedNum = toySelected.getAttribute('data-num');
+  const toySelectedNum = toySelected.getAttribute('data-num');//dataset
   selectedToys.includes(toySelectedNum) ? selectedToys = selectedToys.filter(elem => elem !== toySelectedNum) : selectedToys.push(toySelectedNum);
   console.log(selectedToys);
 }
