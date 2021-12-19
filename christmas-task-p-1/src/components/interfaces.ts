@@ -9,12 +9,16 @@ export interface ToyData {
   favorite: boolean;
 }
 
-export interface FilterObj {  
-  shape: string [];
-  color: string [];
-  size: string [];
-  selectedToys: string [];
-  onlyFavorite: boolean;  
+export interface FilterObj {
+  shape: string[];
+  color: string[];
+  size: string[];
+  selectedToys: string[];
+  onlyFavorite: boolean;
+  sortingOrder: string;
+
+  countFilter: [number, number];
+  yearFilter: [number, number];
 }
 
 /* export interface FilterObjTypes {

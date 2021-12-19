@@ -1,4 +1,4 @@
-import { countSlider, yearSlider, filterItems, sortingOrder, State } from './storage';
+import { countSlider, yearSlider, filterItems, State, sortingOrder, searchField } from './storage';
 import data from './data';
 import { FilterObj, ToyData } from './interfaces';
 import noUiSlider from 'nouislider';
@@ -7,14 +7,22 @@ import { target } from 'nouislider';
 
 filterItems.forEach(item => {
   item.addEventListener('click', handleFilterItems);
+  //console.log('ev list numb', filterItems);
 });
 
-sortingOrder.onchange = (e: Event) => {
+sortingOrder.onchange = () => {
   //console.log(this?.value);
-  console.log((e.target as HTMLInputElement).value);
+  //console.log('sort val', sortingOrder.value);
+  //sortingOrder.value
+  State.sortingOrder = sortingOrder.value;
+  renderToys(filterToys());
 };
 
-export function handleFilterItems(e: Event) {
+searchField.addEventListener('input', () => {
+  renderToys(filterToys());
+});
+
+function handleFilterItems(e: Event) {
   const filterElement = e.target as HTMLElement;
   const inputFilterGroup = filterElement.dataset.group as string;
   const inputFilterValue = filterElement.dataset.value as string;
@@ -47,25 +55,60 @@ export function handleFilterItems(e: Event) {
   //selectedToys = selectedToys.filter(elem => elem !== toySelectedNum)
   console.log('filterElement ', filterElement.dataset);
   console.log('state after', State);
-  renderToys(filterToys(State));
+  renderToys(filterToys());
 }
 
-function filterToys(state: FilterObj) {
-  //splice
-  const res = data.slice(0);
-  return res
-    .filter(elem => state.shape.length === 0 || state.shape.includes(elem.shape))
-    .filter(elem => state.color.length === 0 || state.color.includes(elem.color))
-    .filter(elem => state.size.length === 0 || state.size.includes(elem.size))
-    .filter(elem => !state.onlyFavorite || elem.favorite);
+function filterToys() {
+  const query = searchField.value.toLowerCase();
+  console.log('query', query, 'query.length', query.length);
+  //const filtered = data.filter(item=>query.length === 0 || item.name.toLowerCase().includes(query));
+  const tData = data.slice(0);
+  console.log('sorting in Filter ', State.sortingOrder);
+
+  let res = tData
+    .filter(elem => State.shape.length === 0 || State.shape.includes(elem.shape))
+    .filter(elem => State.color.length === 0 || State.color.includes(elem.color))
+    .filter(elem => State.size.length === 0 || State.size.includes(elem.size))
+    .filter(elem => !State.onlyFavorite || elem.favorite)
+    .filter(elem => State.countFilter[0] <= Number(elem.count) && Number(elem.count) <= State.countFilter[1])
+    .filter(elem => State.yearFilter[0] <= Number(elem.year) && Number(elem.year) <= State.yearFilter[1])
+    .filter(item => query.length === 0 || item.name.toLowerCase().includes(query));
+  /* .filter(elem => query.length === 0 || elem.name.toLowerCase().includes(query)) */
+  //let res = res.filter(item=>query.length === 0 || item.name.toLowerCase().includes(query));
+  console.log('res', res);
+
+  if (State.sortingOrder === 'sort-default') {
+    res = res.sort(function (a, b) {
+      return Number(a.num) < Number(b.num) ? -1 : 1;
+    });
+  } else if (State.sortingOrder === 'sort-name-asc') {
+    res = res.sort(function (a, b) {
+      return a.name < b.name ? -1 : 1;
+    });
+  } else if (State.sortingOrder === 'sort-name-desc') {
+    res = res.sort(function (a, b) {
+      return a.name > b.name ? -1 : 1;
+    });
+  } else if (State.sortingOrder === 'sort-year-asc') {
+    res = res.sort(function (a, b) {
+      return Number(a.year) < Number(b.year) ? -1 : 1;
+    });
+  } else if (State.sortingOrder === 'sort-year-desc') {
+    res = res.sort(function (a, b) {
+      return Number(a.year) > Number(b.year) ? -1 : 1;
+    });
+  }
+  /* console.log('res', res);*/
+  console.log('State CFilte', State.countFilter);
+  return res;
 
   //.favorite === filter.favorite
   //renderToys()
 }
 
-export function initCountSlider(countStart: number, countEnd: number) {
+export function initCountSlider() {
   noUiSlider.create(countSlider, {
-    start: [countStart, countEnd],
+    start: [State.countFilter[0], State.countFilter[1]],
     step: 1,
     connect: true,
     tooltips: true,
@@ -83,14 +126,18 @@ export function initCountSlider(countStart: number, countEnd: number) {
     },
   });
   (countSlider as target).noUiSlider?.on('set', () => {
-    console.log('slider2');
-    console.log((countSlider as target).noUiSlider?.get());
+    console.log('slider1');
+    console.log('slVal', typeof Array.from(JSON.stringify((countSlider as target).noUiSlider?.get())));
+    const positions = JSON.parse(JSON.stringify((countSlider as target).noUiSlider?.get()));
+    State.countFilter = [Number(positions[0]), Number(positions[1])];
+    console.log('State CFilteRRR', positions);
+    renderToys(filterToys());
   });
 }
 
-export function initYearSlider(yearStart: number, yearEnd: number) {
+export function initYearSlider() {
   noUiSlider.create(yearSlider, {
-    start: [yearStart, yearEnd],
+    start: [State.yearFilter[0], State.yearFilter[1]],
     step: 10,
     connect: true,
     tooltips: true,
@@ -108,72 +155,15 @@ export function initYearSlider(yearStart: number, yearEnd: number) {
     },
   });
   (yearSlider as target).noUiSlider?.on('set', () => {
+    console.log('slider2');
+    console.log('slVal2', typeof Array.from(JSON.stringify((yearSlider as target).noUiSlider?.get())));
+    const positions = JSON.parse(JSON.stringify((yearSlider as target).noUiSlider?.get()));
+    State.yearFilter = [Number(positions[0]), Number(positions[1])];
+    console.log('State CFilteRRR', positions);
+    renderToys(filterToys());
+  });
+  /* (yearSlider as target).noUiSlider?.on('set', () => {
     console.log('slider');
     console.log((yearSlider as target).noUiSlider?.get());
-  });
+  }); */
 }
-
-/* import { ToyData } from "../../data";
-import data from "../../data";
-import renderToys from "./renderToys";
-export interface  FilterObj {
-  favorite: boolean,
-}
-
-const filterObj: FilterObj = {
-  favorite: false,
-};
-
-const filterFavourite = document.querySelector('.favorite-input');
-    filterFavourite?.addEventListener('click', ()=>{
-      console.log('press ', filterObj.favorite);
-      filterObj.favorite = (filterObj.favorite) ? false: true;
-      const filteredToys = filterToys(data, filterObj);
-      renderToys(filteredToys);
-    }
-);
-
-let selectedToys: Array <string | null> = [];
-const maxSelected = 5; //20
-
-export function selectToys(e: Event) {
-  //add toy num to array
-  const toySelected = e.target as HTMLTemplateElement;
-  toySelected.classList.toggle('active');
-  const toySelectedNum = toySelected.getAttribute('data-num');//dataset
-  selectedToys.includes(toySelectedNum) ? selectedToys = selectedToys.filter(elem => elem !== toySelectedNum) : selectedToys.push(toySelectedNum);
-  console.log(selectedToys);
-}
-
-function filterToys(toys: Array<ToyData>, filter: FilterObj) {
-  return toys.filter(elem=>elem);//.favorite === filter.favorite
-}
-
-
-
-export default filterToys; */
-
-/* class FilterToys {
-  unfiltered: Array<ToyData>;
-  constructor(input: Array<ToyData>) {
-    this.unfiltered = input;
-  }
-  filterData() {
-    return this.unfiltered.filter(elem=>elem.favorite);
-  }
-}
-
-export default FilterToys; */
-
-/* class Toy {
-  name: string;
-
-  constructor(name: string) {
-    this.name = name;
-  }
-  print() {
-    return this.name;
-  }
-}
-
-export default Toy; */

@@ -8,12 +8,12 @@ export function initSearch() {
   searchField.focus();
 }
 
-export function userSearch(e: Event) {//rewrite to pass it to render
-  const query = (e.target as HTMLInputElement).value.toLowerCase();
-  const filtered = data.filter(item=>item.name.toLowerCase().includes(query));
+/* export function userSearch() {//rewrite to pass it to render
+  const query = searchField.value.toLowerCase();
+  const filtered = data.filter(item=>query.length === 0 || item.name.toLowerCase().includes(query));
   console.log('dataF', filtered);
   
-  /* const rendredToys = toyContainer?.querySelectorAll('.toy');
+  const rendredToys = toyContainer?.querySelectorAll('.toy');
   let noResults = true;
   rendredToys?.forEach(elem => {
     if (elem.querySelector('.toy-title')?.textContent?.toLowerCase().includes(query)) {
@@ -24,8 +24,8 @@ export function userSearch(e: Event) {//rewrite to pass it to render
     }
     console.log('noRes', noResults);
     noResults ? nothingFound?.classList.remove('hide') : nothingFound?.classList.add('hide');
-  }); */
+  }); 
   renderToys(filtered);
-}
+} */
 
-searchField.addEventListener('input', userSearch);
+//searchField.addEventListener('input', userSearch);
