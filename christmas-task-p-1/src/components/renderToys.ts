@@ -1,13 +1,19 @@
 import { ToyData } from './interfaces';
 import { selectToys } from './selectToys';
 import { toyContainer } from './storage';
+import { nothingFound, filteredCounterNumber, State } from './storage';
 
-export function renderToys(toys: Array<ToyData>): void {  
-  if (toyContainer) toyContainer.innerHTML = '';
+export function renderToys(filteredData: ToyData[]): void {
+  toyContainer.innerHTML = '';
+  console.log('fData length Rerender', filteredData.length);
+  filteredCounterNumber.textContent = String(filteredData.length);
+  filteredData.length !== 0 ? nothingFound?.classList.add('hide') : nothingFound?.classList.remove('hide');
   //if toys is Empty nothingFound?.classList.remove('hide') : nothingFound?.classList.add('hide');
-  toys.forEach(({ num, name, count, year, shape, color, size, favorite }) => {
+  //favorites from Array + ovrNumber of favorites
+  filteredData.forEach(({ num, name, count, year, shape, color, size, favorite }) => {
     const toyCard = document.createElement('div');
     toyCard.classList.add('toy');
+    if (State.selectedToys.includes(num)) toyCard.classList.add('active');
     toyCard.innerHTML = `
       <h2 class="toy-title">${name}</h2>
       <img class="toy-img" src="assets/toys/${num}.png" alt="toy">

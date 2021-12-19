@@ -1,5 +1,8 @@
-import { countSlider, yearSlider, filterItems, sortingOrder } from './storage';
+import { countSlider, yearSlider, filterItems, sortingOrder, State } from './storage';
+import data from './data';
+import { FilterObj, ToyData } from './interfaces';
 import noUiSlider from 'nouislider';
+import { renderToys } from './renderToys';
 import { target } from 'nouislider';
 
 filterItems.forEach(item => {
@@ -8,17 +11,56 @@ filterItems.forEach(item => {
 
 sortingOrder.onchange = (e: Event) => {
   //console.log(this?.value);
-  console.log((e.target as HTMLInputElement).value);   
+  console.log((e.target as HTMLInputElement).value);
 };
 
 export function handleFilterItems(e: Event) {
   const filterElement = e.target as HTMLElement;
-  if (filterElement.classList.contains('active')) {
-    filterElement.classList.remove('active');
-  } else {
+  const inputFilterGroup = filterElement.dataset.group as string;
+  const inputFilterValue = filterElement.dataset.value as string;
+  console.log('state before', State);
+
+  if (!filterElement.classList.contains('active')) {
     filterElement.classList.add('active');
+    if (inputFilterGroup === 'shape') {
+      State.shape.push(inputFilterValue);
+    } else if (inputFilterGroup === 'color') {
+      State.color.push(inputFilterValue);
+    } else if (inputFilterGroup === 'size') {
+      State.size.push(inputFilterValue);
+    } else if (inputFilterGroup === 'favorite') {
+      State.onlyFavorite = true;
+    }
+  } else {
+    filterElement.classList.remove('active');
+    if (inputFilterGroup === 'shape') {
+      State.shape = State.shape.filter(elem => elem !== inputFilterValue);
+      //Object.assign(State, {color: State.color.filter(elem => elem !== inputFilterValue)});
+    } else if (inputFilterGroup === 'color') {
+      State.color = State.color.filter(elem => elem !== inputFilterValue);
+    } else if (inputFilterGroup === 'size') {
+      State.size = State.size.filter(elem => elem !== inputFilterValue);
+    } else if (inputFilterGroup === 'favorite') {
+      State.onlyFavorite = false;
+    }
   }
+  //selectedToys = selectedToys.filter(elem => elem !== toySelectedNum)
   console.log('filterElement ', filterElement.dataset);
+  console.log('state after', State);
+  renderToys(filterToys(State));
+}
+
+function filterToys(state: FilterObj) {
+  //splice
+  const res = data.slice(0);
+  return res
+    .filter(elem => state.shape.length === 0 || state.shape.includes(elem.shape))
+    .filter(elem => state.color.length === 0 || state.color.includes(elem.color))
+    .filter(elem => state.size.length === 0 || state.size.includes(elem.size))
+    .filter(elem => !state.onlyFavorite || elem.favorite);
+
+  //.favorite === filter.favorite
+  //renderToys()
 }
 
 export function initCountSlider(countStart: number, countEnd: number) {
