@@ -19,7 +19,3 @@ export interface AppStateObject {
   countFilter: [number, number];
   yearFilter: [number, number];
 }
-
-/* export interface FilterObjTypes {
-  item: 'color' | 'size' | 'shape';
-} */

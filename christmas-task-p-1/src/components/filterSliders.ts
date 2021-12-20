@@ -1,4 +1,3 @@
-
 import { countSlider, yearSlider, AppState } from './storage';
 import noUiSlider from 'nouislider';
 import { target } from 'nouislider';
@@ -6,7 +5,6 @@ import { renderToys } from './renderToys';
 import { filterToys } from './filterData';
 
 export function initCountSlider() {
-  
   noUiSlider.create(countSlider, {
     start: [AppState.countFilter[0], AppState.countFilter[1]],
     step: 1,
@@ -26,20 +24,17 @@ export function initCountSlider() {
     },
   });
   (countSlider as target).noUiSlider?.on('set', () => {
-    console.log('slider1');
-    console.log('slVal', typeof Array.from(JSON.stringify((countSlider as target).noUiSlider?.get())));
     const positions = JSON.parse(JSON.stringify((countSlider as target).noUiSlider?.get()));
     AppState.countFilter = [Number(positions[0]), Number(positions[1])];
-    console.log('AppState CFilteRRR', positions);
     renderToys(filterToys());
   });
 }
 
-export function setCountSlider (input: [number, number]) {
+export function setCountSlider(input: [number, number]) {
   (countSlider as target).noUiSlider?.set(input);
 }
 
-export function setYearSlider (input: [number, number]) {
+export function setYearSlider(input: [number, number]) {
   (yearSlider as target).noUiSlider?.set(input);
 }
 
@@ -63,12 +58,8 @@ export function initYearSlider() {
     },
   });
   (yearSlider as target).noUiSlider?.on('set', () => {
-    console.log('slider2');
-    console.log('slVal2', typeof Array.from(JSON.stringify((yearSlider as target).noUiSlider?.get())));
     const positions = JSON.parse(JSON.stringify((yearSlider as target).noUiSlider?.get()));
     AppState.yearFilter = [Number(positions[0]), Number(positions[1])];
-    console.log('AppState CFilteRRR', positions);
     renderToys(filterToys());
   });
-  
 }

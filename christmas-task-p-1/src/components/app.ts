@@ -1,18 +1,17 @@
-import { initSearch, getLocaleStorage,setLocalStorage } from './storage';
+import { initSearch, getLocaleStorage, setLocalStorage } from './storage';
 import { initCountSlider, initYearSlider } from './filterSliders';
 
 class App {
-  /* countSlider: void;
+  initSearch: void;
   constructor() {
-    this.countSlider = initCountSlider();
-  }   */
+    this.initSearch = initSearch();
+  }
   start() {
-    //renderToys(data);
-    initSearch();
-    initCountSlider();//
-    initYearSlider();//
+    this.initSearch;
+    initCountSlider();
+    initYearSlider();
     window.addEventListener('beforeunload', setLocalStorage);
-    window.addEventListener('load', getLocaleStorage);   
+    window.addEventListener('load', getLocaleStorage);
   }
 }
 

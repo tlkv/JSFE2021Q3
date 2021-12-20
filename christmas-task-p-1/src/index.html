@@ -7,31 +7,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="./assets/favicon.ico" />
   <title>Christmas Task</title>
-  <!-- <link rel="stylesheet" href="./css/nouislider.css"> -->
-  <!-- <link rel="stylesheet" href="./css/style.css"> -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <header class="header">
+  <header class="header" id="header">
     <div class="header-container">
-      <nav class="nav-bar">
+      <nav class="navigation">
         <a class="logo"></a>
-        <a href="#" class="switch-main-page">Игрушки</a>
+        <a href="#">Toys</a>
       </nav>
-      <div class="header-controls">
+      <div class="header-control-panel">
         <input type="search" class="search" autocomplete="off" />
-        <div class="select"><span class="selected-toys-count">0</span></div>
+        <div class="select">В избранном: <span class="selected-toys-count">0</span></div>
       </div>
     </div>
   </header>
-  <div class="page main-page">
-    <div class="blur">
-      <div class="controls">
+  <div class="page">
+    <div class="background-effect">
+      <div class="control-panel" id="control-panel">
+        <div class="range">
+          <div class="control-panel-title">Фильтры по диапазонам</div>
+          <div class="count">
+            <span class="control-span">Количество экземпляров:</span>
+            <div class="count-slider-container  slider-container">
+              <div class="count-slider"></div>
+            </div>
+          </div>
+          <div class="year">
+            <span class="control-span">Год приобретения:</span>
+            <div class="year-slider-container slider-container">
+              <div class="year-slider"></div>
+            </div>
+          </div>
+        </div>
         <div class="filters">
-          <div class="controls-title">Фильтры по значению</div>
+          <div class="control-panel-title">Фильтры по параметрам</div>
           <div class="shape">Форма: <button class="filter-item" data-group="shape" data-value="шар"></button>
             <button class="filter-item" data-group="shape" data-value="колокольчик"></button>
             <button class="filter-item" data-group="shape" data-value="шишка"></button>
@@ -50,33 +63,12 @@
           </div>
           <div class="favorite-container">Только любимые: <div class="form-group">
               <button class="filter-item" data-group="favorite" data-value="favorite"></button>
-              <!-- <input type="checkbox" class="favorite-input" id="checkbox" />
-              <label for="checkbox" class="favorite-input-label"></label> -->
             </div>
           </div>
           <div class="filtered-counter">Всего выбрано (фильтры + поиск): <span class="filtered-counter-number"></span></div>
         </div>
-        <div class="range">
-          <div class="controls-title">Фильтры по диапазону</div>
-          <div class="count">
-            <span class="control-span">Количество экземпляров:</span>
-            <div class="count-slider-container  slider-container">
-              <!-- <output class="slider-output">1</output> -->
-              <div class="count-slider"></div>
-              <!-- <output class="slider-output">12</output> -->
-            </div>
-          </div>
-          <div class="year">
-            <span class="control-span">Год приобретения:</span>
-            <div class="year-slider-container slider-container">
-              <!-- <output class="slider-output">1940</output> -->
-              <div class="year-slider"></div>
-              <!-- <output class="slider-output">2020</output> -->
-            </div>
-          </div>
-        </div>
         <div class="sort">
-          <div class="controls-title">Сортировка</div>
+          <div class="control-panel-title">Сортировка</div>
           <select class="sort-select">
             <option selected value="sort-default">По умолчанию</option>
             <option value="sort-name-asc">По названию от А до Я</option>
@@ -84,25 +76,26 @@
             <option value="sort-year-asc">По году покупки по возрастанию</option>
             <option value="sort-year-desc">По году покупки по убыванию</option>
           </select>
-          <button class="reset reset-filters">Сбросить фильтры</button>
-          <button class="reset reset-local">Сбросить настройки</button>
+          <div class="sortings-wrapper">
+            <button class="reset-btn reset-filters">Сбросить фильтры</button>
+            <button class="reset-btn reset-local">Сбросить настройки</button>
+          </div>
         </div>
-      </div>      
+      </div>
       <div class="toy-container"></div>
       <div class="nothing-found hide-opacity">Извините, совпадений не обнаружено</div>
     </div>
   </div>
   <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-data">
-        <p class="copyright">©</p>
-        <p class="year">2021</p>
-        <a class="github-username" href="https://github.com/tlkv" target="_blank">TLKV</a>        
-      </div>
-      
-      <a class=" rss-logo" href="https://rs.school/js/" target="_blank" rel="noopener noreferrer"></a>
-      </div>
+    <div><a class="git" href="https://github.com/tlkv" target="_blank">TLKV</a></div>
+    <div>© 2021</div>
+    <div><a href="https://rs.school/js/" target="_blank"><img class="rslogo" src="./assets/svg/rs_school_js.svg" alt="rs"></a></div>
   </footer>
+  <a href="#control-panel" class="up-button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="1em" height="1em" focusable="false" aria-hidden="true" class="svgr-icons">
+      <path d="M3.7 6.7l3.8-3.8V15h1V2.9l3.8 3.8.7-.7-5-5-5 5z"></path>
+    </svg>
+  </a>
 </body>
 
 </html>

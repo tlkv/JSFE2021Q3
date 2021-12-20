@@ -3,9 +3,8 @@ import { ToyData } from './interfaces';
 import { selectToys } from './filterData';
 import { setCountSlider, setYearSlider } from './filterSliders';
 
-export function renderToys(filteredData: ToyData[]): void {
-  toyContainer.innerHTML = '';
-  console.log('fData length Rerender', filteredData.length);
+export function renderToys(filteredData: Array <ToyData>): void {
+  toyContainer.innerHTML = '';  
   filteredCounterNumber.textContent = String(filteredData.length);
   filteredData.length !== 0 ? nothingFound?.classList.add('hide-opacity') : nothingFound?.classList.remove('hide-opacity');
   selectedCounter.textContent = String(AppState.selectedToys.length);
@@ -24,7 +23,7 @@ export function renderToys(filteredData: ToyData[]): void {
         <p class="size">Размер:<span>${size}</span></p>
         <p class="favorite">Любимая:<span>${favorite ? 'да' : 'нет'}</span></p>
       </div>
-      <div class="ribbon"></div>
+      <div class="chosen"></div>
       `;
     toyCard.addEventListener('click', selectToys);
     toyCard.dataset.num = String(num);
