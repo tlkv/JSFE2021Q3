@@ -1,18 +1,18 @@
-import { toyContainer, selectedCounter, nothingFound, filteredCounterNumber, State, filterItems  } from './storage';
+import { toyContainer, selectedCounter, nothingFound, filteredCounterNumber, AppState, filterItems, sortingOrder  } from './storage';
 import { ToyData } from './interfaces';
 import { selectToys } from './filterData';
-
+import { setCountSlider, setYearSlider } from './filterSliders';
 
 export function renderToys(filteredData: ToyData[]): void {
   toyContainer.innerHTML = '';
   console.log('fData length Rerender', filteredData.length);
   filteredCounterNumber.textContent = String(filteredData.length);
-  filteredData.length !== 0 ? nothingFound?.classList.add('hide') : nothingFound?.classList.remove('hide');
-  selectedCounter.textContent = String(State.selectedToys.length);
+  filteredData.length !== 0 ? nothingFound?.classList.add('hide-opacity') : nothingFound?.classList.remove('hide-opacity');
+  selectedCounter.textContent = String(AppState.selectedToys.length);
   filteredData.forEach(({ num, name, count, year, shape, color, size, favorite }) => {
     const toyCard = document.createElement('div');
     toyCard.classList.add('toy');
-    if (State.selectedToys.includes(num)) toyCard.classList.add('active');
+    if (AppState.selectedToys.includes(num)) toyCard.classList.add('active');
     toyCard.innerHTML = `
       <h2 class="toy-title">${name}</h2>
       <img class="toy-img" src="assets/toys/${num}.png" alt="toy">
@@ -37,14 +37,17 @@ export function renderFilterPanel () {
     const inputFilterGroup = item.dataset.group as string;
     const inputFilterValue = item.dataset.value as string;
     if (inputFilterGroup === 'shape') {
-      State.shape.includes(inputFilterValue) ? item.classList.add('active') : item.classList.remove('active');
+      AppState.shape.includes(inputFilterValue) ? item.classList.add('active') : item.classList.remove('active');
     } else if (inputFilterGroup === 'color') {
-      State.color.includes(inputFilterValue) ? item.classList.add('active') : item.classList.remove('active');
+      AppState.color.includes(inputFilterValue) ? item.classList.add('active') : item.classList.remove('active');
     } else if (inputFilterGroup === 'size') {
-      State.size.includes(inputFilterValue) ? item.classList.add('active') : item.classList.remove('active');
+      AppState.size.includes(inputFilterValue) ? item.classList.add('active') : item.classList.remove('active');
     } else if (inputFilterGroup === 'favorite') {
-      State.onlyFavorite ? item.classList.add('active') : item.classList.remove('active');
-    }    
+      AppState.onlyFavorite ? item.classList.add('active') : item.classList.remove('active');
+    }
+    
   }); 
-  
+  sortingOrder.value = AppState.sortingOrder;
+  setCountSlider([AppState.countFilter[0], AppState.countFilter[1]]);
+  setYearSlider([AppState.yearFilter[0], AppState.yearFilter[1]]);
 }

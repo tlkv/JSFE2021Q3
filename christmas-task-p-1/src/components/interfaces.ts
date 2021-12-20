@@ -9,7 +9,7 @@ export interface ToyData {
   favorite: boolean;
 }
 
-export interface StateObject {
+export interface AppStateObject {
   shape: string[];
   color: string[];
   size: string[];

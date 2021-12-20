@@ -12,9 +12,7 @@ class App {
     initCountSlider();//
     initYearSlider();//
     window.addEventListener('beforeunload', setLocalStorage);
-    window.addEventListener('load', getLocaleStorage); 
-    
-    
+    window.addEventListener('load', getLocaleStorage);   
   }
 }
 
