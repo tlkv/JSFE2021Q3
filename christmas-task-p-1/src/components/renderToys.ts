@@ -1,4 +1,4 @@
-import { toyContainer, selectedCounter, nothingFound, filteredCounterNumber, State  } from './storage';
+import { toyContainer, selectedCounter, nothingFound, filteredCounterNumber, State, filterItems  } from './storage';
 import { ToyData } from './interfaces';
 import { selectToys } from './filterData';
 
@@ -30,4 +30,21 @@ export function renderToys(filteredData: ToyData[]): void {
     toyCard.dataset.num = String(num);
     toyContainer?.append(toyCard);
   });
+}
+
+export function renderFilterPanel () {
+  filterItems.forEach(item=>{
+    const inputFilterGroup = item.dataset.group as string;
+    const inputFilterValue = item.dataset.value as string;
+    if (inputFilterGroup === 'shape') {
+      State.shape.includes(inputFilterValue) ? item.classList.add('active') : item.classList.remove('active');
+    } else if (inputFilterGroup === 'color') {
+      State.color.includes(inputFilterValue) ? item.classList.add('active') : item.classList.remove('active');
+    } else if (inputFilterGroup === 'size') {
+      State.size.includes(inputFilterValue) ? item.classList.add('active') : item.classList.remove('active');
+    } else if (inputFilterGroup === 'favorite') {
+      State.onlyFavorite ? item.classList.add('active') : item.classList.remove('active');
+    }    
+  }); 
+  
 }

@@ -1,5 +1,5 @@
 import { StateObject } from './interfaces';
-import { renderToys } from './renderToys';
+import { renderToys, renderFilterPanel } from './renderToys';
 import { filterToys } from './filterData';
 
 export const maxSelected = 20;
@@ -18,6 +18,10 @@ export const countSlider = document.querySelector('.count-slider') as HTMLElemen
 export const yearSlider = document.querySelector('.year-slider') as HTMLElement;
 export const sortingOrder = document.querySelector('.sort-select') as HTMLInputElement;
 export const searchField = document.querySelector('.search') as HTMLInputElement;
+
+//export const panelColors = document.querySelectorAll('[data-group="color"]') as NodeListOf<HTMLElement>;
+
+
 
 export const State: StateObject = {
   shape: [],
@@ -42,6 +46,7 @@ export function getLocaleStorage() {
     Object.assign(State, JSON.parse(localStorage.getItem('chr-local-state') as string));
     console.log('StateAft ', State);
     //renderToys(filterToys());
+    renderFilterPanel();
   } else {
     console.log('noLocal');
   }

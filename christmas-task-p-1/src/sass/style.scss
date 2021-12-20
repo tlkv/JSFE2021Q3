@@ -60,7 +60,7 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.4s;
 }
 
 .logo:hover {
@@ -81,7 +81,7 @@ body {
   text-transform: uppercase;
   text-decoration: none;
   padding: 20px;
-  transition: 0.3s;
+  transition: 0.4s;
 }
 
 .nav-bar a:hover {
@@ -150,7 +150,7 @@ input[type='search']::-webkit-search-cancel-button {
   background-size: 48px 60px;
   background-position: left -8px;
   background-repeat: no-repeat;
-  transition: 0.3s;
+  transition: 0.4s;
 }
 
 .select span {
@@ -272,7 +272,7 @@ input[type='search']::-webkit-search-cancel-button {
   font-size: 22px;
   color: #fff;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.4s;
   overflow: hidden;
   outline: 1px solid;
   outline-color: rgba(255, 255, 255, 0.5);
@@ -534,7 +534,7 @@ output {
   background-repeat: no-repeat;
   background-position: center center;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.4s;
 }
 
 .shape button:nth-child(5) {
@@ -581,7 +581,7 @@ output {
   outline: 0;
   background-color: transparent;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.4s;
 }
 
 .color button:hover,
@@ -661,7 +661,7 @@ output {
   background-repeat: no-repeat;
   background-position: center center;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.4s;
 }
 
 .size button:hover {
@@ -1108,7 +1108,7 @@ output {
 .onoffswitch-inner {
   width: 200%;
   margin-left: -100%;
-  transition: margin 0.3s ease-in 0s;
+  transition: margin 0.4s ease-in 0s;
 }
 
 .onoffswitch-inner:before,
@@ -1149,7 +1149,7 @@ output {
   top: 0;
   bottom: 0;
   right: 55px;
-  transition: all 0.3s ease-in 0s;
+  transition: all 0.4s ease-in 0s;
 }
 
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
@@ -1187,7 +1187,7 @@ output {
   color: #fff;
   text-decoration: none;
   padding: 0 20px;
-  transition: 0.3s;
+  transition: 0.4s;
 }
 
 .github-username:hover {
@@ -1200,7 +1200,7 @@ output {
   background-size: contain;
   background-repeat: no-repeat;
   background-image: url('../assets/svg/rss.svg');
-  transition: 0.3s;
+  transition: 0.4s;
 }
 
 .rss-logo:hover {
