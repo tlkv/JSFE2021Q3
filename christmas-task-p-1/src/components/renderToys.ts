@@ -1,15 +1,14 @@
+import { toyContainer, selectedCounter, nothingFound, filteredCounterNumber, State  } from './storage';
 import { ToyData } from './interfaces';
-import { selectToys } from './selectToys';
-import { toyContainer } from './storage';
-import { nothingFound, filteredCounterNumber, State } from './storage';
+import { selectToys } from './filterData';
+
 
 export function renderToys(filteredData: ToyData[]): void {
   toyContainer.innerHTML = '';
   console.log('fData length Rerender', filteredData.length);
   filteredCounterNumber.textContent = String(filteredData.length);
   filteredData.length !== 0 ? nothingFound?.classList.add('hide') : nothingFound?.classList.remove('hide');
-  //if toys is Empty nothingFound?.classList.remove('hide') : nothingFound?.classList.add('hide');
-  //favorites from Array + ovrNumber of favorites
+  selectedCounter.textContent = String(State.selectedToys.length);
   filteredData.forEach(({ num, name, count, year, shape, color, size, favorite }) => {
     const toyCard = document.createElement('div');
     toyCard.classList.add('toy');
@@ -27,9 +26,8 @@ export function renderToys(filteredData: ToyData[]): void {
       </div>
       <div class="ribbon"></div>
       `;
-
     toyCard.addEventListener('click', selectToys);
-    toyCard.dataset.num = String(num); //  setAttribute('data-num', String(num));
+    toyCard.dataset.num = String(num);
     toyContainer?.append(toyCard);
   });
 }

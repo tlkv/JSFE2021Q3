@@ -9,14 +9,13 @@ export interface ToyData {
   favorite: boolean;
 }
 
-export interface FilterObj {
+export interface StateObject {
   shape: string[];
   color: string[];
   size: string[];
   selectedToys: string[];
   onlyFavorite: boolean;
   sortingOrder: string;
-
   countFilter: [number, number];
   yearFilter: [number, number];
 }

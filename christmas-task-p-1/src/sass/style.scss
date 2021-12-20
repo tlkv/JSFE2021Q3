@@ -306,6 +306,11 @@ input[type='search']::-webkit-search-cancel-button {
   padding-bottom: 40px;
 }
 
+.nothing-found {
+  text-align: center;
+  font-size: 28px;
+}
+
 .toy {
   display: flex;
   flex-wrap: wrap;
@@ -320,6 +325,7 @@ input[type='search']::-webkit-search-cancel-button {
   backdrop-filter: blur(6px);
   cursor: pointer;
   overflow: hidden;
+  position: relative;
 }
 
 .toy > * {
