@@ -1,8 +1,14 @@
-import { AppStateObject, filterKeys, sortingTypes, ToyData } from './interfaces';
+import { AppStateObject, FilterKeys, SortingTypes, ToyData, FilterValues } from './interfaces';
 import { renderToys, renderFilterPanel } from './renderToys';
 import { filterToys, selectToys } from './filterData';
 
 export const maxSelected = 20;
+
+export const countDefaultValues: FilterValues = [1, 12];
+export const countDefaultStep = 1;
+export const yearDefaultValues: FilterValues = [1940, 2020];
+export const yearDefaultStep = 10;
+
 
 //page containers
 export const toyContainer = document.querySelector('.toy-container') as HTMLElement;
@@ -95,7 +101,7 @@ export function handleFilterItems(e: Event) {
     return false;
   }  
   const inputFilterGroup = filterElement.dataset.group as string;
-  const inputFilterKey = inputFilterGroup as filterKeys;
+  const inputFilterKey = inputFilterGroup as FilterKeys;
   const inputFilterValue = filterElement.dataset.value as string;
   if (inputFilterGroup === 'favorite') {
     AppState.onlyFavorite = !filterElement.classList.contains('active');
@@ -109,7 +115,7 @@ export function handleFilterItems(e: Event) {
 }
 
 sortingOrder.onchange = () => {
-  AppState.sortingOrder = sortingOrder.value as sortingTypes;
+  AppState.sortingOrder = sortingOrder.value as SortingTypes;
   renderToys(filterToys());
 };
 

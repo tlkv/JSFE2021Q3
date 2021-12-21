@@ -15,18 +15,13 @@ export interface AppStateObject {
   size: string[];
   selectedToys: string[];
   onlyFavorite: boolean;
-  sortingOrder: sortingTypes;
-  countFilter: [number, number];
-  yearFilter: [number, number];
+  sortingOrder: SortingTypes;
+  countFilter: FilterValues;
+  yearFilter: FilterValues;
 }
 
+export type FilterKeys = 'shape' | 'color' | 'size';
 
-export type filterKeys = 'shape' | 'color' | 'size';
+export type SortingTypes = 'sort-default' | 'sort-name-asc' | 'sort-name-desc' | 'sort-year-asc' | 'sort-year-desc';
 
-export type sortingTypes = 'sort-default' | 'sort-name-asc' | 'sort-name-desc' | 'sort-year-asc' | 'sort-year-desc';
-
-/* export type shapeTypes = 'sort-default' | 'sort-name-asc' | 'sort-name-desc' | 'sort-year-asc' | 'sort-year-desc';
-
-export type sortingTypes = 'sort-default' | 'sort-name-asc' | 'sort-name-desc' | 'sort-year-asc' | 'sort-year-desc';
-
-export type sortingTypes = 'sort-default' | 'sort-name-asc' | 'sort-name-desc' | 'sort-year-asc' | 'sort-year-desc'; */
+export type FilterValues = [number, number];

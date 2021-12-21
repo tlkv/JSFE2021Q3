@@ -20,7 +20,6 @@ export function filterToys() {
 export function selectToys(e: Event) {
   const toySelected = e.target as HTMLTemplateElement;
   if (toySelected.classList.contains('toy')) {
-    console.log('yes');
     if (AppState.selectedToys.length === maxSelected && !toySelected.classList.contains('active')) {
       toySelected.classList.add('maximum');
       setTimeout(() => {

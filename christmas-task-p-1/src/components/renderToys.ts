@@ -1,4 +1,4 @@
-import { AppState } from './storage';
+import { AppState, countSlider, yearSlider } from './storage';
 import {
   toyContainer,
   selectedCounter,
@@ -7,8 +7,8 @@ import {
   filterItems,
   sortingOrder,
 } from './storage';
-import { ToyData, filterKeys } from './interfaces';
-import { setCountSlider, setYearSlider } from './filterSliders';
+import { ToyData, FilterKeys } from './interfaces';
+import { setSlider } from './filterSliders';
 
 export function renderToys(filteredData: Array<ToyData>): void {
   toyContainer.innerHTML = '';
@@ -42,7 +42,7 @@ export function renderToys(filteredData: Array<ToyData>): void {
 export function renderFilterPanel() {
   filterItems.forEach(item => {
     const inputFilterGroup = item.dataset.group as string;
-    const inputFilterKey = inputFilterGroup as filterKeys;
+    const inputFilterKey = inputFilterGroup as FilterKeys;
     const inputFilterValue = item.dataset.value as string;
     if (inputFilterGroup === 'favorite') {
       AppState.onlyFavorite ? item.classList.add('active') : item.classList.remove('active');
@@ -53,6 +53,6 @@ export function renderFilterPanel() {
     }
   });
   sortingOrder.value = AppState.sortingOrder;
-  setCountSlider([AppState.countFilter[0], AppState.countFilter[1]]);
-  setYearSlider([AppState.yearFilter[0], AppState.yearFilter[1]]);
+  setSlider(countSlider, [AppState.countFilter[0], AppState.countFilter[1]]);
+  setSlider(yearSlider, [AppState.yearFilter[0], AppState.yearFilter[1]]);
 }
