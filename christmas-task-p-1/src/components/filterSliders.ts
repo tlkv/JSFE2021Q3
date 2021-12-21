@@ -1,4 +1,5 @@
-import { countSlider, yearSlider, AppState } from './storage';
+import { AppState } from './storage';
+import { countSlider, yearSlider } from './storage';
 import noUiSlider from 'nouislider';
 import { target } from 'nouislider';
 import { renderToys } from './renderToys';

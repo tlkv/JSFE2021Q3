@@ -1,12 +1,21 @@
-import { toyContainer, selectedCounter, nothingFound, filteredCounterNumber, AppState, filterItems, sortingOrder  } from './storage';
-import { ToyData } from './interfaces';
-import { selectToys } from './filterData';
+import { AppState } from './storage';
+import {
+  toyContainer,
+  selectedCounter,
+  emptySearchResults,
+  filteredCounterNumber,
+  filterItems,
+  sortingOrder,
+} from './storage';
+import { ToyData, filterKeys } from './interfaces';
 import { setCountSlider, setYearSlider } from './filterSliders';
 
-export function renderToys(filteredData: Array <ToyData>): void {
-  toyContainer.innerHTML = '';  
+export function renderToys(filteredData: Array<ToyData>): void {
+  toyContainer.innerHTML = '';
   filteredCounterNumber.textContent = String(filteredData.length);
-  filteredData.length !== 0 ? nothingFound?.classList.add('hide-opacity') : nothingFound?.classList.remove('hide-opacity');
+  filteredData.length !== 0
+    ? emptySearchResults?.classList.add('hide-opacity')
+    : emptySearchResults?.classList.remove('hide-opacity');
   selectedCounter.textContent = String(AppState.selectedToys.length);
   filteredData.forEach(({ num, name, count, year, shape, color, size, favorite }) => {
     const toyCard = document.createElement('div');
@@ -25,27 +34,24 @@ export function renderToys(filteredData: Array <ToyData>): void {
       </div>
       <div class="chosen"></div>
       `;
-    toyCard.addEventListener('click', selectToys);
     toyCard.dataset.num = String(num);
     toyContainer?.append(toyCard);
   });
 }
 
-export function renderFilterPanel () {
-  filterItems.forEach(item=>{
+export function renderFilterPanel() {
+  filterItems.forEach(item => {
     const inputFilterGroup = item.dataset.group as string;
+    const inputFilterKey = inputFilterGroup as filterKeys;
     const inputFilterValue = item.dataset.value as string;
-    if (inputFilterGroup === 'shape') {
-      AppState.shape.includes(inputFilterValue) ? item.classList.add('active') : item.classList.remove('active');
-    } else if (inputFilterGroup === 'color') {
-      AppState.color.includes(inputFilterValue) ? item.classList.add('active') : item.classList.remove('active');
-    } else if (inputFilterGroup === 'size') {
-      AppState.size.includes(inputFilterValue) ? item.classList.add('active') : item.classList.remove('active');
-    } else if (inputFilterGroup === 'favorite') {
+    if (inputFilterGroup === 'favorite') {
       AppState.onlyFavorite ? item.classList.add('active') : item.classList.remove('active');
+    } else {
+      AppState[inputFilterKey].includes(inputFilterValue)
+        ? item.classList.add('active')
+        : item.classList.remove('active');
     }
-    
-  }); 
+  });
   sortingOrder.value = AppState.sortingOrder;
   setCountSlider([AppState.countFilter[0], AppState.countFilter[1]]);
   setYearSlider([AppState.yearFilter[0], AppState.yearFilter[1]]);

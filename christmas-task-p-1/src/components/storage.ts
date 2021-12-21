@@ -1,12 +1,12 @@
-import { AppStateObject } from './interfaces';
+import { AppStateObject, filterKeys, sortingTypes, ToyData } from './interfaces';
 import { renderToys, renderFilterPanel } from './renderToys';
-import { filterToys } from './filterData';
+import { filterToys, selectToys } from './filterData';
 
 export const maxSelected = 20;
 
 //page containers
 export const toyContainer = document.querySelector('.toy-container') as HTMLElement;
-export const nothingFound = document.querySelector('.nothing-found');
+export const emptySearchResults = document.querySelector('.nothing-found');
 
 //page elements with walues
 export const selectedCounter = document.querySelector('.selected-toys-count') as HTMLElement;
@@ -14,6 +14,7 @@ export const filteredCounterNumber = document.querySelector('.filtered-counter-n
 
 //toys collection handlers
 export const filterItems = document.querySelectorAll('.filter-item') as NodeListOf<HTMLElement>;
+export const filterItemsContainer = document.querySelector('.filters') as HTMLElement;
 export const countSlider = document.querySelector('.count-slider') as HTMLElement;
 export const yearSlider = document.querySelector('.year-slider') as HTMLElement;
 export const sortingOrder = document.querySelector('.sort-select') as HTMLInputElement;
@@ -36,6 +37,26 @@ export const AppState: AppStateObject = {
   yearFilter: [1940, 2020],
 };
 
+
+export const sortingFunctions = {
+  'sort-default': function (a: ToyData, b: ToyData) {
+    return Number(a.num) < Number(b.num) ? -1 : 1;
+  },
+  'sort-name-asc': function (a: ToyData, b: ToyData) {
+    return a.name < b.name ? -1 : 1;
+  },
+  'sort-name-desc': function (a: ToyData, b: ToyData) {
+    return a.name > b.name ? -1 : 1;
+  },
+  'sort-year-asc': function (a: ToyData, b: ToyData) {
+    return Number(a.year) < Number(b.year) ? -1 : 1;
+  },
+  'sort-year-desc': function (a: ToyData, b: ToyData) {
+    return Number(a.year) > Number(b.year) ? -1 : 1;
+  },
+}
+
+
 export function setLocalStorage() {
   localStorage.setItem('chr-local-state', JSON.stringify(AppState));
 }
@@ -43,8 +64,6 @@ export function getLocaleStorage() {
   if (localStorage.getItem('chr-local-state')) {
     Object.assign(AppState, JSON.parse(localStorage.getItem('chr-local-state') as string));
   }
-  renderFilterPanel();
-  renderToys(filterToys());
 }
 
 function resetFiltersHandler() {
@@ -72,49 +91,33 @@ export function initSearch() {
 
 export function handleFilterItems(e: Event) {
   const filterElement = e.target as HTMLElement;
+  if (!filterElement.classList.contains('filter-item')) {    
+    return false;
+  }  
   const inputFilterGroup = filterElement.dataset.group as string;
+  const inputFilterKey = inputFilterGroup as filterKeys;
   const inputFilterValue = filterElement.dataset.value as string;
-  if (!filterElement.classList.contains('active')) {
-    filterElement.classList.add('active');
-    if (inputFilterGroup === 'shape') {
-      AppState.shape.push(inputFilterValue);
-    } else if (inputFilterGroup === 'color') {
-      AppState.color.push(inputFilterValue);
-    } else if (inputFilterGroup === 'size') {
-      AppState.size.push(inputFilterValue);
-    } else if (inputFilterGroup === 'favorite') {
-      AppState.onlyFavorite = true;
-    }
+  if (inputFilterGroup === 'favorite') {
+    AppState.onlyFavorite = !filterElement.classList.contains('active');
   } else {
-    filterElement.classList.remove('active');
-    if (inputFilterGroup === 'shape') {
-      AppState.shape = AppState.shape.filter(elem => elem !== inputFilterValue);
-      //Object.assign(AppState, {color: AppState.color.filter(elem => elem !== inputFilterValue)});
-    } else if (inputFilterGroup === 'color') {
-      AppState.color = AppState.color.filter(elem => elem !== inputFilterValue);
-    } else if (inputFilterGroup === 'size') {
-      AppState.size = AppState.size.filter(elem => elem !== inputFilterValue);
-    } else if (inputFilterGroup === 'favorite') {
-      AppState.onlyFavorite = false;
-    }
+    !filterElement.classList.contains('active')
+      ? AppState[inputFilterKey].push(inputFilterValue)
+      : (AppState[inputFilterKey] = AppState[inputFilterKey].filter(elem => elem !== inputFilterValue));
   }
+  filterElement.classList.toggle('active');
   renderToys(filterToys());
 }
 
-filterItems.forEach(item => {
-  item.addEventListener('click', handleFilterItems);
-});
-
 sortingOrder.onchange = () => {
-  AppState.sortingOrder = sortingOrder.value;
+  AppState.sortingOrder = sortingOrder.value as sortingTypes;
   renderToys(filterToys());
 };
+
+resetFilters.addEventListener('click', resetFiltersHandler);
 
 searchField.addEventListener('input', () => {
   renderToys(filterToys());
 });
-
-resetFilters.addEventListener('click', resetFiltersHandler);
 
 resetLocal.addEventListener('click', resetLocalHandler);
 
@@ -125,3 +128,6 @@ document.addEventListener('scroll', () => {
     upButton.classList.remove('show-button');
   }
 });
+
+toyContainer.addEventListener('click', selectToys);
+filterItemsContainer.addEventListener('click', handleFilterItems);
