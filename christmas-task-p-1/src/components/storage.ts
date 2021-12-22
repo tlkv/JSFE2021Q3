@@ -2,27 +2,30 @@ import { AppStateObject, FilterKeys, SortingTypes, ToyData, FilterValues } from 
 import { renderToys, renderFilterPanel } from './renderToys';
 import { filterToys, selectToys } from './filterData';
 
+//app default values
 export const maxSelected = 20;
-
 export const countDefaultValues: FilterValues = [1, 12];
 export const countDefaultStep = 1;
 export const yearDefaultValues: FilterValues = [1940, 2020];
 export const yearDefaultStep = 10;
 
+//query selector helper
+export const qSelector = (selector: string) => document.querySelector(selector) as HTMLElement;
 
 //page containers
-export const toyContainer = document.querySelector('.toy-container') as HTMLElement;
-export const emptySearchResults = document.querySelector('.nothing-found');
+export const toyContainer = qSelector('.toy-container');
+export const emptySearchResults = qSelector('.nothing-found');
 
 //page elements with walues
-export const selectedCounter = document.querySelector('.selected-toys-count') as HTMLElement;
-export const filteredCounterNumber = document.querySelector('.filtered-counter-number') as HTMLElement;
+export const selectedCounter = qSelector('.selected-toys-count');
+export const filteredCounterNumber = qSelector('.filtered-counter-number');
 
 //toys collection handlers
 export const filterItems = document.querySelectorAll('.filter-item') as NodeListOf<HTMLElement>;
-export const filterItemsContainer = document.querySelector('.filters') as HTMLElement;
-export const countSlider = document.querySelector('.count-slider') as HTMLElement;
-export const yearSlider = document.querySelector('.year-slider') as HTMLElement;
+export const filterItemsContainer = qSelector('.filters');
+export const countSlider = qSelector('.count-slider');
+export const yearSlider = qSelector('.year-slider');
+
 export const sortingOrder = document.querySelector('.sort-select') as HTMLInputElement;
 export const searchField = document.querySelector('.search') as HTMLInputElement;
 
@@ -30,7 +33,7 @@ export const searchField = document.querySelector('.search') as HTMLInputElement
 export const resetFilters = document.querySelector('.reset-filters') as HTMLInputElement;
 export const resetLocal = document.querySelector('.reset-local') as HTMLInputElement;
 
-const upButton = document.querySelector('.up-button') as HTMLElement;
+const upButton = qSelector('.up-button');
 
 export const AppState: AppStateObject = {
   shape: [],
@@ -42,7 +45,6 @@ export const AppState: AppStateObject = {
   countFilter: [1, 12],
   yearFilter: [1940, 2020],
 };
-
 
 export const sortingFunctions = {
   'sort-default': function (a: ToyData, b: ToyData) {
@@ -60,8 +62,7 @@ export const sortingFunctions = {
   'sort-year-desc': function (a: ToyData, b: ToyData) {
     return Number(a.year) > Number(b.year) ? -1 : 1;
   },
-}
-
+};
 
 export function setLocalStorage() {
   localStorage.setItem('chr-local-state', JSON.stringify(AppState));
@@ -97,9 +98,9 @@ export function initSearch() {
 
 export function handleFilterItems(e: Event) {
   const filterElement = e.target as HTMLElement;
-  if (!filterElement.classList.contains('filter-item')) {    
+  if (!filterElement.classList.contains('filter-item')) {
     return false;
-  }  
+  }
   const inputFilterGroup = filterElement.dataset.group as string;
   const inputFilterKey = inputFilterGroup as FilterKeys;
   const inputFilterValue = filterElement.dataset.value as string;
