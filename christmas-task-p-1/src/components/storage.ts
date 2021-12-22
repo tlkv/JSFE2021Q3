@@ -1,6 +1,6 @@
-import { AppStateObject, FilterKeys, SortingTypes, ToyData, FilterValues } from './interfaces';
-import { renderToys, renderFilterPanel } from './renderToys';
-import { filterToys, selectToys } from './filterData';
+import { AppStateObject, SortingTypes, ToyData, FilterValues } from './interfaces';
+import { renderToys } from './renderToys';
+import { filterToys, selectToys, resetFiltersHandler, resetLocalHandler, handleFilterItems } from './filterData';
 
 //app default values
 export const maxSelected = 20;
@@ -8,32 +8,6 @@ export const countDefaultValues: FilterValues = [1, 12];
 export const countDefaultStep = 1;
 export const yearDefaultValues: FilterValues = [1940, 2020];
 export const yearDefaultStep = 10;
-
-//query selector helper
-export const qSelector = (selector: string) => document.querySelector(selector) as HTMLElement;
-
-//page containers
-export const toyContainer = qSelector('.toy-container');
-export const emptySearchResults = qSelector('.nothing-found');
-
-//page elements with walues
-export const selectedCounter = qSelector('.selected-toys-count');
-export const filteredCounterNumber = qSelector('.filtered-counter-number');
-
-//toys collection handlers
-export const filterItems = document.querySelectorAll('.filter-item') as NodeListOf<HTMLElement>;
-export const filterItemsContainer = qSelector('.filters');
-export const countSlider = qSelector('.count-slider');
-export const yearSlider = qSelector('.year-slider');
-
-export const sortingOrder = document.querySelector('.sort-select') as HTMLInputElement;
-export const searchField = document.querySelector('.search') as HTMLInputElement;
-
-//reset buttons
-export const resetFilters = document.querySelector('.reset-filters') as HTMLInputElement;
-export const resetLocal = document.querySelector('.reset-local') as HTMLInputElement;
-
-const upButton = qSelector('.up-button');
 
 export const AppState: AppStateObject = {
   shape: [],
@@ -64,55 +38,38 @@ export const sortingFunctions = {
   },
 };
 
+export const qSelector = (selector: string) => document.querySelector(selector) as HTMLElement;
+
+//page containers
+export const toyContainer = qSelector('.toy-container');
+export const emptySearchResults = qSelector('.nothing-found');
+
+//page elements with walues
+export const selectedCounter = qSelector('.selected-toys-count');
+export const filteredCounterNumber = qSelector('.filtered-counter-number');
+
+//toys collection handlers
+export const filterItems = document.querySelectorAll('.filter-item') as NodeListOf<HTMLElement>;
+export const filterItemsContainer = qSelector('.filters');
+export const countSlider = qSelector('.count-slider');
+export const yearSlider = qSelector('.year-slider');
+
+export const sortingOrder = document.querySelector('.sort-select') as HTMLInputElement;
+export const searchField = document.querySelector('.search') as HTMLInputElement;
+
+export const resetFilters = document.querySelector('.reset-filters') as HTMLInputElement;
+export const resetLocal = document.querySelector('.reset-local') as HTMLInputElement;
+
+const upButton = qSelector('.up-button');
+
 export function setLocalStorage() {
   localStorage.setItem('chr-local-state', JSON.stringify(AppState));
 }
+
 export function getLocaleStorage() {
   if (localStorage.getItem('chr-local-state')) {
     Object.assign(AppState, JSON.parse(localStorage.getItem('chr-local-state') as string));
   }
-}
-
-function resetFiltersHandler() {
-  AppState.shape = [];
-  AppState.color = [];
-  AppState.size = [];
-  AppState.onlyFavorite = false;
-  AppState.countFilter = [1, 12];
-  AppState.yearFilter = [1940, 2020];
-  searchField.value = '';
-  renderToys(filterToys());
-  renderFilterPanel();
-}
-
-function resetLocalHandler() {
-  AppState.selectedToys = [];
-  AppState.sortingOrder = 'sort-default';
-  resetFiltersHandler();
-}
-
-export function initSearch() {
-  searchField.setAttribute('placeholder', 'Поиск');
-  searchField.focus();
-}
-
-export function handleFilterItems(e: Event) {
-  const filterElement = e.target as HTMLElement;
-  if (!filterElement.classList.contains('filter-item')) {
-    return false;
-  }
-  const inputFilterGroup = filterElement.dataset.group as string;
-  const inputFilterKey = inputFilterGroup as FilterKeys;
-  const inputFilterValue = filterElement.dataset.value as string;
-  if (inputFilterGroup === 'favorite') {
-    AppState.onlyFavorite = !filterElement.classList.contains('active');
-  } else {
-    !filterElement.classList.contains('active')
-      ? AppState[inputFilterKey].push(inputFilterValue)
-      : (AppState[inputFilterKey] = AppState[inputFilterKey].filter(elem => elem !== inputFilterValue));
-  }
-  filterElement.classList.toggle('active');
-  renderToys(filterToys());
 }
 
 sortingOrder.onchange = () => {

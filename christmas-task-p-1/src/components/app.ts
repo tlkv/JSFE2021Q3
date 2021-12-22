@@ -7,9 +7,8 @@ import {
   yearDefaultValues,
   yearDefaultStep,
 } from './storage';
-import { initSearch, getLocaleStorage, setLocalStorage } from './storage';
-import { initSlider } from './filterSliders';
-import { filterToys } from './filterData';
+import { getLocaleStorage, setLocalStorage } from './storage';
+import { filterToys, initSlider, initSearch } from './filterData';
 import { renderFilterPanel, renderToys } from './renderToys';
 
 class App {

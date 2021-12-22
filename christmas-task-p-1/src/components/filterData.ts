@@ -1,6 +1,50 @@
-import { AppState, sortingFunctions } from './storage';
-import { selectedCounter, maxSelected, searchField } from './storage';
+import { AppState, sortingFunctions, selectedCounter, maxSelected, searchField } from './storage';
 import data from './data';
+import { FilterKeys, FilterValues } from './interfaces';
+import { renderFilterPanel, renderToys } from './renderToys';
+import noUiSlider from 'nouislider';
+import { target } from 'nouislider';
+
+export function initSearch() {
+  searchField.setAttribute('placeholder', 'Поиск');
+  searchField.focus();
+}
+
+export function initSlider(
+  elem: HTMLElement,
+  currentValues: FilterValues,
+  defaultValues: FilterValues,
+  step: number,
+  stateKey: 'countFilter' | 'yearFilter'
+) {
+  noUiSlider.create(elem, {
+    start: currentValues,
+    step: step,
+    connect: true,
+    tooltips: true,
+    format: {
+      to(value) {
+        return Math.floor(Number(value));
+      },
+      from(value) {
+        return Math.floor(Number(value));
+      },
+    },
+    range: {
+      min: defaultValues[0],
+      max: defaultValues[1],
+    },
+  });
+  (elem as target).noUiSlider?.on('set', () => {
+    const positions = JSON.parse(JSON.stringify((elem as target).noUiSlider?.get()));
+    AppState[stateKey] = [Number(positions[0]), Number(positions[1])];
+    renderToys(filterToys());
+  });
+}
+
+export function setSlider(elem: HTMLElement, input: [number, number]) {
+  (elem as target).noUiSlider?.set(input);
+}
 
 export function filterToys() {
   const query = searchField.value.toLowerCase();
@@ -34,4 +78,41 @@ export function selectToys(e: Event) {
       selectedCounter.textContent = String(AppState.selectedToys.length);
     }
   }
+}
+
+export function handleFilterItems(e: Event) {
+  const filterElement = e.target as HTMLElement;
+  if (!filterElement.classList.contains('filter-item')) {
+    return false;
+  }
+  const inputFilterGroup = filterElement.dataset.group as string;
+  const inputFilterKey = inputFilterGroup as FilterKeys;
+  const inputFilterValue = filterElement.dataset.value as string;
+  if (inputFilterGroup === 'favorite') {
+    AppState.onlyFavorite = !filterElement.classList.contains('active');
+  } else {
+    !filterElement.classList.contains('active')
+      ? AppState[inputFilterKey].push(inputFilterValue)
+      : (AppState[inputFilterKey] = AppState[inputFilterKey].filter(elem => elem !== inputFilterValue));
+  }
+  filterElement.classList.toggle('active');
+  renderToys(filterToys());
+}
+
+export function resetFiltersHandler() {
+  AppState.shape = [];
+  AppState.color = [];
+  AppState.size = [];
+  AppState.onlyFavorite = false;
+  AppState.countFilter = [1, 12];
+  AppState.yearFilter = [1940, 2020];
+  searchField.value = '';
+  renderToys(filterToys());
+  renderFilterPanel();
+}
+
+export function resetLocalHandler() {
+  AppState.selectedToys = [];
+  AppState.sortingOrder = 'sort-default';
+  resetFiltersHandler();
 }

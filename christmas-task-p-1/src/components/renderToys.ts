@@ -1,5 +1,7 @@
-import { AppState, countSlider, yearSlider } from './storage';
 import {
+  AppState,
+  countSlider,
+  yearSlider,
   toyContainer,
   selectedCounter,
   emptySearchResults,
@@ -7,8 +9,8 @@ import {
   filterItems,
   sortingOrder,
 } from './storage';
+import { setSlider } from './filterData';
 import { ToyData, FilterKeys } from './interfaces';
-import { setSlider } from './filterSliders';
 
 export function renderToys(filteredData: Array<ToyData>): void {
   toyContainer.innerHTML = '';
