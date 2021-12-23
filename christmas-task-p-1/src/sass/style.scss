@@ -18,6 +18,11 @@ body {
   color: #fff;
 }
 
+button {
+  font-family: 'Comfortaa', sans-serif;
+  font-weight: 500;
+}
+
 .header {
   position: relative;
   background-color: #003147;
@@ -43,13 +48,17 @@ body {
   background-repeat: no-repeat;
   cursor: pointer;
   transition: 0.4s;
+  background-image: url(../assets/svg/tree.svg);
+}
+
+.logo:hover {
+  filter: invert(25%);
 }
 
 .navigation {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  visibility: hidden;
 }
 
 .navigation a {
@@ -109,7 +118,6 @@ body {
 
 input[type='search']::-webkit-search-cancel-button {
   -webkit-appearance: none;
-
   height: 19px;
   width: 19px;
   background: url('../assets/svg/cross-red.svg') right no-repeat;
