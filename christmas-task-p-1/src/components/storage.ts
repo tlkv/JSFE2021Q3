@@ -2,7 +2,7 @@ import { AppStateObject, SortingTypes, ToyData, FilterValues } from './interface
 import { renderToys } from './renderToys';
 import { filterToys, selectToys, resetFiltersHandler, resetLocalHandler, handleFilterItems } from './filterData';
 import { router } from './routing';
-import { chooseTree, chooseBackground } from './treeDecoration';
+import { chooseTree, chooseBackground, handleAudio, handleSnow } from './treeDecoration';
 
 //app default values
 export const maxSelected = 20;
@@ -67,11 +67,23 @@ export const selectBackgroundContainer = document.querySelector('.background-con
 
 export const treeMain = document.querySelector('.main-tree') as HTMLElement;
 export const treeMainContainer = document.querySelector('.main-tree-container') as HTMLElement;
+export const audioButton = document.querySelector('.audio-controls') as HTMLElement;
+export const snowButton = document.querySelector('.snow-controls') as HTMLElement;
+export const snowWrapper = document.querySelector('.snow-wrapper') as HTMLElement;
 
 export const routingButtons = document.querySelectorAll('.routing') as NodeListOf<HTMLElement>;
 export const pages = document.querySelectorAll('.page') as NodeListOf<HTMLElement>;
 
 const upButton = document.querySelector('.up-button') as HTMLElement;
+
+
+export const audio = new Audio();
+audio.src = '../assets/audio/audio.mp3';
+audio.volume = 0.5;
+audio.loop = true;
+
+
+
 
 export function setLocalStorage() {
   localStorage.setItem('chr-local-state', JSON.stringify(AppState));
@@ -112,8 +124,10 @@ routingButtons.forEach(item => {
 });
 
 selectTreeContainer.addEventListener('click', chooseTree);
-
 selectBackgroundContainer.addEventListener('click', chooseBackground);
+audioButton.addEventListener('click', handleAudio);
+snowButton.addEventListener('click', handleSnow);
+
 
 /* routing */
 

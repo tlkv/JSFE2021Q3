@@ -1,4 +1,4 @@
-import { treeMain, treeMainContainer } from "./storage";
+import { treeMain, treeMainContainer, audioButton, audio, snowWrapper, snowButton } from "./storage";
 
 export function chooseTree(e: Event) {
   const target = e.target as HTMLTemplateElement;
@@ -8,6 +8,29 @@ export function chooseTree(e: Event) {
   }  
 }
 
+
+
+export function handleAudio() {
+  if (!audioButton.classList.contains('active')) {
+    audioButton.classList.add('active');
+    audio.currentTime = 0;
+    audio.play();
+  } else {
+    audioButton.classList.remove('active');
+    audio.pause();
+  }
+}
+
+export function handleSnow() {
+  if (!snowButton.classList.contains('active')) {
+    snowButton.classList.add('active');
+    snowWrapper.classList.remove('hide');
+  } else {
+    snowButton.classList.remove('active');
+    snowWrapper.classList.add('hide');
+  }
+}
+
 export function chooseBackground(e: Event) {
   const target = e.target as HTMLTemplateElement;
   const elem = treeMainContainer as HTMLElement;
@@ -15,3 +38,6 @@ export function chooseBackground(e: Event) {
     elem.style.backgroundImage = `url('../assets/bg/${target.dataset.back}.jpg'`;
   }  
 }
+
+
+  
