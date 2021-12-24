@@ -1,4 +1,4 @@
-import { AppState, sortingFunctions, selectedCounter, maxSelected, searchField } from './storage';
+import { AppState, sortingFunctions, selectedCounter, maxSelected, searchField, countDefaultValues, yearDefaultValues } from './storage';
 import data from './data';
 import { FilterKeys, FilterValues } from './interfaces';
 import { renderFilterPanel, renderToys } from './renderToys';
@@ -104,8 +104,8 @@ export function resetFiltersHandler() {
   AppState.color = [];
   AppState.size = [];
   AppState.onlyFavorite = false;
-  AppState.countFilter = [1, 12];
-  AppState.yearFilter = [1940, 2020];
+  AppState.countFilter = countDefaultValues;//
+  AppState.yearFilter = yearDefaultValues;
   searchField.value = '';
   renderToys(filterToys());
   renderFilterPanel();

@@ -158,7 +158,7 @@ input[type='search']::-webkit-search-cancel-button {
   /* background-size: cover;
   background-attachment: fixed; */
   min-width: 100%;
-  min-height: calc(100vh - 170px);
+  min-height: calc(100vh - 100px);
   padding-top: 70px;
 }
 
@@ -763,3 +763,14 @@ footer a {
     display: none;
   }
 }
+
+
+/* #map {
+  height: 700px;
+  width: 500px;
+}
+
+#ttree {
+  height: 700px;
+  width: 500px;
+} */

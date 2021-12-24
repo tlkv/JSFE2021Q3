@@ -1,6 +1,8 @@
 import { AppStateObject, SortingTypes, ToyData, FilterValues } from './interfaces';
 import { renderToys } from './renderToys';
 import { filterToys, selectToys, resetFiltersHandler, resetLocalHandler, handleFilterItems } from './filterData';
+import { router } from './routing';
+import { chooseTree, chooseBackground } from './treeDecoration';
 
 //app default values
 export const maxSelected = 20;
@@ -38,21 +40,21 @@ export const sortingFunctions = {
   },
 };
 
-export const qSelector = (selector: string) => document.querySelector(selector) as HTMLElement;
+//export const qSelector = (selector: string) => document.querySelector(selector) as HTMLElement;
 
 //page containers
-export const toyContainer = qSelector('.toy-container');
-export const emptySearchResults = qSelector('.nothing-found');
+export const toyContainer = document.querySelector('.toy-container') as HTMLElement;
+export const emptySearchResults = document.querySelector('.nothing-found') as HTMLElement;
 
 //page elements with walues
-export const selectedCounter = qSelector('.selected-toys-count');
-export const filteredCounterNumber = qSelector('.filtered-counter-number');
+export const selectedCounter = document.querySelector('.selected-toys-count') as HTMLElement;
+export const filteredCounterNumber = document.querySelector('.filtered-counter-number') as HTMLElement;
 
 //toys collection handlers
 export const filterItems = document.querySelectorAll('.filter-item') as NodeListOf<HTMLElement>;
-export const filterItemsContainer = qSelector('.filters');
-export const countSlider = qSelector('.count-slider');
-export const yearSlider = qSelector('.year-slider');
+export const filterItemsContainer = document.querySelector('.filters') as HTMLElement;
+export const countSlider = document.querySelector('.count-slider') as HTMLElement;
+export const yearSlider = document.querySelector('.year-slider') as HTMLElement;
 
 export const sortingOrder = document.querySelector('.sort-select') as HTMLInputElement;
 export const searchField = document.querySelector('.search') as HTMLInputElement;
@@ -60,10 +62,16 @@ export const searchField = document.querySelector('.search') as HTMLInputElement
 export const resetFilters = document.querySelector('.reset-filters') as HTMLInputElement;
 export const resetLocal = document.querySelector('.reset-local') as HTMLInputElement;
 
-const routingButtons = document.querySelectorAll('.routing') as NodeListOf<HTMLElement>;
-const pages = document.querySelectorAll('.page') as NodeListOf<HTMLElement>;
+export const selectTreeContainer = document.querySelector('.tree-container') as HTMLElement;
+export const selectBackgroundContainer = document.querySelector('.background-container') as HTMLElement;
 
-const upButton = qSelector('.up-button');
+export const treeMain = document.querySelector('.main-tree') as HTMLElement;
+export const treeMainContainer = document.querySelector('.main-tree-container') as HTMLElement;
+
+export const routingButtons = document.querySelectorAll('.routing') as NodeListOf<HTMLElement>;
+export const pages = document.querySelectorAll('.page') as NodeListOf<HTMLElement>;
+
+const upButton = document.querySelector('.up-button') as HTMLElement;
 
 export function setLocalStorage() {
   localStorage.setItem('chr-local-state', JSON.stringify(AppState));
@@ -99,14 +107,34 @@ document.addEventListener('scroll', () => {
 toyContainer.addEventListener('click', selectToys);
 filterItemsContainer.addEventListener('click', handleFilterItems);
 
-/* routing */
-
-function router(e: Event) {
-  pages.forEach(page => {
-    page.dataset.routing === (e.target as HTMLElement).dataset.routing ? page.classList.remove('hide') : page.classList.add('hide');
-  });
-}
-
 routingButtons.forEach(item => {
   item.addEventListener('click', router);
 });
+
+selectTreeContainer.addEventListener('click', chooseTree);
+
+selectBackgroundContainer.addEventListener('click', chooseBackground);
+
+/* routing */
+
+
+
+/* const areas = document.getElementsByTagName('area');
+for (let index = 0; index < areas.length; index++) {
+  console.log(areas);
+  
+  areas[index].addEventListener(
+    'mouseover',
+    function () {
+      this.focus();
+    },
+    false
+  );
+  areas[index].addEventListener(
+    'mouseout',
+    function () {
+      this.blur();
+    },
+    false
+  );
+} */
