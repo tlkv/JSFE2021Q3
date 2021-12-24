@@ -60,6 +60,9 @@ export const searchField = document.querySelector('.search') as HTMLInputElement
 export const resetFilters = document.querySelector('.reset-filters') as HTMLInputElement;
 export const resetLocal = document.querySelector('.reset-local') as HTMLInputElement;
 
+const routingButtons = document.querySelectorAll('.routing') as NodeListOf<HTMLElement>;
+const pages = document.querySelectorAll('.page') as NodeListOf<HTMLElement>;
+
 const upButton = qSelector('.up-button');
 
 export function setLocalStorage() {
@@ -95,3 +98,15 @@ document.addEventListener('scroll', () => {
 
 toyContainer.addEventListener('click', selectToys);
 filterItemsContainer.addEventListener('click', handleFilterItems);
+
+/* routing */
+
+function router(e: Event) {
+  pages.forEach(page => {
+    page.dataset.routing === (e.target as HTMLElement).dataset.routing ? page.classList.remove('hide') : page.classList.add('hide');
+  });
+}
+
+routingButtons.forEach(item => {
+  item.addEventListener('click', router);
+});

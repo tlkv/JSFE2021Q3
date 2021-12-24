@@ -44,11 +44,9 @@ button {
 .logo {
   width: 48px;
   height: 60px;
-  background-size: contain;
-  background-repeat: no-repeat;
   cursor: pointer;
   transition: 0.4s;
-  background-image: url(../assets/svg/tree.svg);
+  background: url(../assets/svg/tree.svg) center / contain no-repeat;
 }
 
 .logo:hover {
@@ -64,7 +62,7 @@ button {
 .navigation a {
   text-transform: uppercase;
   text-decoration: none;
-  padding: 20px;
+  padding: 20px 10px;
   transition: 0.4s;
   position: relative;
   display: block;
@@ -129,7 +127,7 @@ input[type='search']::-webkit-search-cancel-button {
   outline: 0;
 }
 
-.select span {
+.selected-toys-count {
   display: inline-block;
   min-width: 40px;
   height: 40px;
@@ -151,14 +149,23 @@ input[type='search']::-webkit-search-cancel-button {
   background: rgba(23, 40, 40, 0.3);
   backdrop-filter: blur(3px);
   height: 100%;
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 170px);
   width: 100%;
+}
+
+.main-area-wrapper {
+  background: url(../assets/bg.jpg) center / cover fixed no-repeat;
+  /* background-size: cover;
+  background-attachment: fixed; */
+  min-width: 100%;
+  min-height: calc(100vh - 170px);
+  padding-top: 70px;
 }
 
 .page {
   min-width: 100%;
-  min-height: calc(100vh - 100px);
-  background-image: url('../assets/bg.jpg');
+  min-height: calc(100vh - 170px);
+  /* background-image: url('../assets/bg.jpg'); */
   background-size: cover;
   background-attachment: fixed;
 }
@@ -285,7 +292,7 @@ input[type='search']::-webkit-search-cancel-button {
   max-width: 1400px;
   font-size: 18px;
   margin: 0 auto 20px auto;
-  padding: 80px 8px 20px 8px;
+  /* padding: 80px 8px 20px 8px; */
   line-height: 40px;
   background-color: rgba(31, 112, 127, 0.5);
   backdrop-filter: blur(5px);
@@ -751,5 +758,8 @@ footer a {
   }
   .control-panel {
     font-size: 17px;
+  }
+  .sel-text {
+    display: none;
   }
 }
