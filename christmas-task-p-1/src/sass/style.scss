@@ -627,10 +627,20 @@ output {
   backdrop-filter: blur(5px);
   cursor: pointer;
   color: #fff;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 400;
   transition: all 0.4s;
 }
+
+.user-tree-filters .reset-btn {
+  width: 88%;
+  margin-left: 6%;
+}
+
+.snowflake-audio-container {
+  margin-bottom: 0;
+  justify-content: center;
+} 
 
 .reset-btn:hover,
 .sort-select:hover {

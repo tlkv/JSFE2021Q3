@@ -10,6 +10,7 @@ import {
 import { getLocaleStorage, setLocalStorage } from './storage';
 import { filterToys, initSlider, initSearch } from './filterData';
 import { renderFilterPanel, renderToys } from './renderToys';
+import { renderTree } from './treeDecoration';
 
 class App {
   initSearch: void;
@@ -25,6 +26,7 @@ class App {
       getLocaleStorage();
       renderFilterPanel();
       renderToys(filterToys());
+      renderTree();
     });
   }
 }

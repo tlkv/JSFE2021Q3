@@ -2,8 +2,11 @@ import { AppState, sortingFunctions, selectedCounter, maxSelected, searchField, 
 import data from './data';
 import { FilterKeys, FilterValues } from './interfaces';
 import { renderFilterPanel, renderToys } from './renderToys';
+import { renderTree } from './treeDecoration';
+import { handleAudio } from './treeDecoration';
 import noUiSlider from 'nouislider';
 import { target } from 'nouislider';
+
 
 export function initSearch() {
   searchField.setAttribute('placeholder', 'Поиск');
@@ -111,8 +114,14 @@ export function resetFiltersHandler() {
   renderFilterPanel();
 }
 
-export function resetLocalHandler() {
+export function resetLocalHandler() {  
   AppState.selectedToys = [];
   AppState.sortingOrder = 'sort-default';
-  resetFiltersHandler();
+  AppState.tree = '1';
+  AppState.background = '1';
+  AppState.audio = false;
+  AppState.snow = false;
+  renderTree();
+  handleAudio();
+  resetFiltersHandler();  
 }

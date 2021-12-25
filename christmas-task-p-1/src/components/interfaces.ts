@@ -18,9 +18,15 @@ export interface AppStateObject {
   sortingOrder: SortingTypes;
   countFilter: FilterValues;
   yearFilter: FilterValues;
+  tree: string;
+  background: string;
+  audio: boolean;
+  snow: boolean;
 }
 
 export type FilterKeys = 'shape' | 'color' | 'size';
+
+export type TreeKeys = 'tree' | 'background' | 'audio' | 'snow';
 
 export type SortingTypes = 'sort-default' | 'sort-name-asc' | 'sort-name-desc' | 'sort-year-asc' | 'sort-year-desc';
 
