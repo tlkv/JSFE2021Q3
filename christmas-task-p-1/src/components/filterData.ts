@@ -1,12 +1,20 @@
-import { AppState, sortingFunctions, selectedCounter, maxSelected, searchField, countDefaultValues, yearDefaultValues } from './storage';
+import {
+  AppState,
+  sortingFunctions,
+  selectedCounter,
+  maxSelected,
+  searchField,
+  countDefaultValues,
+  yearDefaultValues,
+} from './storage';
 import data from './data';
 import { FilterKeys, FilterValues } from './interfaces';
 import { renderFilterPanel, renderToys } from './renderToys';
 import { renderTree } from './treeDecoration';
-import { handleAudio } from './treeDecoration';
+import { handleAudio } from './audio';
+import { renderFavorites } from './renderFavorites';
 import noUiSlider from 'nouislider';
 import { target } from 'nouislider';
-
 
 export function initSearch() {
   searchField.setAttribute('placeholder', 'Поиск');
@@ -79,6 +87,7 @@ export function selectToys(e: Event) {
         ? (AppState.selectedToys = AppState.selectedToys.filter(elem => elem !== toySelectedNum))
         : AppState.selectedToys.push(toySelectedNum);
       selectedCounter.textContent = String(AppState.selectedToys.length);
+      renderFavorites();
     }
   }
 }
@@ -107,14 +116,14 @@ export function resetFiltersHandler() {
   AppState.color = [];
   AppState.size = [];
   AppState.onlyFavorite = false;
-  AppState.countFilter = countDefaultValues;//
+  AppState.countFilter = countDefaultValues; //
   AppState.yearFilter = yearDefaultValues;
   searchField.value = '';
   renderToys(filterToys());
   renderFilterPanel();
 }
 
-export function resetLocalHandler() {  
+export function resetLocalHandler() {
   AppState.selectedToys = [];
   AppState.sortingOrder = 'sort-default';
   AppState.tree = '1';
@@ -123,5 +132,6 @@ export function resetLocalHandler() {
   AppState.snow = false;
   renderTree();
   handleAudio();
-  resetFiltersHandler();  
+  renderFavorites();
+  resetFiltersHandler();
 }

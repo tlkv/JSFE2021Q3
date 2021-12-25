@@ -1,4 +1,4 @@
-import { pages } from "./storage";
+import { pages } from './storage';
 
 export function router(e: Event) {
   pages.forEach(page => {

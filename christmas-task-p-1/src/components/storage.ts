@@ -2,7 +2,8 @@ import { AppStateObject, SortingTypes, ToyData, FilterValues } from './interface
 import { renderToys } from './renderToys';
 import { filterToys, selectToys, resetFiltersHandler, resetLocalHandler, handleFilterItems } from './filterData';
 import { router } from './routing';
-import { chooseTree, chooseBackground, handleAudio, handleSnow, handleTreeFilters } from './treeDecoration';
+import { handleTreeFilters } from './treeDecoration';
+import { audioOnload } from './audio';
 
 //app default values
 export const maxSelected = 20;
@@ -44,11 +45,10 @@ export const sortingFunctions = {
   },
 };
 
-//export const qSelector = (selector: string) => document.querySelector(selector) as HTMLElement;
-
 //page containers
 export const toyContainer = document.querySelector('.toy-container') as HTMLElement;
 export const emptySearchResults = document.querySelector('.nothing-found') as HTMLElement;
+export const favContainer = document.querySelector('.fav-container') as HTMLElement;
 
 //page elements with walues
 export const selectedCounter = document.querySelector('.selected-toys-count') as HTMLElement;
@@ -130,52 +130,6 @@ routingButtons.forEach(item => {
   item.addEventListener('click', router);
 });
 
-/* selectTreeContainer.addEventListener('click', chooseTree);
-selectBackgroundContainer.addEventListener('click', chooseBackground);
-audioButton.addEventListener('click', handleAudio);
-snowButton.addEventListener('click', handleSnow); */
+document.addEventListener('click', audioOnload);
 
 userTreeFilters.addEventListener('click', handleTreeFilters);
-
-/* routing */
-
-/* const areas = document.getElementsByTagName('area');
-for (let index = 0; index < areas.length; index++) {
-  console.log(areas);
-  
-  areas[index].addEventListener(
-    'mouseover',
-    function () {
-      this.focus();
-    },
-    false
-  );
-  areas[index].addEventListener(
-    'mouseout',
-    function () {
-      this.blur();
-    },
-    false
-  );
-} */
-
-//snowflake test
-/* const body = document.body;
-
-setInterval(createSnowFlake, 50);
-
-function createSnowFlake() {
-	const snow_flake = document.createElement('i');
-	snow_flake.classList.add('fas');
-	snow_flake.classList.add('fa-snowflake');
-	snow_flake.style.left = Math.random() * window.innerWidth + 'px';
-	snow_flake.style.animationDuration = Math.random() * 3 + 2 + 's'; // between 2 - 5 seconds
-	snow_flake.style.opacity = String(Math.random());
-	snow_flake.style.fontSize = Math.random() * 10 + 10 + 'px';
-	
-	document.body.appendChild(snow_flake);
-	
-	setTimeout(() => {
-		snow_flake.remove();
-	}, 5000)
-} */

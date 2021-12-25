@@ -40,6 +40,7 @@
   width: 50%;
   padding-bottom: 20px;
   overflow: hidden;
+  border-radius: 15px;
 }
 
 .main-tree {
@@ -54,8 +55,8 @@
   width: 25%;
 }
 
-.favorites-container,
-.favorites-container-test,
+.fav-container,
+.fav-container-test,
 .fav-decor {
   display: flex;
   flex-wrap: wrap;
@@ -73,32 +74,6 @@
   text-align: center;
   margin: 10px 0;
 }
-
-/* .favorites-container::before, .favorites-container-test::before,
-.fav-decor::before,
-.background-container::before,
-.tree-container::before,
-.lights-container::before {
-  content: "Игрушки";
-  width: 100%;
-  font-size: 20px;
-  font-weight: 400;
-  padding: 10px;
-  padding-left: 0;
-  text-transform: uppercase;
-} */
-/* .fav-decor::before {
-  content: "Вы нарядили";
-}
-.background-container::before {
-  content: "Выберите фон";
-}
-.tree-container::before {
-  content: "Выберите ёлку";
-}
-.lights-container::before {
-  content: "Гирлянда";
-} */
 
 .fav-decor-container {
   display: flex;
@@ -298,15 +273,19 @@
 }
 .lights-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 110px;
+    justify-content: space-between;
+    align-items: center;
+    height: 110px;
+    /* width: 100%; */
+    width: fit-content;
+    margin: 0 auto;
 }
 
 .color-btn {
   width: 24px;
   height: 24px;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .multi-btn {
@@ -332,6 +311,11 @@
 .blue-btn {
   background-color: #24e0ff;
   box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #006 0 -1px 9px, #3f8cff 0 2px 14px;
+}
+
+.none-btn {
+  background: #fff url('../assets/svg/cross-red.svg') center / 110% no-repeat;
+  border: 2px solid red;
 }
 
 .lightswitch {
@@ -399,15 +383,15 @@
 
 .snow-wrapper {
   height: calc(100vh - 50px);
-    width: 50%;
-    position: absolute;
-    top: 0;
-    /* height: 100%; */
-    left: 25%;
-    pointer-events: none;
-    z-index: 99;
-    overflow: hidden;
-    /* left: 0; */
+  width: 50%;
+  position: absolute;
+  top: 0;
+  /* height: 100%; */
+  left: 25%;
+  pointer-events: none;
+  z-index: 99;
+  overflow: hidden;
+  /* left: 0; */
 }
 
 .snow {

@@ -11,6 +11,7 @@ import { getLocaleStorage, setLocalStorage } from './storage';
 import { filterToys, initSlider, initSearch } from './filterData';
 import { renderFilterPanel, renderToys } from './renderToys';
 import { renderTree } from './treeDecoration';
+import { renderFavorites } from './renderFavorites';
 
 class App {
   initSearch: void;
@@ -27,6 +28,7 @@ class App {
       renderFilterPanel();
       renderToys(filterToys());
       renderTree();
+      renderFavorites();
     });
   }
 }

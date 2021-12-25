@@ -26,7 +26,7 @@
       </div>
     </div>
   </header>
-  <div class="main-area-wrapper">
+  <div class="main-area-wrapper" id="mainwrap">
     <div class="page main-page hide" data-routing="main">
       <h1 class="main-page-title">Новогодняя игра<span>«Ёлочные игрушки»</span></h1>
       <button class="switch-page routing" data-routing="toys">Начать</button>
@@ -109,71 +109,24 @@
                   <button class="color-btn blue-btn" data-color="blue"></button>
                   <button class="color-btn yellow-btn" data-color="yellow"></button>
                   <button class="color-btn green-btn" data-color="green"></button>
-                  <button class="color-btn green-btn" data-color="green"></button>
+                  <button class="color-btn none-btn" data-color="none"></button>
                 </div>
-                <!-- <div class="lightswitch">
-                  <input type="checkbox" name="lightswitch" class="lightswitch-checkbox" id="mylightswitch" checked>
-                  <label class="lightswitch-label" for="mylightswitch">
-                    <div class="lightswitch-inner"></div>
-                    <div class="lightswitch-switch"></div>
-                  </label>
-                </div> -->
               </div>
             </div>
           </div>
           <div class="main-tree-container">
             <div class="lights-tree-container"></div>
             <map name="tree-map">
-              <area coords="365,699,189,706,113,683,31,608,2,555,2,539,18,437,73,351,106,224,161,134,243,-1,306,75,353,144,399,221,424,359,452,459,496,550,444,664" shape="poly" href="javascript:void(0);">
+              <area coords="365,699,189,706,113,683,31,608,2,555,2,539,18,437,73,351,106,224,161,134,243,-1,306,75,353,144,399,221,424,359,452,459,496,550,444,664" shape="poly" alt="tree-area" href="javascript:void(0);">
             </map>
             <img src="assets/tree/1.png" class="main-tree" usemap="#tree-map" alt="tree">
           </div>
           <div class="favorites-toys">
-            <div class="favorites-container-wrapper">
+            <div class="fav-container-wrapper">
               <h2 class="fav-title">Игрушки</h2>
-              <div class="favorites-container">
+              <div class="fav-container">
               </div>
             </div>
-            <div class="favorites-container-wrapper">
-              <h2 class="fav-title">Игрушки Тест</h2>
-              <div class="favorites-container-test">
-                <div class="favorites-card" data-num="1">
-                  <p class="favorites-count">2</p>
-                  <img class="favorites-card-img" src="assets/toys/1.png" alt="toy" id="1-2" draggable="true" data-imgnum="1"><img class="favorites-card-img" src="assets/toys/1.png" alt="toy" id="1-1" draggable="true" data-imgnum="1">
-                </div>
-                <div class="favorites-card" data-num="2">
-                  <p class="favorites-count">5</p>
-                  <img class="favorites-card-img" src="assets/toys/2.png" alt="toy" id="2-5" draggable="true" data-imgnum="2"><img class="favorites-card-img" src="assets/toys/2.png" alt="toy" id="2-4" draggable="true" data-imgnum="2"><img class="favorites-card-img" src="assets/toys/2.png" alt="toy" id="2-3" draggable="true" data-imgnum="2"><img class="favorites-card-img" src="assets/toys/2.png" alt="toy" id="2-2" draggable="true" data-imgnum="2"><img class="favorites-card-img" src="assets/toys/2.png" alt="toy" id="2-1" draggable="true" data-imgnum="2">
-                </div>
-                <div class="favorites-card" data-num="3">
-                  <p class="favorites-count">3</p>
-                  <img class="favorites-card-img" src="assets/toys/3.png" alt="toy" id="3-3" draggable="true" data-imgnum="3"><img class="favorites-card-img" src="assets/toys/3.png" alt="toy" id="3-2" draggable="true" data-imgnum="3"><img class="favorites-card-img" src="assets/toys/3.png" alt="toy" id="3-1" draggable="true" data-imgnum="3">
-                </div>
-                <div class="favorites-card" data-num="4">
-                  <p class="favorites-count">2</p>
-                  <img class="favorites-card-img" src="assets/toys/4.png" alt="toy" id="4-2" draggable="true" data-imgnum="4"><img class="favorites-card-img" src="assets/toys/4.png" alt="toy" id="4-1" draggable="true" data-imgnum="4">
-                </div>
-              </div>
-            </div>
-            <!-- <div class="fav-decor">
-              <div class="fav-decor-container">
-                <div class="tree-decor">
-                  <img src="assets/tree/1.png" class="tree-decor-img" alt="decorate-tree">
-                </div>
-                <div class="tree-decor">
-                  <img src="assets/tree/2.png" class="tree-decor-img" alt="decorate-tree">
-                </div>
-                <div class="tree-decor">
-                  <img src="assets/tree/3.png" class="tree-decor-img" alt="decorate-tree">
-                </div>
-                <div class="tree-decor">
-                  <img src="assets/tree/4.png" class="tree-decor-img" alt="decorate-tree">
-                </div>
-                <div class="tree-decor">
-                  <img src="assets/tree/5.png" class="tree-decor-img" alt="decorate-tree">
-                </div>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>
@@ -245,7 +198,7 @@
     <div>© 2021</div>
     <div><a href="https://rs.school/js/" target="_blank"><img class="rslogo" src="./assets/svg/rs_school_js.svg" alt="rs"></a></div>
   </footer>
-  <a href="#control-panel" class="up-button">
+  <a href="#mainwrap" class="up-button">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="1em" height="1em" focusable="false" aria-hidden="true" class="svgr-icons">
       <path d="M3.7 6.7l3.8-3.8V15h1V2.9l3.8 3.8.7-.7-5-5-5 5z"></path>
     </svg>
