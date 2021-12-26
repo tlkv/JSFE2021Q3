@@ -4,6 +4,7 @@ import './sass/nouislider.scss';
 import './sass/main.scss';
 import './sass/tree.scss';
 import './sass/style.scss';
+import './sass/decoration.scss';
 
 const app = new App();
 app.start();

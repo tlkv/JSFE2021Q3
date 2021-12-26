@@ -451,7 +451,7 @@ output {
 }
 
 .color button,
-.favorite-container button {
+.favorite-container button, .lights-switch {
   position: relative;
   width: 30px;
   height: 30px;
@@ -466,7 +466,7 @@ output {
 }
 
 .color button:hover,
-.favorite-container button:hover {
+.favorite-container button:hover, .lights-switch:hover {
   border-color: #fff;
 }
 
@@ -491,7 +491,8 @@ output {
 }
 
 .color button.active::after,
-.favorite-container button.active::after {
+.favorite-container button.active::after,
+.lights-switch.active::after {
   content: '';
   display: block;
   position: absolute;

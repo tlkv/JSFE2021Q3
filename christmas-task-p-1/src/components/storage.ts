@@ -25,6 +25,8 @@ export const AppState: AppStateObject = {
   background: '1',
   audio: false,
   snow: false,
+  lightsOn: false,
+  lights: 'multicolor',
 };
 
 export const sortingFunctions = {
@@ -75,7 +77,9 @@ export const selectBackgroundContainer = document.querySelector('.background-con
 
 export const audioButton = document.querySelector('.audio-controls') as HTMLElement;
 export const snowButton = document.querySelector('.snow-controls') as HTMLElement;
+export const lightsButton = document.querySelector('.lights-switch') as HTMLElement;
 export const snowWrapper = document.querySelector('.snow-wrapper') as HTMLElement;
+export const LightsWrapper = document.querySelector('.lights-tree-container') as HTMLElement;
 
 /* leave only this + lights selector */
 export const userTreeFilters = document.querySelector('.user-tree-filters') as HTMLElement;
@@ -86,7 +90,7 @@ export const pages = document.querySelectorAll('.page') as NodeListOf<HTMLElemen
 const upButton = document.querySelector('.up-button') as HTMLElement;
 
 export const audio = new Audio();
-audio.src = '../assets/audio/audio.mp3';
+audio.src = './assets/audio/audio.mp3';
 audio.volume = 0.5;
 audio.loop = true;
 

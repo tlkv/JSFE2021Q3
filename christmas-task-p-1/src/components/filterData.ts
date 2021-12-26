@@ -130,6 +130,8 @@ export function resetLocalHandler() {
   AppState.background = '1';
   AppState.audio = false;
   AppState.snow = false;
+  AppState.lightsOn = false;
+  AppState.lights = 'multicolor';
   renderTree();
   handleAudio();
   renderFavorites();

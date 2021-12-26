@@ -41,6 +41,7 @@
   padding-bottom: 20px;
   overflow: hidden;
   border-radius: 15px;
+  margin-top: 10px;
 }
 
 .main-tree {
@@ -175,7 +176,9 @@
   height: 40px;
   background-image: url('../assets/svg/snow.svg');
 }
-
+.on-off-lights {
+  padding: 4px 10px;
+}
 .audio-controls {
   width: 40px;
   height: 40px;
@@ -268,24 +271,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 250px;
-  padding: 10px;
+
+  /* padding: 10px; */
 }
 .lights-container {
   display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 110px;
-    /* width: 100%; */
-    width: fit-content;
-    margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  height: 110px;
+  /* width: 100%; */
+  width: fit-content;
+  margin: 0 auto;
 }
 
 .color-btn {
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   cursor: pointer;
+  margin: 0 5px;
 }
 
 .multi-btn {
@@ -382,16 +386,18 @@
 }
 
 .snow-wrapper {
-  height: calc(100vh - 50px);
+  height: calc(100vh - 170px);
   width: 50%;
   position: absolute;
-  top: 0;
+  top: 10px;
   /* height: 100%; */
   left: 25%;
   pointer-events: none;
   z-index: 99;
   overflow: hidden;
   /* left: 0; */
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 .snow {
@@ -445,4 +451,14 @@
   .main-tree-container {
     width: 70%;
   }
+  .snow-wrapper {
+    width: 70%;
+    left: 30%;
+  }
+}
+
+.color-btn.active,
+.bg.menu-item.active,
+.tree-item.active {
+  border: 1px solid #ff0;
 }

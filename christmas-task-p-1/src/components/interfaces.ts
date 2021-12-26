@@ -22,12 +22,16 @@ export interface AppStateObject {
   background: string;
   audio: boolean;
   snow: boolean;
+  lightsOn: boolean;
+  lights: string;
 }
 
 export type FilterKeys = 'shape' | 'color' | 'size';
 
-export type TreeKeys = 'tree' | 'background' | 'audio' | 'snow';
+export type TreeKeys = 'tree' | 'background' | 'audio' | 'snow' | 'lights' | 'lightsOn';
 
 export type SortingTypes = 'sort-default' | 'sort-name-asc' | 'sort-name-desc' | 'sort-year-asc' | 'sort-year-desc';
+
+export type LightsTypes = 'multicolor' | 'red' | 'blue' | 'green' | 'yellow';
 
 export type FilterValues = [number, number];
