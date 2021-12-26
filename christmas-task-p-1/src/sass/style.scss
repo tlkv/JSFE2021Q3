@@ -451,7 +451,8 @@ output {
 }
 
 .color button,
-.favorite-container button, .lights-switch {
+.favorite-container button,
+.lights-switch {
   position: relative;
   width: 30px;
   height: 30px;
@@ -466,7 +467,8 @@ output {
 }
 
 .color button:hover,
-.favorite-container button:hover, .lights-switch:hover {
+.favorite-container button:hover,
+.lights-switch:hover {
   border-color: #fff;
 }
 
@@ -503,6 +505,14 @@ output {
   border: solid #fff;
   border-width: 0 4px 4px 0;
   transform: rotate(45deg);
+}
+
+.lights-switch {
+  margin-left: 2px;
+  border-width: 2px;
+  border-color: #fff;
+  width: 32px;
+  height: 32px;
 }
 
 .color button.active:nth-child(1)::after {
@@ -641,7 +651,7 @@ output {
 .snowflake-audio-container {
   margin-bottom: 0;
   justify-content: center;
-} 
+}
 
 .reset-btn:hover,
 .sort-select:hover {
