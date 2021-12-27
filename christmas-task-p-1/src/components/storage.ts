@@ -1,9 +1,11 @@
 import { AppStateObject, SortingTypes, ToyData, FilterValues } from './interfaces';
 import { renderToys } from './renderToys';
-import { filterToys, selectToys, resetFiltersHandler, resetLocalHandler, handleFilterItems } from './filterData';
+import { filterToys, selectToys, resetFiltersHandler, resetLocalHandler, handleFilterItems, resetTreeHandler } from './filterData';
 import { router } from './routing';
 import { handleTreeFilters } from './treeDecoration';
 import { audioOnload } from './audio';
+import { handleDragStart, handleOverDrop } from './dragNDrop';
+import { renderFavorites } from './renderFavorites';
 
 //app default values
 export const maxSelected = 20;
@@ -66,6 +68,8 @@ export const sortingOrder = document.querySelector('.sort-select') as HTMLInputE
 export const searchField = document.querySelector('.search') as HTMLInputElement;
 
 export const resetFilters = document.querySelector('.reset-filters') as HTMLInputElement;
+export const resetToys= document.querySelector('.reset-toys') as HTMLInputElement;
+export const resetTree = document.querySelector('.reset-tree') as HTMLInputElement;
 export const resetLocal = document.querySelectorAll('.reset-local') as NodeListOf<HTMLElement>;
 
 export const treeMain = document.querySelector('.main-tree') as HTMLImageElement;
@@ -80,6 +84,7 @@ export const snowButton = document.querySelector('.snow-controls') as HTMLElemen
 export const lightsButton = document.querySelector('.lights-switch') as HTMLElement;
 export const snowWrapper = document.querySelector('.snow-wrapper') as HTMLElement;
 export const LightsWrapper = document.querySelector('.lights-tree-container') as HTMLElement;
+const treeMap = document.querySelector('.tree-map') as HTMLElement;
 
 /* leave only this + lights selector */
 export const userTreeFilters = document.querySelector('.user-tree-filters') as HTMLElement;
@@ -110,6 +115,7 @@ sortingOrder.onchange = () => {
 };
 
 resetFilters.addEventListener('click', resetFiltersHandler);
+resetTree.addEventListener('click', resetTreeHandler);
 
 searchField.addEventListener('input', () => {
   renderToys(filterToys());
@@ -137,3 +143,9 @@ routingButtons.forEach(item => {
 document.addEventListener('click', audioOnload);
 
 userTreeFilters.addEventListener('click', handleTreeFilters);
+
+
+favContainer.addEventListener('dragstart', handleDragStart);
+treeMap.addEventListener('dragover', handleOverDrop);
+treeMap.addEventListener('drop', handleOverDrop);
+resetToys.addEventListener('click', renderFavorites)

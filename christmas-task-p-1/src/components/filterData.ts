@@ -137,3 +137,15 @@ export function resetLocalHandler() {
   renderFavorites();
   resetFiltersHandler();
 }
+
+export function resetTreeHandler() {  
+  AppState.tree = '1';
+  AppState.background = '1';
+  AppState.audio = false;
+  AppState.snow = false;
+  AppState.lightsOn = false;
+  AppState.lights = 'multicolor';
+  renderTree();
+  handleAudio();
+  renderFavorites();
+}

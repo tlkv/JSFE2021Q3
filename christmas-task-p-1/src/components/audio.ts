@@ -1,7 +1,6 @@
 import { AppState, audio } from './storage';
 
-export function audioOnload() {
-  console.log('handleAudio');
+export function audioOnload() {  
   handleAudio();
   document.removeEventListener('click', audioOnload);
 }

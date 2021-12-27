@@ -19,7 +19,6 @@ export function handleTreeFilters(e: Event) {
   if (!filterElement.classList.contains('tree-filter-item')) {
     return false;
   }
-  console.log(filterElement.dataset);
   const inputFilterKey = filterElement.dataset.group as TreeKeys;
   const inputFilterValue = filterElement.dataset.value as string;
   if (inputFilterKey === 'audio' || inputFilterKey === 'snow' || inputFilterKey === 'lightsOn') {
@@ -29,18 +28,17 @@ export function handleTreeFilters(e: Event) {
   }
   renderTree();
   handleAudio();
-  console.log(AppState);
 }
 
 export function renderTree() {
   treeMain.src = `./assets/tree/${AppState.tree}.png`;
   treeMainContainer.style.backgroundImage = `url('./assets/bg/${AppState.background}.jpg'`;
+  clearInterval(interval);
   if (AppState.snow) {
     snowWrapper.classList.remove('hide');
     snowButton.classList.add('active');
-    interval = setInterval(createSnowFlake, 100);
+    interval = setInterval(createSnowFlake, 70);
   } else {
-    clearInterval(interval);
     snowWrapper.classList.add('hide');
     snowButton.classList.remove('active');
   }
