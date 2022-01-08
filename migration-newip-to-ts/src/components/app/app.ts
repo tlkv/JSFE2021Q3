@@ -1,6 +1,5 @@
 import AppController from '../controller/controller';
 import { AppView } from '../view/appView';
-
 class App {
   public controller: AppController;
   public view: AppView;

@@ -1,11 +1,49 @@
-type Options = {
+export type Options = {
   apiKey: string;
   sources: string;
 };
-interface respObject {
+
+export type Callbacks<T> = (_data: T) => void;
+
+export type SourceType = Pick<DataSource, 'sources'>;
+export type ArticleType = Pick<DataNews, 'articles'>;
+export type DataType = Articles | DataNews | DataSource;
+
+export interface respObject {
   endpoint: string;
   options?: Partial<Options>;
 }
+export interface Source {
+  category: string;
+  country: string;
+  description: string;
+  id: string;
+  language: string;
+  name: string;
+  url: string;
+}
+
+export interface DataSource {
+  status: string;
+  sources: Source[];
+}
+export interface Articles {
+  author: string;
+  content: string;
+  description: string;
+  publishedAt: string;
+  source: { id: string; name: string };
+  title: string;
+  url: string;
+  urlToImage: string;
+}
+
+export interface DataNews {
+  status: string;
+  totalResults: number;
+  articles: Articles[];
+}
+
 class Loader {
   public baseLink: string;
   public options: Partial<Options>;
@@ -17,7 +55,7 @@ class Loader {
 
   getResp(
     { endpoint, options = {} }: respObject,
-    callback = () => {
+    callback: Callbacks<DataType> = () => {
       console.error('No callback for GET response');
     }
   ): void {
@@ -45,7 +83,7 @@ class Loader {
     return url.slice(0, -1);
   }
 
-  load(method: string, endpoint: string, callback, options = {}) {
+  load(method: string, endpoint: string, callback: Callbacks<DataType>, options = {}) {
     fetch(this.makeUrl(options, endpoint), { method })
       .then(this.errorHandler)
       .then((res) => res.json())
