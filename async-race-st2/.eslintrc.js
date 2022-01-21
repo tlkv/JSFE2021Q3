@@ -1,9 +1,10 @@
+// eslint-disable-next-line no-undef
 module.exports = {
   env: {
     browser: true,
     es2021: true,
   },
-  extends: ['airbnb-base'],
+  extends: ['airbnb-typescript/base', 'eslint:recommended', 'plugin:@typescript-eslint/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 13,

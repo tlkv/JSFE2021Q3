@@ -1,0 +1,41 @@
+* {
+  font-family: 'Josefin Sans', sans-serif;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  text-transform: uppercase;
+  background-color: #363636;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  color: #e6c300;
+}
+
+header, main {
+  width: 100%;
+  text-align: center;
+  padding: 10px;  
+}
+
+header button {
+  margin: 10px;
+  width: 120px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.hide {
+  display: none;
+}
