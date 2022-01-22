@@ -23,10 +23,11 @@ h1 {
   color: #e6c300;
 }
 
-header, main {
+header,
+main {
   width: 100%;
   text-align: center;
-  padding: 10px;  
+  padding: 10px;
 }
 
 header button {
@@ -38,4 +39,12 @@ header button {
 
 .hide {
   display: none;
+}
+
+.garage-controls {
+  display: flex;
+  justify-content: center;
+  width: 280px;
+  flex-wrap: wrap;
+  margin: auto;
 }

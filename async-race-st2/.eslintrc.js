@@ -12,5 +12,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   ignorePatterns: ['*.config.js'],
-  rules: { '@typescript-eslint/no-explicit-any': 'error' },
+  rules: {
+    '@typescript-eslint/no-explicit-any': 'error',
+  },
 };
