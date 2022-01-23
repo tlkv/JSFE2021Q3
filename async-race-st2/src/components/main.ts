@@ -1,4 +1,6 @@
-import { getCars } from "./api";
+import { renderCars, handleCarsAction, createCar, updateCar } from './cars';
+import { appState } from './store';
+import { handleCarsNext, handleCarsPrev } from './pagination';
 
 export const main = document.createElement('main');
 export const garageContainer = document.createElement('div');
@@ -19,29 +21,51 @@ export const raceButton = document.createElement('button');
 export const resetButton = document.createElement('button');
 export const generateButton = document.createElement('button');
 
-export function initMain(root: HTMLElement) {
-  const headingGarage = document.createElement('h2');
-  headingGarage.textContent = 'Garage';
-  garageContainer.classList.add('garage-container');
-  garageContainer.append(headingGarage);
+export const garageCount = document.createElement('span');
+export const garageCurrentPage = document.createElement('span');
+export const garagePrev = document.createElement('button');
+export const garageNext = document.createElement('button');
 
+export async function initMain(root: HTMLElement) {
+  const headingGarage = document.createElement('h2');
+  const pageGarage = document.createElement('h4');
+  const carsPagination = document.createElement('div');
+
+  headingGarage.innerHTML = `Garage: `;
+  pageGarage.innerHTML = `Page #`;
+  garageCount.textContent = appState.carsAmount;
+  garageCurrentPage.textContent = String(appState.carsPage);
+  garageCount.classList.add('garage-count');
+  garageCurrentPage.classList.add('garage-current-page');
+  headingGarage.append(garageCount);
+  pageGarage.append(garageCurrentPage);
+  garageContainer.classList.add('garage-container');
   garageControls.classList.add('garage-controls');
+
+  carsPagination.classList.add('cars-pagination');
+  garageNext.classList.add('cars-prev"');
+  garagePrev.classList.add('cars-prev"');
+  garageNext.textContent = 'Next';
+  garagePrev.textContent = 'Prev';
+  carsPagination.append(garagePrev, garageNext);
+
+  garageNext.addEventListener('click', handleCarsNext);
+  garagePrev.addEventListener('click', handleCarsPrev);
 
   createInput.type = 'text';
   createColor.type = 'color';
   createButton.textContent = 'Create';
 
   updateInput.type = 'text';
-  updateColor.type = 'color'; // forEach
+  updateColor.type = 'color';
   updateButton.textContent = 'Update';
 
   raceButton.textContent = 'Race';
-  resetButton.textContent = 'Reset';
+  resetButton.textContent = 'Reset Race';
   generateButton.textContent = 'Generate Cars';
 
-  generateButton.addEventListener('click', () => {
-    getCars();
-  })
+  createButton.addEventListener('click', createCar);
+  updateButton.addEventListener('click', updateCar);
 
   garageControls.append(
     createInput,
@@ -55,14 +79,12 @@ export function initMain(root: HTMLElement) {
     generateButton
   );
 
-  garageInner.textContent = `inside Garage`;
   garageInner.classList.add('garage-inner');
-  garageContainer.append(garageControls, garageInner);
+  garageInner.addEventListener('click', handleCarsAction);
+  garageContainer.append(garageControls, headingGarage, pageGarage, carsPagination, garageInner);
 
-  const headingWinners = document.createElement('h2');
-  headingWinners.textContent = 'Winners';
+  const headingWinners = document.createElement('h2'); // remake
   winnersContainer.classList.add('winners-container', 'hide');
-  winnersInner.textContent = `inside Winners`;
   winnersInner.classList.add('winners-inner');
   winnersContainer.append(headingWinners, winnersInner);
 
