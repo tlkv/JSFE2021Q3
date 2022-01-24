@@ -1,6 +1,7 @@
-import { renderCars, handleCarsAction, createCar, updateCar, createRandomCars } from './cars';
+import { renderCars, handleCarsAction, createCar, updateCar, createRandomCars, startRace } from './cars';
 import { appState } from './store';
 import { handleCarsNext, handleCarsPrev, handleWinnersNext, handleWinnersPrev } from './pagination';
+import { randomWinnersGenerate } from './winners';
 
 export const main = document.createElement('main');
 
@@ -26,8 +27,8 @@ export const garageInner = document.createElement('div');
 
 garageCreateButton.textContent = 'Create';
 garageUpdateButton.textContent = 'Update';
-garageRaceButton.textContent = 'Race';
-garageResetButton.textContent = 'Reset Race';
+garageRaceButton.textContent = 'Start race';
+garageResetButton.textContent = 'Reset Race/Cars';
 garageGenerateButton.textContent = 'Generate Cars';
 garageHeading.innerHTML = `<i class="fas fa-car"></i> Garage: `;
 garageCurrentPage.innerHTML = `Page #`;
@@ -75,6 +76,8 @@ export function initGarage(root: HTMLElement) {
   garageUpdateButton.addEventListener('click', updateCar);
   garageGenerateButton.addEventListener('click', createRandomCars);
   garageInner.addEventListener('click', handleCarsAction);
+  garageRaceButton.addEventListener('click', startRace);
+  garageResetButton.addEventListener('click', renderCars);
 }
 
 export const winnersContainer = document.createElement('div');
@@ -87,6 +90,9 @@ export const winnersPrev = document.createElement('button');
 export const winnersNext = document.createElement('button');
 export const winnersTopRow = document.createElement('div');
 export const winnersInner = document.createElement('div');
+
+export const winnersRandomGenerator = document.createElement('button');
+winnersRandomGenerator.textContent = 'Generate Random Winners';
 
 winnersHeading.innerHTML = `<i class="fas fa-medal"></i> Winners: `;
 winnersCurrentPage.innerHTML = `Page #`;
@@ -114,10 +120,18 @@ export function initWinners() {
   winnersPagination.append(winnersPrev, winnersNext);
   winnersCount.textContent = appState.winnersAmount;
   winnersCurrentPageNum.textContent = String(appState.winnersPageCurrent);
-  winnersContainer.append(winnersHeading, winnersCurrentPage, winnersPagination, winnersTopRow, winnersInner);
+  winnersContainer.append(
+    winnersHeading,
+    winnersCurrentPage,
+    winnersPagination,
+    winnersTopRow,
+    winnersInner,
+    winnersRandomGenerator
+  );
 
   main.append(winnersContainer);
 
+  winnersRandomGenerator.addEventListener('click', randomWinnersGenerate);
   winnersNext.addEventListener('click', handleWinnersNext);
   winnersPrev.addEventListener('click', handleWinnersPrev);
   // handle sortings

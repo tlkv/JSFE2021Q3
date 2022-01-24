@@ -1,6 +1,6 @@
 import { appState } from './store';
-import { winnersInner, winnersCount, winnersCurrentPageNum } from './main';
-import { getWinners, getCarData } from './api';
+import { winnersInner, winnersCount, winnersCurrentPageNum, winnersNext, winnersPrev } from './main';
+import { getWinners, getCarData, createWinner } from './api';
 import { IWinner, ICar } from './interfaces';
 
 export function renderWinnerCard(curr: number, { name, color }: ICar, { id, time, wins }: IWinner) {
@@ -18,10 +18,26 @@ export function renderWinnerCard(curr: number, { name, color }: ICar, { id, time
 export async function renderWinners() {
   await getWinners();
   winnersCount.textContent = appState.winnersAmount;
-  winnersCurrentPageNum.textContent = String(appState.garagePageCurrent);
+  winnersCurrentPageNum.textContent = String(appState.winnersPageCurrent);
+  appState.winnersPageCurrent === 1 ? (winnersPrev.disabled = true) : (winnersPrev.disabled = false);
+  Number(appState.winnersAmount) / appState.winnersPageLimit <= appState.winnersPageCurrent
+    ? (winnersNext.disabled = true)
+    : (winnersNext.disabled = false);
   winnersInner.innerHTML = '';
   for (let i = 0; i < appState.winners.length; i++) {
     const res = (await getCarData(appState.winners[i].id)) as ICar;
     winnersInner.append(renderWinnerCard(i, res, appState.winners[i]));
   }
+}
+
+export async function randomWinnersGenerate() {
+  if (appState.cars.length === 0) return false;
+  for (let i = 0; i < 10; i++) {
+    const wId = appState.cars[Math.floor(Math.random() * appState.cars.length)].id;
+    const wTime = Math.round(Math.random() * 10) + 1;
+    const wWins = Math.round(Math.random() * 10) + 1;
+    const winner: IWinner = { id: wId, time: wTime, wins: wWins };
+    await createWinner(winner);
+  }
+  renderWinners();
 }

@@ -84,7 +84,7 @@ button {
 
 .garage-container,
 .winners-container {
-  width: 500px;
+  max-width: 1000px;
   margin: auto;
 }
 
@@ -103,21 +103,4 @@ button {
 .winner-header-item {
   width: 20%;
   text-align: center;
-}
-
-.drive {
-  animation-fill-mode: forwards;
-}
-
-.header-active {
-  border: 1px solid red;
-}
-
-@keyframes grow {
-  0% {
-    font-size: 0;
-  }
-  100% {
-    font-size: 40px;
-  }
 }

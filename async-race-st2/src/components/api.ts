@@ -1,8 +1,8 @@
 import { App } from './app';
-import { ICar, ICreatedCar, IWinner } from './interfaces';
-import { appState } from './store';
+import { ICar, ICreatedCar, IWinner, ICarEngine } from './interfaces';
 import { garageCreateColor, garageCreateInput, garageUpdateInput, garageUpdateColor } from './main';
-import { getRandomName, getRandomColor } from './utils';
+import { appState } from './store';
+
 
 const baseUrl = 'http://localhost:3000';
 
@@ -67,6 +67,8 @@ export async function updateCarApi(id: string): Promise<void> {
   } catch (err) {
     throw new Error(err as string);
   }
+  garageUpdateInput.value = '';
+  garageUpdateColor.value = '#000000';
 }
 
 export async function getWinners(): Promise<void> {
@@ -102,6 +104,49 @@ export async function getCarData(carId: number): Promise<ICar | null> {
       return res;
     }
     return null;
+  } catch (err) {
+    throw new Error(err as string);
+  }
+}
+
+export async function startCarEngineApi(carId: number): Promise<{ status: number; result: ICarEngine }> {
+  try {
+    const data = await fetch(`${engine}?id=${carId}&status=started`, {
+      method: 'PATCH',
+    });
+    const res: ICarEngine = await data.json();
+
+    return {
+      status: data.status,
+      result: res,
+    };
+  } catch (err) {
+    throw new Error(err as string);
+  }
+}
+
+export async function switchToDrive(car: number) {
+  try {
+    const data = await fetch(`${engine}?id=${car}&status=drive`, {
+      method: 'PATCH',
+    });
+    return data.status;
+  } catch (err) {
+    throw new Error(err as string);
+  }
+}
+
+export async function createWinner(car: IWinner): Promise<number> {
+  try {
+    const data = await fetch(winners, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(car),
+    });
+
+    return data.status;
   } catch (err) {
     throw new Error(err as string);
   }

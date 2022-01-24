@@ -26,3 +26,8 @@ export interface ICreatedCar {
   name: string;
   color: string;
 }
+
+export interface ICarEngine {
+  velocity: number;
+  distance: number;
+}
