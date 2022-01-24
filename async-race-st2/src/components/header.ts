@@ -3,10 +3,19 @@ import { garageContainer, winnersContainer } from './main';
 const header = document.createElement('header');
 const garageButton = document.createElement('button');
 const winnersButton = document.createElement('button');
+garageButton.innerHTML = `<i class="fas fa-car"></i> Garage`;
+winnersButton.innerHTML = `<i class="fas fa-medal"></i> Winners`;
+
+function toggleView(hideElem: HTMLElement | null, showElem: HTMLElement | null) {
+  if (hideElem) {
+    hideElem.classList.add('hide');
+  }
+  if (showElem) {
+    showElem.classList.remove('hide');
+  }
+}
 
 export function initHeader(root: HTMLElement) {
-  garageButton.textContent = 'Garage';
-  winnersButton.textContent = 'Winners';
   header.append(garageButton);
   header.append(winnersButton);
   garageButton.addEventListener('click', () => {
@@ -16,13 +25,4 @@ export function initHeader(root: HTMLElement) {
     toggleView(garageContainer, winnersContainer);
   });
   root.append(header);
-}
-
-function toggleView(hideElem: HTMLElement | null, showElem: HTMLElement | null) {
-  if (hideElem) {
-    hideElem.classList.add('hide');
-  }
-  if (showElem) {
-    showElem.classList.remove('hide');
-  }
 }

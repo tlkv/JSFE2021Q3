@@ -13,14 +13,15 @@ export interface IWinner {
 export interface IStore {
   cars: Array<ICar>;
   carsAmount: string;
-  carsPage: number;
-  carsPageLimit: number;
+  garagePageCurrent: number;
+  garagePageLimit: number;
   winners: Array<IWinner>;
   winnersAmount: string;
-  winnersPage: number;
+  winnersPageCurrent: number;
   winnersPageLimit: number;
+  sortOrder: 'ASC' | 'DESC';
+  sortBy: 'id' | 'wins' | 'time';
 }
-
 export interface ICreatedCar {
   name: string;
   color: string;

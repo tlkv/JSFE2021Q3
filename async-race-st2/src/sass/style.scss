@@ -52,9 +52,7 @@ button {
   margin: auto;
 }
 
-.car-card {  
-  width: 500px;
-  margin: auto;
+.car-card {
   margin-top: 20px;
   position: relative;
   border-bottom: 4px dotted #fff;
@@ -62,7 +60,7 @@ button {
 
 .car-card-flag {
   position: absolute;
-  right: 80px;
+  right: 60px;
   font-size: 28px;
   top: 15px;
 }
@@ -78,4 +76,48 @@ button {
 
 .border-error {
   border: 2px solid red;
+}
+
+.car-card-buttons {
+  margin-bottom: 5px;
+}
+
+.garage-container,
+.winners-container {
+  width: 500px;
+  margin: auto;
+}
+
+.winner-card,
+.winners-top-row {
+  display: flex;
+}
+
+.winners-top-row {
+  margin: 5px 0;
+  padding: 5px;
+  border: 1px solid #fff;
+}
+
+.winner-card-item,
+.winner-header-item {
+  width: 20%;
+  text-align: center;
+}
+
+.drive {
+  animation-fill-mode: forwards;
+}
+
+.header-active {
+  border: 1px solid red;
+}
+
+@keyframes grow {
+  0% {
+    font-size: 0;
+  }
+  100% {
+    font-size: 40px;
+  }
 }

@@ -1,28 +1,19 @@
 import {
   garageInner,
   garageCount,
-  garageCurrentPage,
-  createButton,
-  createColor,
-  createInput,
-  updateInput,
-  updateColor,
-  updateButton,
+  garageCurrentPageNum,
+  garageCreateButton,
+  garageCreateColor,
+  garageCreateInput,
+  garageUpdateInput,
+  garageUpdateColor,
+  garageUpdateButton,
 } from './main';
 import { appState } from './store';
 import { ICar, ICreatedCar } from './interfaces';
-import { getCars, removeCar, generateCar, updateCarApi } from './api';
+import { getCars, removeCar, generateCar, updateCarApi, removeWinner } from './api';
 import { getRandomColor, getRandomName } from './utils';
-
-export async function renderCars() {
-  await getCars();
-  garageCount.textContent = appState.carsAmount;
-  garageCurrentPage.textContent = String(appState.carsPage);
-  garageInner.innerHTML = '';
-  for (let i = 0; i < appState.cars.length; i++) {
-    garageInner.append(renderCarCard(appState.cars[i]));
-  }
-}
+import { renderWinners } from './winners';
 
 export function renderCarCard({ id, name, color }: ICar) {
   const carCard = document.createElement('div');
@@ -47,38 +38,50 @@ export function renderCarCard({ id, name, color }: ICar) {
   return carCard;
 }
 
+export async function renderCars() {
+  await getCars();
+  garageCount.textContent = appState.carsAmount;
+  garageCurrentPageNum.textContent = String(appState.garagePageCurrent);
+  garageInner.innerHTML = '';
+  for (let i = 0; i < appState.cars.length; i++) {
+    garageInner.append(renderCarCard(appState.cars[i]));
+  }
+}
+
 export async function handleCarsAction(e: Event) {
   const selectedItem = e.target as HTMLTemplateElement;
   if (selectedItem.hasAttribute('data-remove-id')) {
     await removeCar(selectedItem.getAttribute('data-remove-id') as string);
+    await removeWinner(selectedItem.getAttribute('data-remove-id') as string);
     renderCars();
+    renderWinners();
   }
   if (selectedItem.hasAttribute('data-select-id')) {
-    updateInput.value = selectedItem.getAttribute('data-select-name') as string;
-    updateColor.value = selectedItem.getAttribute('data-select-color') as string;
-    updateButton.setAttribute('data-update-id', selectedItem.getAttribute('data-select-id') as string);
+    garageUpdateInput.value = selectedItem.getAttribute('data-select-name') as string;
+    garageUpdateColor.value = selectedItem.getAttribute('data-select-color') as string;
+    garageUpdateButton.setAttribute('data-update-id', selectedItem.getAttribute('data-select-id') as string);
   }
 }
 
 export async function updateCar() {
-  if (!updateButton.hasAttribute('data-update-id')) {
-    updateInput.classList.add('border-error');
-    updateInput.value = 'No car selected';
+  if (!garageUpdateButton.hasAttribute('data-update-id')) {
+    garageUpdateInput.classList.add('border-error');
+    garageUpdateInput.value = 'No car selected';
     setTimeout(() => {
-      updateInput.classList.remove('border-error');
-      updateInput.value = '';
+      garageUpdateInput.classList.remove('border-error');
+      garageUpdateInput.value = '';
     }, 1200);
   } else {
-    if (updateInput.value.length === 0) {
-      updateInput.classList.add('border-error');
-      updateInput.placeholder = 'No input';
+    if (garageUpdateInput.value.length === 0) {
+      garageUpdateInput.classList.add('border-error');
+      garageUpdateInput.placeholder = 'No input';
       setTimeout(() => {
-        updateInput.classList.remove('border-error');
-        updateInput.placeholder = '';
+        garageUpdateInput.classList.remove('border-error');
+        garageUpdateInput.placeholder = '';
       }, 1200);
     } else {
-      const id = updateButton.getAttribute('data-update-id') as string;
-      updateButton.removeAttribute('data-update-id');
+      const id = garageUpdateButton.getAttribute('data-update-id') as string;
+      garageUpdateButton.removeAttribute('data-update-id');
       await updateCarApi(id);
       renderCars();
     }
@@ -86,15 +89,15 @@ export async function updateCar() {
 }
 
 export async function createCar() {
-  if (createInput.value.length === 0) {
-    createInput.classList.add('border-error');
-    createInput.placeholder = 'No input';
+  if (garageCreateInput.value.length === 0) {
+    garageCreateInput.classList.add('border-error');
+    garageCreateInput.placeholder = 'No input';
     setTimeout(() => {
-      createInput.classList.remove('border-error');
-      createInput.placeholder = '';
+      garageCreateInput.classList.remove('border-error');
+      garageCreateInput.placeholder = '';
     }, 1200);
   } else {
-    await generateCar(createInput.value, createColor.value);
+    await generateCar(garageCreateInput.value, garageCreateColor.value);
     renderCars();
   }
 }
