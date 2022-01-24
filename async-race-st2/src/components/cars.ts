@@ -12,6 +12,7 @@ import {
 import { appState } from './store';
 import { ICar, ICreatedCar } from './interfaces';
 import { getCars, removeCar, generateCar, updateCarApi } from './api';
+import { getRandomColor, getRandomName } from './utils';
 
 export async function renderCars() {
   await getCars();
@@ -93,7 +94,17 @@ export async function createCar() {
       createInput.placeholder = '';
     }, 1200);
   } else {
-    await generateCar();
+    await generateCar(createInput.value, createColor.value);
     renderCars();
   }
+}
+
+export async function createRandomCars() {
+  let arr = [];
+  for (let i = 0; i < 100; i += 1) {
+    arr.push(generateCar(getRandomName(), getRandomColor()));
+  }
+  Promise.all(arr).then(() => {
+    renderCars();
+  });
 }

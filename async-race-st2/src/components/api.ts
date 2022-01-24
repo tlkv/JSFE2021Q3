@@ -2,6 +2,7 @@ import { App } from './app';
 import { ICar, ICreatedCar } from './interfaces';
 import { appState } from './store';
 import { createColor, createInput, updateInput, updateColor } from './main';
+import { getRandomName, getRandomColor } from './utils';
 
 const baseUrl = 'http://localhost:3000';
 
@@ -27,14 +28,17 @@ export async function removeCar(id: string): Promise<void> {
     await fetch(`${garage}/${id}`, {
       method: 'DELETE',
     });
+    if ((Number(appState.carsAmount) - 1) / appState.carsPageLimit <= appState.carsPage - 1) {
+      appState.carsPage -= 1;
+    }
   } catch (err) {
     throw new Error(err as string);
   }
 }
 
-export async function generateCar(): Promise<void> {
-  const name = createInput.value;
-  const color = createColor.value;
+export async function generateCar(name: String, color: String): Promise<void> {
+  /* const name = createInput.value;
+  const color = createColor.value; */
   try {
     await fetch(garage, {
       method: 'POST',
@@ -63,3 +67,9 @@ export async function updateCarApi(id: string): Promise<void> {
     throw new Error(err as string);
   }
 }
+
+/* export async function generateRandomCars(): Promise<void> {
+  for (let i = 0; i <= 100; i += 1) {
+    await generateCar(getRandomName(), getRandomColor());
+  }
+} */

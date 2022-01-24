@@ -1,4 +1,4 @@
-import { renderCars, handleCarsAction, createCar, updateCar } from './cars';
+import { renderCars, handleCarsAction, createCar, updateCar, createRandomCars } from './cars';
 import { appState } from './store';
 import { handleCarsNext, handleCarsPrev } from './pagination';
 
@@ -66,6 +66,7 @@ export async function initMain(root: HTMLElement) {
 
   createButton.addEventListener('click', createCar);
   updateButton.addEventListener('click', updateCar);
+  generateButton.addEventListener('click', createRandomCars);
 
   garageControls.append(
     createInput,
