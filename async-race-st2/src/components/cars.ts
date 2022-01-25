@@ -12,10 +12,15 @@ import {
   garageNext,
 } from './main';
 import { appState } from './store';
-import { ICar, ICreatedCar } from './interfaces';
-import { getCars, removeCar, generateCar, updateCarApi, removeWinner, startCarEngineApi } from './api';
+import { ICar, ICarEngine, ICreatedCar } from './interfaces';
+import { getCars, removeCar, generateCar, updateCarApi, removeWinner, startCarEngineApi, switchToDrive } from './api';
 import { getRandomColor, getRandomName } from './utils';
 import { renderWinners } from './winners';
+
+let carStartButtons: NodeListOf<HTMLInputElement>;
+let carStopButtons: NodeListOf<HTMLInputElement>;
+let carImages: NodeListOf<HTMLElement>;
+let carAnimations: Array<Animation> = [];
 
 export function renderCarCard({ id, name, color }: ICar) {
   const carCard = document.createElement('div');
@@ -34,8 +39,8 @@ export function renderCarCard({ id, name, color }: ICar) {
   <div class="car-card-buttons">
     <button class="car-card-button car-card-button-select" data-select-id="${id}" data-select-name="${name}" data-select-color="${color}">Select</button>
     <button class="car-card-button car-card-button-remove" data-remove-id="${id}">Remove</button>
-    <button class="car-card-button car-card-button-start" data-start-id="${id}">Start</button>
-    <button class="car-card-button car-card-button-stop" data-stop-id="${id}" disabled>Stop</button>
+    <button class="car-card-button car-card-button-start" data-start-id="${id}">Start (A)</button>
+    <button class="car-card-button car-card-button-stop" data-stop-id="${id}" disabled>Stop (B)</button>
   </div>`;
   return carCard;
 }
@@ -52,6 +57,16 @@ export async function renderCars() {
   for (let i = 0; i < appState.cars.length; i++) {
     garageInner.append(renderCarCard(appState.cars[i]));
   }
+  carStartButtons = garageInner.querySelectorAll('.car-card-button-start');
+  carStopButtons = garageInner.querySelectorAll('.car-card-button-stop');
+  carImages = garageInner.querySelectorAll('.car-card-pic');
+
+  for (let i = 0; i < carStartButtons.length; i++) {
+    carStartButtons[i].onclick = () => {
+      carStartButtons[i].disabled = true;
+      startCarEngine(Number(carStartButtons[i].getAttribute('data-start-id')), i);
+    };
+  }
 }
 
 export async function handleCarsAction(e: Event) {
@@ -67,9 +82,9 @@ export async function handleCarsAction(e: Event) {
     garageUpdateColor.value = selectedItem.getAttribute('data-select-color') as string;
     garageUpdateButton.setAttribute('data-update-id', selectedItem.getAttribute('data-select-id') as string);
   }
-  if (selectedItem.hasAttribute('data-start-id')) {
+  /* if (selectedItem.hasAttribute('data-start-id')) {
     startCarEngine(Number(selectedItem.getAttribute('data-start-id')), selectedItem);
-  }
+  } */
 }
 
 export async function updateCar() {
@@ -121,43 +136,50 @@ export async function createRandomCars() {
   });
 }
 
-export async function animateCar(time: number, item: HTMLElement): Promise<void> {
-  const car = item.closest('.car-card')?.getElementsByClassName('fa-car-side')[0] as HTMLElement;
-  const stopButton = item.parentElement?.getElementsByClassName('car-card-button-stop')[0] as HTMLInputElement;
-  stopButton.disabled = false;
-  const carAnimation = car.animate(
-    [
-      { transform: 'translateX(0)' },
-      { transform: `translateX(${(car.closest('.car-card-wrapper') as HTMLElement).offsetWidth - 60}px)` },
-    ],
-    {
-      fill: 'forwards',
-      duration: time,
-    }
-  );
-  stopButton.onclick = () => {
-    carAnimation.finish();
-    carAnimation.cancel();
-  };
-  carAnimation.finished.then(() => {
-    stopButton.disabled = true;
-    (item as HTMLInputElement).disabled = false;
+export async function animateCar(time: number, iter: number): Promise<void> {
+  carStopButtons[iter].disabled = false;
+  carAnimations[iter] = carImages[iter].animate([{ left: 0 }, { left: 'calc(100% - 60px)' }], {
+    fill: 'forwards',
+    duration: time,
   });
+  carStopButtons[iter].onclick = () => {
+    carAnimations[iter].cancel();
+    carStopButtons[iter].disabled = true;
+    carStartButtons[iter].disabled = false;
+  };
 }
 
-export async function startCarEngine(id: number, item: HTMLElement): Promise<void> {
-  (item as HTMLInputElement).disabled = true;
+export async function startCarEngine(id: number, iter: number): Promise<void> {
   const data = await startCarEngineApi(id);
   if (data.status === 200) {
     //handleButtons
     const time = data.result.distance / data.result.velocity;
-    animateCar(time, item);
+    animateCar(time, iter);
+    await switchToDriveMode(data.result, id, iter);
   }
 }
 
-export async function startRace() {
-  const allCars = garageInner.querySelectorAll('.car-card-button-start');
-  allCars.forEach(item => {
-    startCarEngine(Number(item.getAttribute('data-start-id')), item as HTMLElement);
+export async function switchToDriveMode(car: ICarEngine, id: number, iter: number): Promise<void> {
+  const engMode = await switchToDrive(id);
+  return new Promise(resolve => {
+    if (engMode === 500) {
+      carAnimations[iter].pause();
+    }
+
+    if (engMode === 200) {
+      // pass speed to modal
+      // speed = Math.floor(car.distance / car.velocity);
+      resolve();
+    }
   });
+}
+
+export async function startRace() {
+  let arrPromises = [];
+  for (let i = 0; i < carStartButtons.length; i++) {
+    carStartButtons[i].disabled = true;
+    arrPromises.push(startCarEngine(Number(carStartButtons[i].getAttribute('data-start-id')), i));
+  }
+  await Promise.race(arrPromises);
+  console.log('we have a winner!');
 }

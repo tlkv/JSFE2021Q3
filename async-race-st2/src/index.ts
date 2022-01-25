@@ -4,7 +4,7 @@ import { App } from './components/app';
 const app = new App();
 app.start(document.body);
 
-console.log(`Hello! Current self-check: ~140 of 190. It would be better to check this on Thursday if possible. Thank you! If there would be any changes - they will be mentioned in console.log)
+console.log(`Hello! Current self-check: ~150 of 190. It would be better to check this on Thursday if possible. Thank you! If there would be any changes - I'll mention them in console.log by Thursday)
 
 Done:
 5	There should be two views on the site: "Garage" and "Winners".
@@ -22,14 +22,16 @@ Done:
 15	Car animation should work fine on any screen (smallest screen size is 500px)
 10	There should be a button to start race. After user clicks this button all the cars on the current page start driving
 10	There should be a button to reset race. After user clicks this button all the cars return to it's initial places.
+20	User clicks to the engine start button -> UI is waiting for car's velocity answer -> animate the car and makes another request to drive. In case api returned 500 error car animation should be stopped.
+
+Partially done (since no winners added from race to check entirely):
+10	Table should include the next culumns: "№", "Image of the car", "Name of the car", "Wins number", "Best time in seconds" (names of the columns can differ). If the same car wins more than once the number of wins should be incremented while best time should be saved only if it's better than the stored one
 5	There should be pagination (10 winners per one page)
 
-Partially done (because car engines never break, but they should):
-+10 (of 20)	User clicks to the engine start button -> UI is waiting for car's velocity answer -> animate the car and makes another request to drive. In case api returned 500 error car animation should be stopped.
 
 NOT done:
+
 10	After some car finishes first user should see the message contains car's name that shows which one has won
 10	After some car wins it should be displayed at the "Winners view" table
-10	Table should include the next culumns: "№", "Image of the car", "Name of the car", "Wins number", "Best time in seconds" (names of the columns can differ). If the same car wins more than once the number of wins should be incremented while best time should be saved only if it's better than the stored one
 10	User should be able to sort cars by wins number and by best time (ASC, DESC)
 `);

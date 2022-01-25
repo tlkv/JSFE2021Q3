@@ -91,8 +91,8 @@ export const winnersNext = document.createElement('button');
 export const winnersTopRow = document.createElement('div');
 export const winnersInner = document.createElement('div');
 
-export const winnersRandomGenerator = document.createElement('button');
-winnersRandomGenerator.textContent = 'Generate Random Winners';
+/* export const winnersRandomGenerator = document.createElement('button');
+winnersRandomGenerator.textContent = 'Generate Random Winners'; */
 
 winnersHeading.innerHTML = `<i class="fas fa-medal"></i> Winners: `;
 winnersCurrentPage.innerHTML = `Page #`;
@@ -126,12 +126,12 @@ export function initWinners() {
     winnersPagination,
     winnersTopRow,
     winnersInner,
-    winnersRandomGenerator
+    /* winnersRandomGenerator */
   );
 
   main.append(winnersContainer);
 
-  winnersRandomGenerator.addEventListener('click', randomWinnersGenerate);
+  /* winnersRandomGenerator.addEventListener('click', randomWinnersGenerate); */
   winnersNext.addEventListener('click', handleWinnersNext);
   winnersPrev.addEventListener('click', handleWinnersPrev);
   // handle sortings
