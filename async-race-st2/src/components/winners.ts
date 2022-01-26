@@ -16,7 +16,9 @@ export function renderWinnerCard(curr: number, { name, color }: ICar, { id, time
   const winnerCard = document.createElement('div');
   winnerCard.classList.add('winner-card');
   winnerCard.setAttribute('data-winner-id', String(id));
-  winnerCard.innerHTML = `<div class="winner-card-item winner-card-num">${curr + 1}</div>
+  winnerCard.innerHTML = `<div class="winner-card-item winner-card-num">${
+    (appState.winnersPageCurrent - 1) * 10 + curr + 1
+  }</div>
   <div class="winner-card-item winner-card-car"><i class="fas fa-car-side" style="color: ${color};"></i></div>
   <div class="winner-card-item winner-card-name">${name}</div>
   <div class="winner-card-item winner-card-wins">${wins}</div>
