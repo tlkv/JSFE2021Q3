@@ -1,7 +1,16 @@
 import { appState } from './store';
-import { winnersInner, winnersCount, winnersCurrentPageNum, winnersNext, winnersPrev } from './main';
+import {
+  winnersInner,
+  winnersCount,
+  winnersCurrentPageNum,
+  winnersNext,
+  winnersPrev,
+  sortWinsButton,
+  sortTimeButton,
+} from './main';
 import { getWinners, getCarData, createWinnerApi } from './api';
 import { IWinner, ICar } from './interfaces';
+import { App } from './app';
 
 export function renderWinnerCard(curr: number, { name, color }: ICar, { id, time, wins }: IWinner) {
   const winnerCard = document.createElement('div');
@@ -30,7 +39,18 @@ export async function renderWinners() {
   }
 }
 
-export async function randomWinnersGenerate() {
+export function sortWinnersTable(e: Event) {
+  const sorting = (e.target as HTMLElement).dataset.sorting as string;
+  appState.sortBy = sorting as 'wins' | 'time';
+  if (appState.sortOrder === 'ASC') {
+    appState.sortOrder = 'DESC';
+  } else {
+    appState.sortOrder = 'ASC';
+  }
+  renderWinners();
+}
+
+/* export async function randomWinnersGenerate() {
   if (appState.cars.length === 0) return false;
   for (let i = 0; i < 10; i++) {
     const wId = appState.cars[Math.floor(Math.random() * appState.cars.length)].id;
@@ -40,4 +60,4 @@ export async function randomWinnersGenerate() {
     await createWinnerApi(winner);
   }
   renderWinners();
-}
+} */

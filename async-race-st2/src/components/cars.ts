@@ -26,6 +26,7 @@ import {
   getWinner,
   createWinnerApi,
   updateWinnerApi,
+  stopEngineApi,
 } from './api';
 import { getRandomColor, getRandomName } from './utils';
 import { renderWinners } from './winners';
@@ -34,6 +35,7 @@ let carStartButtons: NodeListOf<HTMLInputElement>;
 let carStopButtons: NodeListOf<HTMLInputElement>;
 let carImages: NodeListOf<HTMLElement>;
 let carAnimations: Array<Animation> = [];
+let raceOn = false;
 
 export function renderCarCard({ id, name, color }: ICar) {
   const carCard = document.createElement('div');
@@ -59,6 +61,7 @@ export function renderCarCard({ id, name, color }: ICar) {
 }
 
 export async function renderCars() {
+  raceOn = false;
   await getCars();
   garageCount.textContent = appState.carsAmount;
   garageCurrentPageNum.textContent = String(appState.garagePageCurrent);
@@ -73,16 +76,19 @@ export async function renderCars() {
   carStartButtons = garageInner.querySelectorAll('.car-card-button-start');
   carStopButtons = garageInner.querySelectorAll('.car-card-button-stop');
   carImages = garageInner.querySelectorAll('.car-card-pic');
-
+  // get rid of querySelectors?
   for (let i = 0; i < carStartButtons.length; i++) {
     carStartButtons[i].onclick = () => {
       carStartButtons[i].disabled = true;
       startCarEngine(Number(carStartButtons[i].getAttribute('data-start-id')), i);
     };
-    carStopButtons[i].onclick = () => {
-      carAnimations[i].cancel();
-      carStopButtons[i].disabled = true;
-      carStartButtons[i].disabled = false;
+    carStopButtons[i].onclick = async () => {
+      const res = await stopEngineApi(Number(carStopButtons[i].getAttribute('data-stop-id')));
+      if (res.status === 200) {
+        carAnimations[i].cancel();
+        carStopButtons[i].disabled = true;
+        carStartButtons[i].disabled = false;
+      }
     };
   }
 }
@@ -170,7 +176,7 @@ export async function animateCar(time: number, iter: number): Promise<void> {
 export async function startCarEngine(id: number, iter: number): Promise<IWinnerData | null> {
   const data = await startCarEngineApi(id);
   if (data.status === 200) {
-    //handleButtons
+    // handleButtons
     const time = data.result.distance / data.result.velocity;
     animateCar(time, iter);
     await switchToDriveMode(data.result, id, iter);
@@ -202,15 +208,31 @@ export async function switchToDriveMode(car: ICarEngine, id: number, iter: numbe
 }
 
 export async function startRace() {
+  const disabled = document.querySelectorAll(
+    'header button, .garage-controls button, .garage-pagination button, .car-card-button-remove, .car-card-button-select'
+  );
+  disabled.forEach(element => {
+    (element as HTMLInputElement).disabled = true;
+  });
+  setTimeout(() => {
+    disabled.forEach(element => {
+      (element as HTMLInputElement).disabled = false;
+    });
+  }, 5000);
   let arrPromises = [];
   for (let i = 0; i < carStartButtons.length; i++) {
     carStartButtons[i].disabled = true;
     arrPromises.push(startCarEngine(Number(carStartButtons[i].getAttribute('data-start-id')), i));
   }
+  raceOn = true;
   const winner = await Promise.race(arrPromises);
-  if (winner) {
+  if (winner && raceOn) {
     showWinner(winner as IWinnerData);
   }
+}
+
+export async function resetRace() {
+  renderCars();
 }
 
 async function showWinner(winner: IWinnerData) {
@@ -224,6 +246,7 @@ async function showWinner(winner: IWinnerData) {
   await handleNewWinner(winner);
 }
 
+// move to diff module
 async function handleNewWinner(winner: IWinnerData) {
   const car = await getWinner(winner.id);
   if (car.status === 200) {
@@ -255,6 +278,5 @@ async function updateWinner(winner: IWinnerData): Promise<void> {
     wins: winner.wins,
     time: winner.time,
   };
-
   await updateWinnerApi(carWinner);
 }

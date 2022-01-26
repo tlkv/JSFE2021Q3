@@ -4,7 +4,7 @@ import { App } from './components/app';
 const app = new App();
 app.start(document.body);
 
-console.log(`Hello! Current self-check: ~180 of 190. It would be better to check this on Thursday if possible. Thank you! If there would be any changes - I'll mention them in console.log by Thursday)
+console.log(`Hello! Current self-check: 190 of 190.
 
 Done:
 5	There should be two views on the site: "Garage" and "Winners".
@@ -26,8 +26,5 @@ Done:
 10	After some car finishes first user should see the message contains car's name that shows which one has won
 10	Table should include the next culumns: "№", "Image of the car", "Name of the car", "Wins number", "Best time in seconds" (names of the columns can differ). If the same car wins more than once the number of wins should be incremented while best time should be saved only if it's better than the stored one
 5	There should be pagination (10 winners per one page)
-
-
-NOT done:
 10	User should be able to sort cars by wins number and by best time (ASC, DESC)
 `);

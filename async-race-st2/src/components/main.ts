@@ -1,7 +1,7 @@
-import { renderCars, handleCarsAction, createCar, updateCar, createRandomCars, startRace } from './cars';
+import { renderCars, handleCarsAction, createCar, updateCar, createRandomCars, startRace, resetRace } from './cars';
 import { appState } from './store';
 import { handleCarsNext, handleCarsPrev, handleWinnersNext, handleWinnersPrev } from './pagination';
-import { randomWinnersGenerate } from './winners';
+import { sortWinnersTable } from './winners';
 
 export const main = document.createElement('main');
 
@@ -80,7 +80,7 @@ export function initGarage(root: HTMLElement) {
   garageGenerateButton.addEventListener('click', createRandomCars);
   garageInner.addEventListener('click', handleCarsAction);
   garageRaceButton.addEventListener('click', startRace);
-  garageResetButton.addEventListener('click', renderCars);
+  garageResetButton.addEventListener('click', resetRace);
 }
 
 export const winnersContainer = document.createElement('div');
@@ -94,8 +94,18 @@ export const winnersNext = document.createElement('button');
 export const winnersTopRow = document.createElement('div');
 export const winnersInner = document.createElement('div');
 
-/* export const winnersRandomGenerator = document.createElement('button');
-winnersRandomGenerator.textContent = 'Generate Random Winners'; */
+export const sortWinsWrapper = document.createElement('div');
+export const sortTimeWrapper = document.createElement('div');
+
+export const sortWinsButton = document.createElement('button');
+export const sortTimeButton = document.createElement('button');
+sortWinsButton.textContent = 'Wins';
+sortWinsButton.setAttribute('data-sorting', 'wins');
+sortTimeButton.textContent = 'Time';
+sortTimeButton.setAttribute('data-sorting', 'time');
+
+sortWinsWrapper.classList.add('winner-header-item', 'winner-header-wins');
+sortTimeWrapper.classList.add('winner-header-item', 'winner-header-time');
 
 winnersHeading.innerHTML = `<i class="fas fa-medal"></i> Winners: `;
 winnersCurrentPage.innerHTML = `Page #`;
@@ -110,31 +120,36 @@ winnersPagination.classList.add('winners-pagination');
 winnersNext.classList.add('winners-next');
 winnersPrev.classList.add('winners-prev');
 winnersTopRow.classList.add('winners-top-row');
+
 winnersTopRow.innerHTML = `
 <div class="winner-header-item winner-header-num">Number</div>
 <div class="winner-header-item winner-header-car">Car</div>
-<div class="winner-header-item winner-header-name">Name</div>
-<div class="winner-header-item winner-header-wins">Wins</div>
-<div class="winner-header-item winner-header-time">Best time</div>`;
+<div class="winner-header-item winner-header-name">Name</div>`;
 
 export function initWinners() {
   winnersHeading.append(winnersCount);
   winnersCurrentPage.append(winnersCurrentPageNum);
   winnersPagination.append(winnersPrev, winnersNext);
   winnersCount.textContent = appState.winnersAmount;
+  sortWinsWrapper.append(sortWinsButton);
+  sortTimeWrapper.append(sortTimeButton);
+  winnersTopRow.append(sortWinsWrapper, sortTimeWrapper);
+
   winnersCurrentPageNum.textContent = String(appState.winnersPageCurrent);
   winnersContainer.append(
     winnersHeading,
     winnersCurrentPage,
     winnersPagination,
     winnersTopRow,
-    winnersInner,
+    winnersInner
     /* winnersRandomGenerator */
   );
 
   main.append(winnersContainer);
 
-  /* winnersRandomGenerator.addEventListener('click', randomWinnersGenerate); */
+  [sortWinsButton, sortTimeButton].forEach(item => {
+    item.addEventListener('click', sortWinnersTable);
+  })
   winnersNext.addEventListener('click', handleWinnersNext);
   winnersPrev.addEventListener('click', handleWinnersPrev);
   // handle sortings

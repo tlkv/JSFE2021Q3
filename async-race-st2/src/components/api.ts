@@ -180,3 +180,19 @@ export async function getWinner(wId: number): Promise<{ status: number; result: 
     throw new Error(err as string);
   }
 }
+
+export async function stopEngineApi(car: number): Promise<{ status: number; result: ICarEngine }> {
+  try {
+    const data = await fetch(`${engine}/?id=${car}&status=stopped`, {
+      method: 'PATCH',
+    });
+    const res: ICarEngine = await data.json();
+
+    return {
+      status: data.status,
+      result: res,
+    };
+  } catch (err) {
+    throw new Error(err as string);
+  }
+}
