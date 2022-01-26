@@ -25,6 +25,9 @@ export const garagePrev = document.createElement('button');
 export const garageNext = document.createElement('button');
 export const garageInner = document.createElement('div');
 
+export const winnerPopup = document.createElement('div');
+winnerPopup.classList.add('winner-popup', 'hide');
+
 garageCreateButton.textContent = 'Create';
 garageUpdateButton.textContent = 'Update';
 garageRaceButton.textContent = 'Start race';
@@ -67,7 +70,7 @@ export function initGarage(root: HTMLElement) {
   );
 
   garageContainer.append(garageControls, garageHeading, garageCurrentPage, garagePagination, garageInner);
-  main.append(garageContainer);
+  main.append(garageContainer, winnerPopup);
   root.append(main);
 
   garageNext.addEventListener('click', handleCarsNext);

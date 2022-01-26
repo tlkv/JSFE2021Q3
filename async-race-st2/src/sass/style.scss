@@ -38,6 +38,7 @@ header button {
 button {
   cursor: pointer;
   width: 75px;
+  min-height: 22px;
 }
 
 .hide {
@@ -105,3 +106,16 @@ button {
   width: 20%;
   text-align: center;
 }
+
+.winner-popup {
+  width: 400px;
+  height: 200px;
+  border-radius: 10px;
+  position: absolute;
+  top: calc(50% - 100px);
+  left: calc(50% - 200px);
+  background-color: rgba(0,0,0,0.8);
+  border: 1px solid white;
+  z-index: 1;
+}
+

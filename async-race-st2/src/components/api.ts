@@ -3,7 +3,6 @@ import { ICar, ICreatedCar, IWinner, ICarEngine } from './interfaces';
 import { garageCreateColor, garageCreateInput, garageUpdateInput, garageUpdateColor } from './main';
 import { appState } from './store';
 
-
 const baseUrl = 'http://localhost:3000';
 
 const engine = `${baseUrl}/engine`;
@@ -136,7 +135,7 @@ export async function switchToDrive(car: number) {
   }
 }
 
-export async function createWinner(car: IWinner): Promise<number> {
+export async function createWinnerApi(car: IWinner): Promise<number> {
   try {
     const data = await fetch(winners, {
       method: 'POST',
@@ -147,6 +146,36 @@ export async function createWinner(car: IWinner): Promise<number> {
     });
 
     return data.status;
+  } catch (err) {
+    throw new Error(err as string);
+  }
+}
+
+export async function updateWinnerApi(car: IWinner): Promise<number> {
+  try {
+    const data = await fetch(`${winners}/${car.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(car),
+    });
+
+    return data.status;
+  } catch (err) {
+    throw new Error(err as string);
+  }
+}
+
+export async function getWinner(wId: number): Promise<{ status: number; result: IWinner }> {
+  try {
+    const resp = await fetch(`${winners}/${wId}`);
+    const res: IWinner = await resp.json();
+
+    return {
+      status: resp.status,
+      result: res,
+    };
   } catch (err) {
     throw new Error(err as string);
   }

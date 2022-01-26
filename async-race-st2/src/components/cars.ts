@@ -10,10 +10,23 @@ import {
   garageUpdateButton,
   garagePrev,
   garageNext,
+  winnerPopup,
 } from './main';
 import { appState } from './store';
-import { ICar, ICarEngine, ICreatedCar } from './interfaces';
-import { getCars, removeCar, generateCar, updateCarApi, removeWinner, startCarEngineApi, switchToDrive } from './api';
+import { ICar, ICarEngine, ICreatedCar, IWinner, IWinnerData } from './interfaces';
+import {
+  getCars,
+  removeCar,
+  generateCar,
+  updateCarApi,
+  removeWinner,
+  startCarEngineApi,
+  switchToDrive,
+  getWinners,
+  getWinner,
+  createWinnerApi,
+  updateWinnerApi,
+} from './api';
 import { getRandomColor, getRandomName } from './utils';
 import { renderWinners } from './winners';
 
@@ -65,6 +78,11 @@ export async function renderCars() {
     carStartButtons[i].onclick = () => {
       carStartButtons[i].disabled = true;
       startCarEngine(Number(carStartButtons[i].getAttribute('data-start-id')), i);
+    };
+    carStopButtons[i].onclick = () => {
+      carAnimations[i].cancel();
+      carStopButtons[i].disabled = true;
+      carStartButtons[i].disabled = false;
     };
   }
 }
@@ -142,21 +160,30 @@ export async function animateCar(time: number, iter: number): Promise<void> {
     fill: 'forwards',
     duration: time,
   });
-  carStopButtons[iter].onclick = () => {
+  /* carStopButtons[iter].onclick = () => {
     carAnimations[iter].cancel();
     carStopButtons[iter].disabled = true;
     carStartButtons[iter].disabled = false;
-  };
+  }; */
 }
 
-export async function startCarEngine(id: number, iter: number): Promise<void> {
+export async function startCarEngine(id: number, iter: number): Promise<IWinnerData | null> {
   const data = await startCarEngineApi(id);
   if (data.status === 200) {
     //handleButtons
     const time = data.result.distance / data.result.velocity;
     animateCar(time, iter);
     await switchToDriveMode(data.result, id, iter);
+    return {
+      id: id,
+      name: appState.cars[iter].name,
+      color: appState.cars[iter].color,
+      speed: data.result.velocity,
+      wins: 1,
+      time: +(time / 1000).toFixed(2),
+    };
   }
+  return null;
 }
 
 export async function switchToDriveMode(car: ICarEngine, id: number, iter: number): Promise<void> {
@@ -180,6 +207,54 @@ export async function startRace() {
     carStartButtons[i].disabled = true;
     arrPromises.push(startCarEngine(Number(carStartButtons[i].getAttribute('data-start-id')), i));
   }
-  await Promise.race(arrPromises);
-  console.log('we have a winner!');
+  const winner = await Promise.race(arrPromises);
+  if (winner) {
+    showWinner(winner as IWinnerData);
+  }
+}
+
+async function showWinner(winner: IWinnerData) {
+  winnerPopup.innerHTML = `
+  <h2>Winner</h2>
+  <p>${winner.name} went first with ${winner.time} sec.</p>`;
+  winnerPopup.classList.remove('hide');
+  setTimeout(() => {
+    winnerPopup.classList.add('hide');
+  }, 2000);
+  await handleNewWinner(winner);
+}
+
+async function handleNewWinner(winner: IWinnerData) {
+  const car = await getWinner(winner.id);
+  if (car.status === 200) {
+    car.result.wins += 1;
+    if (winner.time && winner.time > car.result.time) {
+      winner.time = car.result.time;
+    }
+    winner.wins = car.result.wins;
+    await updateWinner(winner);
+  } else {
+    await createWinner(winner);
+  }
+  renderWinners();
+}
+
+async function createWinner(winner: IWinnerData): Promise<void> {
+  const carWinner: IWinner = {
+    id: winner.id,
+    wins: 1,
+    time: winner.time,
+  };
+
+  await createWinnerApi(carWinner);
+}
+
+async function updateWinner(winner: IWinnerData): Promise<void> {
+  const carWinner: IWinner = {
+    id: winner.id,
+    wins: winner.wins,
+    time: winner.time,
+  };
+
+  await updateWinnerApi(carWinner);
 }

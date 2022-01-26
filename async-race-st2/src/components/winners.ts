@@ -1,6 +1,6 @@
 import { appState } from './store';
 import { winnersInner, winnersCount, winnersCurrentPageNum, winnersNext, winnersPrev } from './main';
-import { getWinners, getCarData, createWinner } from './api';
+import { getWinners, getCarData, createWinnerApi } from './api';
 import { IWinner, ICar } from './interfaces';
 
 export function renderWinnerCard(curr: number, { name, color }: ICar, { id, time, wins }: IWinner) {
@@ -37,7 +37,7 @@ export async function randomWinnersGenerate() {
     const wTime = Math.round(Math.random() * 10) + 1;
     const wWins = Math.round(Math.random() * 10) + 1;
     const winner: IWinner = { id: wId, time: wTime, wins: wWins };
-    await createWinner(winner);
+    await createWinnerApi(winner);
   }
   renderWinners();
 }

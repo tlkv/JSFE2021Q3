@@ -31,3 +31,12 @@ export interface ICarEngine {
   velocity: number;
   distance: number;
 }
+
+export interface IWinnerData {
+  id: number;
+  name: string;
+  color: string;
+  speed: number;
+  wins: number;
+  time: number;
+}
