@@ -1,7 +1,8 @@
-import { App } from './app';
-import { ICar, ICreatedCar, IWinner, ICarEngine } from './interfaces';
-import { garageCreateColor, garageCreateInput, garageUpdateInput, garageUpdateColor } from './main';
-import { appState } from './store';
+import { ICar, IWinner, ICarEngine } from './interfaces';
+// eslint-disable-next-line import/no-cycle
+import { garageUpdateInput, garageUpdateColor } from './main';
+// eslint-disable-next-line import/no-named-as-default
+import appState from './store';
 
 const baseUrl = 'http://localhost:3000';
 
@@ -9,9 +10,15 @@ const engine = `${baseUrl}/engine`;
 const winners = `${baseUrl}/winners`;
 const garage = `${baseUrl}/garage`;
 
+const headersType = {
+  'Content-Type': 'application/json',
+};
+
 export async function getCars(): Promise<void> {
   try {
-    const response = await fetch(`${garage}?_page=${appState.garagePageCurrent}&_limit=${appState.garagePageLimit}`);
+    const response = await fetch(
+      `${garage}?_page=${appState.garagePageCurrent}&_limit=${appState.garagePageLimit}`,
+    );
     const data: ICar[] = await response.json();
     if (response.status === 200) {
       appState.cars = data;
@@ -27,10 +34,9 @@ export async function removeCar(id: string): Promise<void> {
     await fetch(`${garage}/${id}`, {
       method: 'DELETE',
     });
-    if (
-      (Number(appState.carsAmount) - 1) / appState.garagePageLimit <= appState.garagePageCurrent - 1 &&
-      appState.garagePageCurrent > 1
-    ) {
+    const currAmount = parseInt(appState.carsAmount, 10);
+    const gPageCurrent = appState.garagePageCurrent;
+    if ((currAmount - 1) / appState.garagePageLimit <= gPageCurrent - 1 && gPageCurrent > 1) {
       appState.garagePageCurrent -= 1;
     }
   } catch (err) {
@@ -38,13 +44,11 @@ export async function removeCar(id: string): Promise<void> {
   }
 }
 
-export async function generateCar(name: String, color: String): Promise<void> {
+export async function generateCar(name: string, color: string): Promise<void> {
   try {
     await fetch(garage, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: headersType,
       body: JSON.stringify({ name, color }),
     });
   } catch (err) {
@@ -58,9 +62,7 @@ export async function updateCarApi(id: string): Promise<void> {
   try {
     await fetch(`${garage}/${id}`, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: headersType,
       body: JSON.stringify({ name, color }),
     });
   } catch (err) {
@@ -73,7 +75,7 @@ export async function updateCarApi(id: string): Promise<void> {
 export async function getWinners(): Promise<void> {
   try {
     const response = await fetch(
-      `${winners}?_page=${appState.winnersPageCurrent}&_limit=${appState.winnersPageLimit}&_sort=${appState.sortBy}&_order=${appState.sortOrder}`
+      `${winners}?_page=${appState.winnersPageCurrent}&_limit=${appState.winnersPageLimit}&_sort=${appState.sortBy}&_order=${appState.sortOrder}`,
     );
     const data: IWinner[] = await response.json();
     if (response.status === 200) {
@@ -108,7 +110,9 @@ export async function getCarData(carId: number): Promise<ICar | null> {
   }
 }
 
-export async function startCarEngineApi(carId: number): Promise<{ status: number; result: ICarEngine }> {
+export async function startCarEngineApi(
+  carId: number,
+): Promise<{ status: number; result: ICarEngine }> {
   try {
     const data = await fetch(`${engine}?id=${carId}&status=started`, {
       method: 'PATCH',
@@ -139,9 +143,7 @@ export async function createWinnerApi(car: IWinner): Promise<number> {
   try {
     const data = await fetch(winners, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: headersType,
       body: JSON.stringify(car),
     });
 
@@ -155,9 +157,7 @@ export async function updateWinnerApi(car: IWinner): Promise<number> {
   try {
     const data = await fetch(`${winners}/${car.id}`, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: headersType,
       body: JSON.stringify(car),
     });
 

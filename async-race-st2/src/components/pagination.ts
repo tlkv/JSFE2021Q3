@@ -1,4 +1,5 @@
-import { appState } from './store';
+/* eslint-disable import/no-cycle */
+import appState from './store';
 import { renderCars } from './cars';
 import { renderWinners } from './winners';
 

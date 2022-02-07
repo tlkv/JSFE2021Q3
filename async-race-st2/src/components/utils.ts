@@ -1,4 +1,4 @@
-import { carModels } from './carData';
+import carModels from './carData';
 
 export function getRandomName() {
   const brandItem = carModels[Math.floor(Math.random() * carModels.length)];

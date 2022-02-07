@@ -1,16 +1,25 @@
-import { initHeader } from './header';
+// eslint-disable-next-line import/no-named-as-default
+import initHeader from './header';
 import { initGarage, initWinners } from './main';
 import { renderCars } from './cars';
 import { renderWinners } from './winners';
 
-export class App {
-  start(root: HTMLElement) {
+class App {
+  root: HTMLElement;
+
+  constructor(root: HTMLElement) {
+    this.root = root;
+  }
+
+  start() {
     window.addEventListener('DOMContentLoaded', async () => {
-      initHeader(root);
-      initGarage(root);
+      initHeader(this.root);
+      initGarage(this.root);
       initWinners();
       await renderCars();
       await renderWinners();
     });
   }
 }
+
+export default App;

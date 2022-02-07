@@ -1,4 +1,4 @@
-export const carModels = [
+const carModels = [
   {
     brand: 'Acura',
     models: [
@@ -34,7 +34,17 @@ export const carModels = [
   },
   {
     brand: 'Aston Martin',
-    models: ['DB7', 'DB9', 'DBS', 'Lagonda', 'Rapide', 'V12 Vantage', 'V8 Vantage', 'Vanquish', 'Virage'],
+    models: [
+      'DB7',
+      'DB9',
+      'DBS',
+      'Lagonda',
+      'Rapide',
+      'V12 Vantage',
+      'V8 Vantage',
+      'Vanquish',
+      'Virage',
+    ],
   },
   {
     brand: 'Audi',
@@ -79,7 +89,16 @@ export const carModels = [
   },
   {
     brand: 'Bentley',
-    models: ['Arnage', 'Azure', 'Brooklands', 'Continental', 'Corniche', 'Eight', 'Mulsanne', 'Turbo R'],
+    models: [
+      'Arnage',
+      'Azure',
+      'Brooklands',
+      'Continental',
+      'Corniche',
+      'Eight',
+      'Mulsanne',
+      'Turbo R',
+    ],
   },
   {
     brand: 'BMW',
@@ -1157,7 +1176,18 @@ export const carModels = [
   },
   {
     brand: 'Porsche',
-    models: ['911', '924', '928', '944', '968', 'Boxster', 'Carrera GT', 'Cayenne', 'Cayman', 'Panamera'],
+    models: [
+      '911',
+      '924',
+      '928',
+      '944',
+      '968',
+      'Boxster',
+      'Carrera GT',
+      'Cayenne',
+      'Cayman',
+      'Panamera',
+    ],
   },
   {
     brand: 'RAM',
@@ -1376,3 +1406,5 @@ export const carModels = [
     models: ['GV', 'GVC', 'GVL', 'GVS', 'GVX'],
   },
 ];
+
+export default carModels;

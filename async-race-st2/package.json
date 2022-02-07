@@ -26,5 +26,8 @@
     "webpack-cli": "^4.9.0",
     "webpack-dev-server": "^4.3.1",
     "webpack-remove-empty-scripts": "^0.7.1"
+  },
+  "dependencies": {
+    "eslint-config-airbnb-typescript": "^16.1.0"
   }
 }

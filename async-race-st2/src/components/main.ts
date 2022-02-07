@@ -1,7 +1,16 @@
-import { renderCars, handleCarsAction, createCar, updateCar, createRandomCars, startRace, resetRace } from './cars';
-import { appState } from './store';
-import { handleCarsNext, handleCarsPrev, handleWinnersNext, handleWinnersPrev } from './pagination';
+/* eslint-disable import/no-cycle */
+import {
+  handleCarsAction,
+  createCar,
+  updateCar,
+  createRandomCars,
+  startRace,
+  resetRace,
+} from './cars';
+import appState from './store';
 import { sortWinnersTable } from './winners';
+// eslint-disable-next-line object-curly-newline
+import { handleCarsNext, handleCarsPrev, handleWinnersNext, handleWinnersPrev } from './pagination';
 
 export const main = document.createElement('main');
 
@@ -33,8 +42,8 @@ garageUpdateButton.textContent = 'Update';
 garageRaceButton.textContent = 'Start race';
 garageResetButton.textContent = 'Reset Race/Cars';
 garageGenerateButton.textContent = 'Generate Cars';
-garageHeading.innerHTML = `<i class="fas fa-car"></i> Garage: `;
-garageCurrentPage.innerHTML = `Page #`;
+garageHeading.innerHTML = '<i class="fas fa-car"></i> Garage: ';
+garageCurrentPage.innerHTML = 'Garage Page #';
 garageCreateInput.type = 'text';
 garageCreateColor.type = 'color';
 garageUpdateInput.type = 'text';
@@ -66,10 +75,16 @@ export function initGarage(root: HTMLElement) {
     garageUpdateButton,
     garageRaceButton,
     garageResetButton,
-    garageGenerateButton
+    garageGenerateButton,
   );
 
-  garageContainer.append(garageControls, garageHeading, garageCurrentPage, garagePagination, garageInner);
+  garageContainer.append(
+    garageControls,
+    garageHeading,
+    garageCurrentPage,
+    garagePagination,
+    garageInner,
+  );
   main.append(garageContainer, winnerPopup);
   root.append(main);
 
@@ -107,8 +122,8 @@ sortTimeButton.setAttribute('data-sorting', 'time');
 sortWinsWrapper.classList.add('winner-header-item', 'winner-header-wins');
 sortTimeWrapper.classList.add('winner-header-item', 'winner-header-time');
 
-winnersHeading.innerHTML = `<i class="fas fa-medal"></i> Winners: `;
-winnersCurrentPage.innerHTML = `Page #`;
+winnersHeading.innerHTML = '<i class="fas fa-medal"></i> Winners: ';
+winnersCurrentPage.innerHTML = 'Winners Page #';
 winnersNext.textContent = 'Next';
 winnersPrev.textContent = 'Prev';
 
@@ -141,16 +156,14 @@ export function initWinners() {
     winnersCurrentPage,
     winnersPagination,
     winnersTopRow,
-    winnersInner
-    /* winnersRandomGenerator */
+    winnersInner,
   );
 
   main.append(winnersContainer);
 
-  [sortWinsButton, sortTimeButton].forEach(item => {
+  [sortWinsButton, sortTimeButton].forEach((item) => {
     item.addEventListener('click', sortWinnersTable);
-  })
+  });
   winnersNext.addEventListener('click', handleWinnersNext);
   winnersPrev.addEventListener('click', handleWinnersPrev);
-  // handle sortings
 }

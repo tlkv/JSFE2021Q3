@@ -1,6 +1,6 @@
 import { IStore } from './interfaces';
 
-export const appState: IStore = {
+const appState: IStore = {
   cars: [],
   carsAmount: '0',
   garagePageCurrent: 1,
@@ -12,3 +12,5 @@ export const appState: IStore = {
   sortOrder: 'ASC',
   sortBy: 'time',
 };
+
+export default appState;
