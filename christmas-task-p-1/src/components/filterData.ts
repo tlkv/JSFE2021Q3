@@ -68,7 +68,7 @@ export function handleFilterItems(e: Event) {
 }
 
 export function resetFiltersHandler() {
-  Object.assign(AppState.shape);
+  AppState.shape = [];
   AppState.color = [];
   AppState.size = [];
   AppState.onlyFavorite = false;
