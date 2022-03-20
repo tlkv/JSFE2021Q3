@@ -1,40 +1,163 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>React</title>
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/moon.css">
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
-
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h2>React</h2>
+				<img src="./assets/react_logo.png" alt="react">
+				<aside class="notes">Prologue</aside>
+			</section>
+			<section>
+				<h2>What is React?</h2>
+				<ul>
+					<li class="fragment fade-up">free and open-source front-end JavaScript library for building user interfaces </li>
+					<li class="fragment fade-up">based on UI components </li>
+					<li class="fragment fade-up">maintained by Facebook (Meta)</li>
+					<li class="fragment fade-up">not a framework! </li>
+				</ul>
+				<aside class="notes">React in general - free, based on components, maintained by Meta</aside>
+			</section>
+			<section>
+				<h2>History</h2>
+				<ul>
+					<li class="fragment fade-up">created by Jordan Walke in 2013</li>
+					<li class="fragment fade-up">React Native (Android, iOS) - 2015</li>
+					<li class="fragment fade-up">React Fiber replaced Stack algorithm - 2017</li>
+					<li class="fragment fade-up">Latest version - 17.0.2 (as of March, 2022)</li>
+				</ul>
+				<aside class="notes">React history - from 2013</aside>
+			</section>
+			<section>
+				<h2>Timeline</h2>
+				<img src="./assets/history-of-react.png" alt="react history">
+				<aside class="notes">React history graph from 2011 to 2020, mention Netflix</aside>
+			</section>
+			<section>
+				<h2>Licensing</h2>
+				<p>MIT license (from 2017)</p>
+				<aside class="notes">Licensing - free license</aside>
+			</section>
+			<section>
+				<h2>Hello, World!</h2>
+				<pre><code data-trim data-noescape>
+					ReactDOM.render(
+						&lt;h1>Hello, world!&lt;/h1>,
+						document.getElementById('root')
+					);
+						</code></pre>
+				<aside class="notes">Hello, World - React example</aside>
+			</section>
+			<section>
+				<h2>JSX</h2>
+				<pre><code data-trim data-noescape>
+					const element = &lt;h1>Hello, world!&lt;/h1>;
+						</code></pre>
+				<aside class="notes">JSX code example</aside>
+			</section>
+			<section>
+				<h2>Components</h2>
+				<pre><code data-trim data-noescape>
+					import React from "react";
+					import Person from "./Person";
+					const Example = () => {
+						return (
+							&lt;/>
+								&lt;div className="app">
+									&lt;Person name="John" />
+								&lt;/div>
+							&lt;/>
+						);
+					};
+						
+					export default Example;
+						</code></pre>
+				<aside class="notes">Component with example</aside>
+			</section>
+			<section>
+				<h2>Functional components</h2>
+				<pre><code data-trim data-noescape>
+					const Greeter = () => &lt;div>Hello World&lt;/div>;
+						</code></pre>
+				<aside class="notes">Function example</aside>
+			</section>
+			<section>
+				<h2>Class components</h2>
+				<pre><code data-trim data-noescape>
+					class ParentComponent extends React.Component {
+						state = { color: 'green' };
+						render() {
+							return (
+								&lt;ChildComponent color={this.state.color} />
+							);
+						}
+					}
+						</code></pre>
+				<aside class="notes">Class example</aside>
+			</section>
+			<section>
+				<h2>Props</h2>
+				<pre><code data-trim data-noescape>
+					function Welcome(props) {
+						return &lt;h1>Hello, {props.name}&lt;/h1>;
+					}
+						</code></pre>
+				<aside class="notes">Props example</aside>
+			</section>
+			<section>
+				<h2>Virtual DOM</h2>
+				<img src="./assets/vdom.png" alt="react dom">
+				<aside class="notes">Virtual DOM scheme</aside>
+			</section>
+			<section>
+				<h2>Lifecycle</h2>
+				<img src="./assets/lifec.png" alt="react lifecycle">
+				<aside class="notes">Lifecycle scheme</aside>
+			</section>
+			<section>
+				<h2>React Hooks</h2>
+				<ul>
+					<li class="fragment fade-up">useState</li>
+					<li class="fragment fade-up">useContext</li>
+					<li class="fragment fade-up">useReducer</li>
+					<li class="fragment fade-up">useMemo</li>
+					<li class="fragment fade-up">useEffect</li>
+				</ul>
+				<aside class="notes">React hooks and rules for them</aside>
+			</section>
+			<section>
+				<h2>Why React?</h2>
+				<img class="fragment fade-up" src="./assets/npmtrends.png" alt="react npm trends">
+				<aside class="notes">NPM trends statistics vs Angular & VUE</aside>
+			</section>
 		</div>
+	</div>
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
-
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
 </html>
