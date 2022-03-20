@@ -35,3 +35,7 @@ export type SortingTypes = 'sort-default' | 'sort-name-asc' | 'sort-name-desc' |
 export type LightsTypes = 'multicolor' | 'red' | 'blue' | 'green' | 'yellow';
 
 export type FilterValues = [number, number];
+
+export interface ISortingFunc {
+  [key: string]: (a: ToyData, b: ToyData) => number;
+}

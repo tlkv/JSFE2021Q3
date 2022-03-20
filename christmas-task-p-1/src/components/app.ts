@@ -2,16 +2,17 @@ import {
   AppState,
   countSlider,
   yearSlider,
-  countDefaultValues,
-  countDefaultStep,
-  yearDefaultValues,
-  yearDefaultStep,
+  COUNT_DEFAULT_VALUES,
+  COUNT_DEFAULT_STEP,
+  YEAR_DEFAULT_VALUES,
+  YEAR_DEFAULT_STEP,
 } from './storage';
 import { getLocaleStorage, setLocalStorage } from './storage';
-import { filterToys, initSlider, initSearch } from './filterData';
+import { filterToys, initSearch } from './filterData';
 import { renderFilterPanel, renderToys } from './renderToys';
 import { renderTree } from './treeDecoration';
 import { renderFavorites } from './renderFavorites';
+import { initSlider } from './sliders';
 
 class App {
   initSearch: void;
@@ -19,8 +20,8 @@ class App {
     this.initSearch = initSearch();
   }
   start() {
-    initSlider(countSlider, AppState.countFilter, countDefaultValues, countDefaultStep, 'countFilter');
-    initSlider(yearSlider, AppState.yearFilter, yearDefaultValues, yearDefaultStep, 'yearFilter');
+    initSlider(countSlider, AppState.countFilter, COUNT_DEFAULT_VALUES, COUNT_DEFAULT_STEP, 'countFilter');
+    initSlider(yearSlider, AppState.yearFilter, YEAR_DEFAULT_VALUES, YEAR_DEFAULT_STEP, 'yearFilter');
     this.initSearch;
     window.addEventListener('beforeunload', setLocalStorage);
     window.addEventListener('load', () => {

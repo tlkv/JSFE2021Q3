@@ -1,6 +1,13 @@
-import { AppStateObject, SortingTypes, ToyData, FilterValues } from './interfaces';
+import { AppStateObject, SortingTypes, ToyData, FilterValues, ISortingFunc } from './interfaces';
 import { renderToys } from './renderToys';
-import { filterToys, selectToys, resetFiltersHandler, resetLocalHandler, handleFilterItems, resetTreeHandler } from './filterData';
+import {
+  filterToys,
+  selectToys,
+  resetFiltersHandler,
+  resetLocalHandler,
+  handleFilterItems,
+  resetTreeHandler,
+} from './filterData';
 import { router } from './routing';
 import { handleTreeFilters } from './treeDecoration';
 import { audioOnload } from './audio';
@@ -8,11 +15,11 @@ import { handleDragStart, handleOverDrop } from './dragNDrop';
 import { renderFavorites } from './renderFavorites';
 
 //app default values
-export const maxSelected = 20;
-export const countDefaultValues: FilterValues = [1, 12];
-export const countDefaultStep = 1;
-export const yearDefaultValues: FilterValues = [1940, 2020];
-export const yearDefaultStep = 10;
+export const MAX_SELECTED = 20;
+export const COUNT_DEFAULT_VALUES: FilterValues = [1, 12];
+export const COUNT_DEFAULT_STEP = 1;
+export const YEAR_DEFAULT_VALUES: FilterValues = [1940, 2020];
+export const YEAR_DEFAULT_STEP = 10;
 
 export const AppState: AppStateObject = {
   shape: [],
@@ -31,7 +38,7 @@ export const AppState: AppStateObject = {
   lights: 'multicolor',
 };
 
-export const sortingFunctions = {
+export const sortingFunctions: ISortingFunc = {
   'sort-default': function (a: ToyData, b: ToyData) {
     return Number(a.num) < Number(b.num) ? -1 : 1;
   },
@@ -68,7 +75,7 @@ export const sortingOrder = document.querySelector('.sort-select') as HTMLInputE
 export const searchField = document.querySelector('.search') as HTMLInputElement;
 
 export const resetFilters = document.querySelector('.reset-filters') as HTMLInputElement;
-export const resetToys= document.querySelector('.reset-toys') as HTMLInputElement;
+export const resetToys = document.querySelector('.reset-toys') as HTMLInputElement;
 export const resetTree = document.querySelector('.reset-tree') as HTMLInputElement;
 export const resetLocal = document.querySelectorAll('.reset-local') as NodeListOf<HTMLElement>;
 
@@ -144,8 +151,7 @@ document.addEventListener('click', audioOnload);
 
 userTreeFilters.addEventListener('click', handleTreeFilters);
 
-
 favContainer.addEventListener('dragstart', handleDragStart);
 treeMap.addEventListener('dragover', handleOverDrop);
 treeMap.addEventListener('drop', handleOverDrop);
-resetToys.addEventListener('click', renderFavorites)
+resetToys.addEventListener('click', renderFavorites);

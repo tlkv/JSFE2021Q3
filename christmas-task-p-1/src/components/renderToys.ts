@@ -9,7 +9,7 @@ import {
   filterItems,
   sortingOrder,
 } from './storage';
-import { setSlider } from './filterData';
+import { setSlider } from './sliders';
 import { ToyData, FilterKeys } from './interfaces';
 
 export function renderToys(filteredData: Array<ToyData>): void {

@@ -2,65 +2,22 @@ import {
   AppState,
   sortingFunctions,
   selectedCounter,
-  maxSelected,
+  MAX_SELECTED,
   searchField,
-  countDefaultValues,
-  yearDefaultValues,
+  COUNT_DEFAULT_VALUES,
+  YEAR_DEFAULT_VALUES,
 } from './storage';
 import data from './data';
-import { FilterKeys, FilterValues } from './interfaces';
+import { FilterKeys } from './interfaces';
 import { renderFilterPanel, renderToys } from './renderToys';
 import { renderTree } from './treeDecoration';
 import { handleAudio } from './audio';
 import { renderFavorites } from './renderFavorites';
-import noUiSlider from 'nouislider';
-import { target } from 'nouislider';
-
-export function initSearch() {
-  searchField.setAttribute('placeholder', 'Поиск');
-  searchField.focus();
-}
-
-export function initSlider(
-  elem: HTMLElement,
-  currentValues: FilterValues,
-  defaultValues: FilterValues,
-  step: number,
-  stateKey: 'countFilter' | 'yearFilter'
-) {
-  noUiSlider.create(elem, {
-    start: currentValues,
-    step: step,
-    connect: true,
-    tooltips: true,
-    format: {
-      to(value) {
-        return Math.floor(Number(value));
-      },
-      from(value) {
-        return Math.floor(Number(value));
-      },
-    },
-    range: {
-      min: defaultValues[0],
-      max: defaultValues[1],
-    },
-  });
-  (elem as target).noUiSlider?.on('set', () => {
-    const positions = JSON.parse(JSON.stringify((elem as target).noUiSlider?.get()));
-    AppState[stateKey] = [Number(positions[0]), Number(positions[1])];
-    renderToys(filterToys());
-  });
-}
-
-export function setSlider(elem: HTMLElement, input: [number, number]) {
-  (elem as target).noUiSlider?.set(input);
-}
 
 export function filterToys() {
   const query = searchField.value.toLowerCase();
-  const tData = data.slice(0);
-  const res = tData
+  return data
+    .slice(0)
     .filter(elem => AppState.shape.length === 0 || AppState.shape.includes(elem.shape))
     .filter(elem => AppState.color.length === 0 || AppState.color.includes(elem.color))
     .filter(elem => AppState.size.length === 0 || AppState.size.includes(elem.size))
@@ -69,13 +26,12 @@ export function filterToys() {
     .filter(elem => AppState.yearFilter[0] <= Number(elem.year) && Number(elem.year) <= AppState.yearFilter[1])
     .filter(item => query.length === 0 || item.name.toLowerCase().includes(query))
     .sort(sortingFunctions[AppState.sortingOrder]);
-  return res;
 }
 
 export function selectToys(e: Event) {
   const toySelected = e.target as HTMLTemplateElement;
   if (toySelected.classList.contains('toy')) {
-    if (AppState.selectedToys.length === maxSelected && !toySelected.classList.contains('active')) {
+    if (AppState.selectedToys.length === MAX_SELECTED && !toySelected.classList.contains('active')) {
       toySelected.classList.add('maximum');
       setTimeout(() => {
         toySelected.classList.remove('maximum');
@@ -86,7 +42,7 @@ export function selectToys(e: Event) {
       AppState.selectedToys.includes(toySelectedNum)
         ? (AppState.selectedToys = AppState.selectedToys.filter(elem => elem !== toySelectedNum))
         : AppState.selectedToys.push(toySelectedNum);
-      selectedCounter.textContent = String(AppState.selectedToys.length);
+      selectedCounter.textContent = AppState.selectedToys.length.toString();
       renderFavorites();
     }
   }
@@ -112,12 +68,12 @@ export function handleFilterItems(e: Event) {
 }
 
 export function resetFiltersHandler() {
-  AppState.shape = [];
+  Object.assign(AppState.shape);
   AppState.color = [];
   AppState.size = [];
   AppState.onlyFavorite = false;
-  AppState.countFilter = countDefaultValues; //
-  AppState.yearFilter = yearDefaultValues;
+  AppState.countFilter = COUNT_DEFAULT_VALUES; //
+  AppState.yearFilter = YEAR_DEFAULT_VALUES;
   searchField.value = '';
   renderToys(filterToys());
   renderFilterPanel();
@@ -138,7 +94,7 @@ export function resetLocalHandler() {
   resetFiltersHandler();
 }
 
-export function resetTreeHandler() {  
+export function resetTreeHandler() {
   AppState.tree = '1';
   AppState.background = '1';
   AppState.audio = false;
@@ -148,4 +104,9 @@ export function resetTreeHandler() {
   renderTree();
   handleAudio();
   renderFavorites();
+}
+
+export function initSearch() {
+  searchField.setAttribute('placeholder', 'Поиск');
+  searchField.focus();
 }
